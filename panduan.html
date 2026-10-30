@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#78131b">
+<meta name="description" content="Panduan langkah demi langkah untuk mengakses layanan informasi publik Bawaslu Kabupaten Bandung.">
+<title>Panduan Layanan | SILANI Bawaslu Kabupaten Bandung</title>
+<link rel="icon" type="image/png" href="logo-bawaslu-bandung.png">
+<style>
+:root{--wine:#78131b;--wine2:#4e0b11;--gold:#d8b56b;--ink:#241d1d;--muted:#706566;--paper:#fffaf7;--line:#e9ded8;--white:#fff}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,"Segoe UI",Arial,sans-serif}
+a{color:inherit;-webkit-tap-highlight-color:transparent}
+.topline{height:5px;background:linear-gradient(90deg,var(--wine) 0 68%,var(--gold) 68% 100%)}
+.sitebar{background:#fff;border-bottom:1px solid #e8dfda}
+.sitebar-inner{max-width:1180px;margin:auto;padding:10px 22px;display:flex;align-items:center;gap:14px}
+.logo{width:170px;max-width:40%;height:auto;object-fit:contain}
+.sitebar-tag{margin-left:auto;text-align:right;font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:var(--wine);font-weight:800}
+.site-nav-wrap{background:#fff;border-bottom:1px solid #e8dfda}
+.site-nav{max-width:1180px;margin:auto;padding:0 22px;display:flex;gap:8px;align-items:center;justify-content:flex-end;flex-wrap:wrap}
+.site-nav a{display:inline-flex;align-items:center;gap:7px;text-decoration:none;color:#5e3034;font-size:12px;font-weight:800;padding:11px 13px;border-radius:9px}
+.site-nav a:hover,.site-nav a[aria-current="page"]{background:#f8eeeb;color:var(--wine)}
+.page-hero{position:relative;overflow:hidden;background:linear-gradient(110deg,rgba(48,8,13,.94),rgba(91,18,26,.88)),url("gedung-bawaslu-bandung.jpeg") center 42%/cover;color:#fff}
+.page-hero-inner{max-width:1120px;margin:auto;padding:48px 22px 45px}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;color:#f3dca5;font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase}
+.eyebrow:before{content:"";display:block;width:28px;height:2px;background:var(--gold)}
+.page-hero h1{font-size:clamp(32px,6vw,54px);line-height:1.05;letter-spacing:-1.5px;margin:14px 0 10px}
+.page-hero p{max-width:700px;font-size:15px;line-height:1.75;color:#f4e8e5;margin:0}
+.container{max-width:1120px;margin:auto;padding:0 22px 46px}
+.breadcrumb{font-size:12px;color:var(--muted);padding:19px 0 0}
+.breadcrumb a{color:var(--wine);font-weight:800;text-decoration:none}
+.intro-card{margin-top:24px;padding:20px 22px;border-radius:15px;border:1px solid #e7d1a0;background:linear-gradient(120deg,#fff4dd,#fffaf0);line-height:1.7;color:#5d4845;font-size:14px}
+.section-title{margin:34px 0 14px}
+.section-title h2{margin:0;color:var(--wine);font-size:23px;letter-spacing:-.4px}
+.section-title p{margin:5px 0 0;color:var(--muted);font-size:13px;line-height:1.6}
+.rule{height:3px;width:58px;background:var(--gold);border-radius:5px;margin-top:10px}
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.step{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:0 5px 18px #28161607}
+.step-number{display:grid;place-items:center;width:39px;height:39px;border-radius:12px;background:#f8eeeb;color:var(--wine);font-size:15px;font-weight:900;margin-bottom:13px}
+.step h3{margin:0 0 8px;color:var(--wine2);font-size:16px}
+.step p{margin:0;color:#665758;font-size:13px;line-height:1.75}
+.info-strip{margin-top:15px;border-left:4px solid var(--gold);padding:15px 17px;background:#fff;border-radius:0 12px 12px 0;box-shadow:0 4px 15px #28161606;font-size:13px;line-height:1.75;color:#665758}
+.info-strip strong{color:var(--wine2)}
+.duo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.detail-card{background:#fff;border:1px solid var(--line);border-radius:15px;padding:20px}
+.detail-card h3{margin:0 0 8px;color:var(--wine2);font-size:16px}
+.detail-card p,.detail-card li{font-size:13px;line-height:1.75;color:#665758}
+.detail-card ul{padding-left:19px;margin:8px 0 0}
+.cta{display:inline-flex;justify-content:center;align-items:center;gap:10px;min-height:48px;background:var(--wine);color:#fff;text-decoration:none;border-radius:11px;padding:13px 18px;font-weight:850;font-size:14px;box-shadow:0 4px 0 var(--wine2)}
+.cta:hover{background:var(--wine2)}
+.cta .arrow{font-size:18px;color:var(--gold)}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.footer{background:#311014;color:#f6e9e7}
+.footer-inner{max-width:1120px;margin:auto;padding:22px;display:flex;justify-content:space-between;align-items:center;gap:18px;font-size:12px;line-height:1.6}
+.footer strong{color:var(--gold);letter-spacing:1px}
+.faq-list{display:grid;gap:10px;margin-top:22px}
+.faq-list details{border:1px solid var(--line);background:#fff;border-radius:14px;padding:0 17px;box-shadow:0 4px 15px #28161605}
+.faq-list details[open]{border-color:#d8b56b}
+.faq-list summary{position:relative;list-style:none;cursor:pointer;padding:17px 28px 17px 0;font-size:14px;font-weight:800;color:var(--wine2);line-height:1.5}
+.faq-list summary::-webkit-details-marker{display:none}
+.faq-list summary:after{content:"+";position:absolute;right:0;top:13px;font-size:22px;color:var(--wine);font-weight:500}
+.faq-list details[open] summary:after{content:"−"}
+.faq-list details p{margin:0;padding:0 0 18px;color:#665758;font-size:13px;line-height:1.8}
+.faq-search{width:100%;border:1px solid #d9cbc5;background:#fff;border-radius:12px;padding:14px 15px;font:inherit;font-size:14px;outline-color:var(--gold)}
+.faq-note{font-size:12px;color:var(--muted);line-height:1.6;margin-top:10px}
+@media(max-width:760px){.steps{grid-template-columns:1fr}.duo{grid-template-columns:1fr}.page-hero-inner{padding:38px 19px}.container{padding:0 15px 35px}.sitebar-inner{padding:10px 15px}.logo{width:145px}.footer-inner{flex-direction:column;align-items:flex-start}}
+@media(max-width:520px){.site-nav{padding:5px 10px;justify-content:stretch;gap:4px}.site-nav a{flex:1;justify-content:center;padding:10px 6px;font-size:11px}.sitebar-tag{font-size:9px;letter-spacing:.8px}.page-hero h1{letter-spacing:-.8px}.section-title h2{font-size:21px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="topline"></div>
+<header class="sitebar"><div class="sitebar-inner">
+<img class="logo" src="logo-bawaslu-bandung.png" alt="Logo Bawaslu Kabupaten Bandung">
+<div class="sitebar-tag">Portal Layanan Informasi<br>Bawaslu Kabupaten Bandung</div>
+</div></header>
+<nav class="site-nav-wrap" aria-label="Navigasi utama"><div class="site-nav"><a href="index.html">⌂ Beranda</a>
+<a href="panduan.html" aria-current="page">☷ Panduan Layanan</a>
+<a href="faq.html">? FAQ</a></div></nav>
+<section class="page-hero"><div class="page-hero-inner">
+<div class="eyebrow">SILANI · Layanan Informasi Publik</div>
+<h1>Panduan Layanan</h1>
+<p>Panduan langkah demi langkah untuk mengakses layanan informasi publik Bawaslu Kabupaten Bandung.</p>
+</div></section>
+<main class="container">
+<div class="breadcrumb"><a href="index.html">Beranda</a> &nbsp; / &nbsp; Panduan Layanan</div>
+
+<div class="intro-card"><strong>Sebelum mengajukan permohonan</strong><br>Periksa terlebih dahulu menu <strong>Cari Informasi</strong> atau Daftar Informasi Publik (DIP). Informasi yang dibutuhkan mungkin sudah tersedia, sehingga Anda tidak perlu mengajukan permohonan baru.</div>
+
+<section>
+  <div class="section-title"><h2>1. Cara Mengajukan Permohonan Informasi</h2><p>Ikuti langkah berikut pada portal resmi PPID Bawaslu.</p><div class="rule"></div></div>
+  <div class="steps">
+    <article class="step"><div class="step-number">01</div><h3>Buka layanan</h3><p>Buka SILANI, pilih <strong>Ajukan Informasi</strong>, lalu lanjutkan ke halaman PPID Bawaslu.</p></article>
+    <article class="step"><div class="step-number">02</div><h3>Tampilkan formulir</h3><p>Jika formulir belum terlihat, geser halaman ke bawah menggunakan petunjuk atau ikon panah pada portal.</p></article>
+    <article class="step"><div class="step-number">03</div><h3>Isi data pemohon</h3><p>Lengkapi email, nama, pekerjaan, pendidikan, nomor telepon/HP, dan alamat sesuai kolom formulir.</p></article>
+    <article class="step"><div class="step-number">04</div><h3>Pilih unit tujuan</h3><p>Pada bagian <strong>Ditujukan Kepada</strong>, pilih <strong>Bawaslu Kabupaten/Kota</strong>, Provinsi <strong>Jawa Barat</strong>, lalu Kabupaten/Kota <strong>Bawaslu Kab. Bandung</strong>.</p></article>
+    <article class="step"><div class="step-number">05</div><h3>Jelaskan kebutuhan</h3><p>Isi <strong>Rincian Informasi</strong> dengan informasi yang diminta dan <strong>Tujuan Informasi</strong> dengan tujuan penggunaan informasi tersebut.</p></article>
+    <article class="step"><div class="step-number">06</div><h3>Pilih cara memperoleh</h3><p>Pilih melihat/membaca/mendengarkan/mencatat atau mendapatkan salinan (hardcopy/softcopy). Jika memilih salinan, pilih cara penerimaan yang tersedia, seperti mengambil langsung, pos, email, kurir, atau WhatsApp.</p></article>
+    <article class="step"><div class="step-number">07</div><h3>Unggah identitas</h3><p>Unggah salinan identitas diri atau dokumen badan sesuai ketentuan yang diminta pada formulir.</p></article>
+    <article class="step"><div class="step-number">08</div><h3>Kirim permohonan</h3><p>Centang persetujuan pemrosesan data pribadi, selesaikan verifikasi “I'm not a robot”, lalu tekan <strong>KIRIM</strong>.</p></article>
+    <article class="step"><div class="step-number">09</div><h3>Terima bukti permohonan</h3><p>Jika persyaratan dinyatakan lengkap, petugas memberikan bukti permohonan informasi.</p></article>
+    <article class="step"><div class="step-number">10</div><h3>Tunggu pemberitahuan</h3><p>Berdasarkan panduan layanan yang diberikan, pemberitahuan tertulis disampaikan dalam waktu <strong>10 hari kerja</strong>. Periksa pemberitahuan resmi pada portal PPID.</p></article>
+    <article class="step"><div class="step-number">11</div><h3>Terima jawaban</h3><p>Pemohon menerima informasi yang diminta atau surat keputusan PPID apabila permohonan ditolak.</p></article>
+    <article class="step"><div class="step-number">12</div><h3>Pantau status</h3><p>Gunakan menu <strong>Cek Status</strong> pada SILANI atau portal resmi PPID untuk memantau permohonan.</p></article>
+  </div>
+  <div class="info-strip"><strong>Biaya:</strong> permohonan informasi tidak dipungut biaya. Untuk penggandaan/fotokopi, pemohon menggandakan sendiri atau menyediakan CD/flashdisk untuk perekaman data, sesuai panduan yang diberikan.</div>
+</section>
+
+<section>
+  <div class="section-title"><h2>2. Cara Mengajukan Keberatan</h2><p>Gunakan prosedur keberatan apabila tidak puas dengan tanggapan atas permohonan informasi.</p><div class="rule"></div></div>
+  <div class="steps">
+    <article class="step"><div class="step-number">01</div><h3>Perhatikan tenggat</h3><p>Panduan yang diberikan menyebut keberatan diajukan paling lambat <strong>30 hari kerja</strong> setelah menerima pemberitahuan tertulis dan/atau keputusan PPID tentang penolakan.</p></article>
+    <article class="step"><div class="step-number">02</div><h3>Ajukan kepada atasan PPID</h3><p>Gunakan menu <strong>Ajukan Keberatan</strong> pada portal PPID atau saluran lain yang tersedia, seperti surat, faks, telepon, atau datang langsung ke tempat layanan PPID.</p></article>
+    <article class="step"><div class="step-number">03</div><h3>Terima tanda bukti</h3><p>Pemohon menerima tanda bukti pengajuan keberatan dari petugas informasi.</p></article>
+    <article class="step"><div class="step-number">04</div><h3>Tunggu tanggapan</h3><p>Panduan yang diberikan menyebut tanggapan tertulis diberikan paling lambat <strong>30 hari kerja</strong> sejak keberatan diterima.</p></article>
+  </div>
+  <div class="info-strip"><strong>Catatan:</strong> ketentuan tenggat dan prosedur pada panduan ini perlu dicocokkan dengan peraturan serta standar layanan resmi yang berlaku sebelum dipublikasikan sebagai panduan definitif.</div>
+  <div class="actions">
+    <a class="cta" href="https://ppidapp.bawaslu.go.id/keberatan" target="_blank" rel="noopener noreferrer">Buka Formulir Keberatan <span class="arrow">↗</span></a>
+    <a class="cta" href="https://ppidapp.bawaslu.go.id/cek" target="_blank" rel="noopener noreferrer">Cek Status Permohonan <span class="arrow">↗</span></a>
+  </div>
+</section>
+
+<section>
+  <div class="section-title"><h2>Kontak dan Jam Layanan</h2><p>Gunakan kontak resmi berikut untuk meminta bantuan.</p><div class="rule"></div></div>
+  <div class="duo">
+    <article class="detail-card"><h3>Alamat Kantor</h3><p><strong>Badan Pengawas Pemilihan Umum Kabupaten Bandung</strong><br>Jl. Raya Gading Tutuka I No. I, Desa Cingcin, Kecamatan Soreang, Kabupaten Bandung.</p><p><a href="https://bandungkab.bawaslu.go.id/" target="_blank" rel="noopener noreferrer">Lihat situs resmi Bawaslu Kabupaten Bandung ↗</a></p></article>
+    <article class="detail-card"><h3>Kontak PPID</h3><p><strong>WhatsApp/Telepon:</strong><br><a href="https://wa.me/6281297786606" target="_blank" rel="noopener noreferrer">0812-9778-6606</a></p><p><strong>Email PPID:</strong><br><a href="mailto:ppid.bawaslukabbdg@gmail.com">ppid.bawaslukabbdg@gmail.com</a></p><p><strong>Email umum Bawaslu:</strong><br><a href="mailto:set.bandungkab@bawaslu.go.id">set.bandungkab@bawaslu.go.id</a></p></article>
+  </div>
+  <div class="info-strip"><strong>Jam layanan:</strong> halaman PPID dan situs Bawaslu Kabupaten Bandung yang diperiksa tidak menampilkan jam layanan secara konsisten/terverifikasi. Konfirmasikan jam operasional kepada petugas sebelum mencantumkan jam tertentu pada SILANI.</div>
+</section>
+
+<section>
+  <div class="section-title"><h2>Mulai Menggunakan Layanan</h2><p>Pengajuan dan proses permohonan tetap berlangsung melalui kanal resmi PPID.</p><div class="rule"></div></div>
+  <div class="actions">
+    <a class="cta" href="https://ppidapp.bawaslu.go.id" target="_blank" rel="noopener noreferrer">Ajukan Informasi <span class="arrow">↗</span></a>
+    <a class="cta" href="https://ppidapp.bawaslu.go.id/dip?unit=2&provinsi=32&kabkota=3204" target="_blank" rel="noopener noreferrer">Daftar Informasi Publik <span class="arrow">↗</span></a>
+  </div>
+</section>
+</main>
+<footer class="footer"><div class="footer-inner"><div><strong>SILANI</strong><br>Sistem Layanan Informasi</div><div>Bawaslu Kabupaten Bandung · Layanan Informasi Publik<br>SILANI bukan sistem PPID baru. Proses permohonan tetap melalui kanal resmi PPID.</div></div></footer>
+</body></html>

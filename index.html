@@ -62,6 +62,13 @@ h1 span{color:var(--gold)}
 @media(max-width:800px){.hero{min-height:340px}.hero-inner{padding:42px 20px 42px}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.lower .grid{grid-template-columns:repeat(2,minmax(0,1fr))}.primary{grid-template-columns:1fr}.cta{width:100%}.sitebar-inner{padding:10px 16px}.logo{width:145px}}
 @media(max-width:420px){.hero{min-height:330px}.hero:before{background-position:57% center}.hero-inner{padding:34px 17px 40px}h1{letter-spacing:-1.5px}.container{padding:0 12px 28px}.primary{padding:20px 16px;gap:15px}.grid,.lower .grid{gap:9px}.card{padding:14px 12px;min-height:157px}.card strong{font-size:14px}.card small{font-size:11px}.iconbox{width:38px;height:38px}.section h2{font-size:20px}.footer-inner{flex-direction:column;align-items:flex-start}.music{right:9px;bottom:9px}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+
+.site-nav{max-width:1180px;margin:auto;padding:0 22px;display:flex;gap:8px;align-items:center;justify-content:flex-end;flex-wrap:wrap}
+.site-nav-wrap{background:#fff;border-bottom:1px solid #e8dfda}
+.site-nav a{display:inline-flex;align-items:center;gap:7px;text-decoration:none;color:#5e3034;font-size:12px;font-weight:800;padding:11px 13px;border-radius:9px}
+.site-nav a:hover,.site-nav a[aria-current="page"]{background:#f8eeeb;color:var(--wine)}
+@media(max-width:520px){.site-nav{padding:5px 10px;justify-content:stretch;gap:4px}.site-nav a{flex:1;justify-content:center;padding:10px 6px;font-size:11px}}
+
 </style>
 </head>
 <body>
@@ -72,6 +79,13 @@ h1 span{color:var(--gold)}
     <div class="sitebar-tag">Portal Layanan Informasi<br>Bawaslu Kabupaten Bandung</div>
   </div>
 </header>
+<nav class="site-nav-wrap" aria-label="Navigasi utama">
+  <div class="site-nav">
+    <a href="index.html" aria-current="page">⌂ Beranda</a>
+    <a href="panduan.html">☷ Panduan Layanan</a>
+    <a href="faq.html">? FAQ</a>
+  </div>
+</nav>
 
 <section class="hero">
   <div class="hero-inner">
@@ -148,7 +162,7 @@ h1 span{color:var(--gold)}
 </footer>
 
 <audio id="mars" preload="none" loop>
-  <source src="MARS PENGAWAS PEMILU (1).mp3" type="audio/mpeg">
+  <source src="https://drive.google.com/uc?export=download&amp;id=1WXFon7NEYGZay-g-9WAXW1QUnLUhlSoZ" type="audio/mpeg">
 </audio>
 <button class="music" id="musicButton" type="button" aria-pressed="false" aria-label="Putar atau hentikan Mars Bawaslu">
   <span class="music-dot"></span><span id="musicLabel">Putar Mars Bawaslu</span>
