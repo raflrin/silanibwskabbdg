@@ -4,7 +4,7 @@ function configureSurveyLink() {
   if (!link) return;
 
   if (SURVEY_FORM_URL &&
-      SURVEY_FORM_URL.indexOf('https://docs.google.com/forms/d/e/1FAIpQLSeKS85GCZxb2eptfXGz6tHEKmWDMq-11Tqvwq94D08Kd5Io9Q/viewform') === 0) {
+      SURVEY_FORM_URL.indexOf('https://docs.google.com/forms/') === 0) {
     link.href = SURVEY_FORM_URL;
     link.target = '_blank';
     link.rel = 'noopener noreferrer';
