@@ -369,4 +369,63 @@ details[open]>summary .chev{transform:rotate(180deg)}
     letter-spacing: -.06em;
   }
   .hero .hero-sub{ font-size: clamp(19px, 5vw, 24px); }
+  
+/* Survei kepuasan SiLani */
+.survey-panel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  margin: 34px 0;
+  padding: 30px;
+  border-radius: 18px;
+  background: #f8f2e9;
+  border: 1px solid rgba(120, 30, 48, .15);
+}
+
+.survey-content {
+  max-width: 650px;
+}
+
+.survey-kicker {
+  color: #9a7136;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .16em;
+}
+
+.survey-content h2 {
+  color: #701c2d;
+  margin: 10px 0;
+  font-size: clamp(22px, 3vw, 30px);
+}
+
+.survey-content p {
+  line-height: 1.7;
+  margin: 0 0 8px;
+}
+
+.survey-content small {
+  color: #756b62;
+}
+
+.survey-button[aria-disabled="true"] {
+  opacity: .65;
+  pointer-events: none;
+}
+
+@media(max-width:640px) {
+  .survey-panel {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 22px;
+  }
+
+  .survey-button {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+}
+
 }
