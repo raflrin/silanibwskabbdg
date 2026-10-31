@@ -7,7 +7,7 @@
 <meta name="description" content="SILANI — Sistem Layanan Informasi Bawaslu Kabupaten Bandung.">
 <title>SILANI | Bawaslu Kabupaten Bandung</title>
 <style>
-:root{--wine:#78131b;--wine2:#4e0b11;--gold:#d8b56b;--ink:#241d1d;--muted:#706566;--paper:#fffaf7;--line:#e9ded8;--white:#fff}
+:root{--wine:#a51f2b;--wine2:#74141d;--gold:#c7a34b;--ink:#20252b;--muted:#667085;--paper:#f5f6f8;--line:#e2e5e9;--white:#fff}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,"Segoe UI",Arial,sans-serif}
@@ -45,7 +45,7 @@ h1 span{color:var(--gold)}
 .card{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:9px;padding:19px 17px 18px;min-height:166px;background:#fff;border:1px solid var(--line);border-radius:14px;text-decoration:none;box-shadow:0 4px 13px #28161606;transition:transform .18s,border-color .18s,box-shadow .18s;overflow:hidden}
 .card:before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--wine)}
 .card:hover{transform:translateY(-3px);border-color:#d6b96e;box-shadow:0 12px 25px #28161612}
-.iconbox{width:42px;height:42px;display:grid;place-items:center;background:#f8eeeb;color:var(--wine);border-radius:12px;font-size:22px}
+.iconbox{width:42px;height:42px;display:grid;place-items:center;background:#f8e9eb;color:var(--wine);border-radius:12px;font-size:22px}
 .card strong{color:#3a2224;font-size:15px;line-height:1.35}
 .card small{color:var(--muted);font-size:12px;line-height:1.5}
 .card .go{margin-top:auto;color:var(--wine);font-size:12px;font-weight:800}
@@ -66,7 +66,7 @@ h1 span{color:var(--gold)}
 .site-nav{max-width:1180px;margin:auto;padding:0 22px;display:flex;gap:8px;align-items:center;justify-content:flex-end;flex-wrap:wrap}
 .site-nav-wrap{background:#fff;border-bottom:1px solid #e8dfda}
 .site-nav a{display:inline-flex;align-items:center;gap:7px;text-decoration:none;color:#5e3034;font-size:12px;font-weight:800;padding:11px 13px;border-radius:9px}
-.site-nav a:hover,.site-nav a[aria-current="page"]{background:#f8eeeb;color:var(--wine)}
+.site-nav a:hover,.site-nav a[aria-current="page"]{background:#f8e9eb;color:var(--wine)}
 @media(max-width:520px){.site-nav{padding:5px 10px;justify-content:stretch;gap:4px}.site-nav a{flex:1;justify-content:center;padding:10px 6px;font-size:11px}}
 
 </style>
@@ -161,45 +161,70 @@ h1 span{color:var(--gold)}
   <div class="footer-inner"><div><strong>SILANI</strong><br>Sistem Layanan Informasi</div><div>Bawaslu Kabupaten Bandung · Layanan Informasi Publik</div></div>
 </footer>
 
-<audio id="mars" preload="none" loop>
-  <source src="MARS PENGAWAS PEMILU (1).mp3" type="audio/mpeg">
+
+
+<audio id="silaniMars" preload="auto" loop>
+  <source src="MARS%20PENGAWAS%20PEMILU%20(1).mp3" type="audio/mpeg">
 </audio>
-<button class="music" id="musicButton" type="button" aria-pressed="false" aria-label="Putar atau hentikan Mars Bawaslu">
-  <span class="music-dot"></span><span id="musicLabel">Putar Mars Bawaslu</span>
+<button class="music" id="silaniMusicButton" type="button" aria-pressed="false" aria-label="Putar atau hentikan Mars Pengawas Pemilu">
+  <span class="music-dot"></span><span id="silaniMusicLabel">Putar Mars Pengawas Pemilu</span>
 </button>
 <script>
 (() => {
-  const audio = document.getElementById('mars');
-  const button = document.getElementById('musicButton');
-  const label = document.getElementById('musicLabel');
+  const audio = document.getElementById('silaniMars');
+  const button = document.getElementById('silaniMusicButton');
+  const label = document.getElementById('silaniMusicLabel');
+  const KEY_PLAY = 'silaniMarsPlaying';
+  const KEY_TIME = 'silaniMarsTime';
 
-  async function playMusic() {
+  try {
+    const saved = Number(sessionStorage.getItem(KEY_TIME) || 0);
+    if (saved > 0 && Number.isFinite(saved)) {
+      audio.addEventListener('loadedmetadata', () => {
+        try { audio.currentTime = Math.min(saved, Math.max(0, audio.duration - 1)); } catch (_) {}
+      }, { once: true });
+    }
+  } catch (_) {}
+
+  function paint(playing) {
+    button.setAttribute('aria-pressed', String(playing));
+    label.textContent = playing ? 'Mars Pengawas Pemilu: aktif' : 'Putar Mars Pengawas Pemilu';
+  }
+  async function play() {
     try {
       await audio.play();
-      button.setAttribute('aria-pressed', 'true');
-      label.textContent = 'Mars Bawaslu: aktif';
-    } catch (err) {
-      button.setAttribute('aria-pressed', 'false');
+      try { sessionStorage.setItem(KEY_PLAY, '1'); } catch (_) {}
+      paint(true);
+    } catch (_) {
+      paint(false);
       label.textContent = 'Ketuk untuk putar Mars';
     }
   }
-
   button.addEventListener('click', async () => {
     if (audio.paused) {
-      await playMusic();
+      await play();
     } else {
       audio.pause();
-      button.setAttribute('aria-pressed', 'false');
-      label.textContent = 'Putar Mars Bawaslu';
+      try { sessionStorage.setItem(KEY_PLAY, '0'); } catch (_) {}
+      paint(false);
     }
   });
-
-  // Attempt autoplay; browsers may block audio until the visitor interacts.
-  window.addEventListener('load', playMusic);
-  document.addEventListener('pointerdown', () => {
-    if (audio.paused) playMusic();
-  }, { once: true });
+  audio.addEventListener('play', () => paint(true));
+  audio.addEventListener('pause', () => paint(false));
+  window.addEventListener('pagehide', () => {
+    try {
+      sessionStorage.setItem(KEY_TIME, String(audio.currentTime || 0));
+      sessionStorage.setItem(KEY_PLAY, audio.paused ? '0' : '1');
+    } catch (_) {}
+  });
+  // Resume on another SILANI page after the visitor has started playback once.
+  let shouldResume = false;
+  try { shouldResume = sessionStorage.getItem(KEY_PLAY) === '1'; } catch (_) {}
+  if (shouldResume) {
+    window.addEventListener('load', play, { once: true });
+  }
 })();
 </script>
+
 </body>
 </html>
