@@ -562,6 +562,70 @@ body{margin:0;background:#f5eee4!important;color:var(--silani-ink)}
 .faq-category{cursor:pointer!important;user-select:none!important}
 .faq-category:focus-visible{outline:3px solid #d6ad5b!important;outline-offset:2px!important}
 
+
+/* FINAL NAV FIX: all three links stay visible on every page */
+.sitebar{
+  position:relative!important;
+  height:82px!important;min-height:82px!important;
+  background:#fffdf9!important;
+  z-index:40!important;
+}
+.sitebar-inner{
+  width:min(1240px,92%)!important;max-width:1240px!important;
+  height:82px!important;min-height:82px!important;
+  margin:0 auto!important;padding:0!important;
+  display:flex!important;align-items:center!important;justify-content:flex-start!important;
+}
+.sitebar .logo{width:190px!important;max-width:40vw!important;max-height:60px!important;object-fit:contain!important}
+.site-nav-wrap{
+  position:absolute!important;top:0!important;right:max(3%,calc((100vw - 1240px)/2))!important;left:auto!important;
+  width:570px!important;height:82px!important;min-height:82px!important;
+  margin:0!important;padding:0!important;
+  display:block!important;background:transparent!important;border:0!important;box-shadow:none!important;
+  z-index:45!important;pointer-events:none!important;overflow:visible!important;
+}
+.site-nav{
+  display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;
+  width:100%!important;height:82px!important;min-height:82px!important;
+  margin:0!important;padding:0!important;gap:8px!important;
+  align-items:center!important;justify-content:flex-end!important;
+  white-space:nowrap!important;overflow:visible!important;pointer-events:auto!important;
+}
+.site-nav a,.site-nav a:last-child{
+  display:inline-flex!important;flex:0 0 auto!important;visibility:visible!important;
+  opacity:1!important;position:static!important;transform:none!important;
+  align-items:center!important;justify-content:center!important;
+  margin:0!important;padding:12px 15px!important;
+  color:#59232a!important;background:transparent!important;
+  border:0!important;border-radius:13px!important;
+  font-size:13px!important;font-weight:750!important;line-height:1.2!important;
+  text-decoration:none!important;white-space:nowrap!important;
+}
+.site-nav a:hover,.site-nav a[aria-current="page"]{
+  background:#f7e8e8!important;color:#941e2b!important;
+}
+.site-nav a.nav-apply{display:none!important}
+@media(max-width:760px){
+  .sitebar,.sitebar-inner{height:104px!important;min-height:104px!important}
+  .sitebar-inner{width:94%!important;align-items:flex-start!important;padding-top:6px!important}
+  .sitebar .logo{width:145px!important;max-height:44px!important}
+  .site-nav-wrap{
+    position:absolute!important;top:48px!important;left:0!important;right:0!important;
+    width:100%!important;height:54px!important;min-height:54px!important;
+  }
+  .site-nav{
+    width:100%!important;height:54px!important;min-height:54px!important;
+    justify-content:center!important;gap:2px!important;padding:0 5px!important;
+  }
+  .site-nav a,.site-nav a:last-child{
+    font-size:10px!important;padding:9px 9px!important;
+  }
+}
+@media(max-width:390px){
+  .site-nav{gap:0!important}
+  .site-nav a,.site-nav a:last-child{font-size:9px!important;padding:8px 6px!important}
+}
+
 </style>
 </head>
 <body>
