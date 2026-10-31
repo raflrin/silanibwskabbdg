@@ -648,3 +648,47 @@ details[open]>summary .chev{transform:rotate(180deg)}
     width:min(78vw, 265px) !important;
   }
 }
+
+
+/* === WORDMARK SILANI: PNG TRANSPARAN TANPA LATAR DAN POTONGAN MASKOT === */
+.hero-logo {
+  display:block !important;
+  width:min(100%, 390px) !important;
+  max-width:390px !important;
+  height:auto !important;
+  max-height:none !important;
+  object-fit:contain !important;
+  object-position:left center !important;
+  margin:14px 0 18px !important;
+  background:transparent !important;
+  filter:drop-shadow(0 5px 8px rgba(20,5,8,.12)) !important;
+}
+.foot-brand-img {
+  display:block !important;
+  width:min(100%, 175px) !important;
+  max-width:175px !important;
+  height:auto !important;
+  max-height:none !important;
+  object-fit:contain !important;
+  object-position:left center !important;
+  margin:0 0 8px !important;
+  background:transparent !important;
+}
+@media (max-width:760px) {
+  .hero-logo {
+    width:min(74vw, 285px) !important;
+    max-width:285px !important;
+    max-height:none !important;
+    margin:10px 0 12px !important;
+  }
+  .foot-brand-img {
+    width:min(42vw, 150px) !important;
+    max-width:150px !important;
+  }
+}
+@media (max-width:390px) {
+  .hero-logo {
+    width:min(70vw, 255px) !important;
+    max-width:255px !important;
+  }
+}
