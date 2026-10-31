@@ -185,5 +185,5 @@ function initPage() {
   configureSurveyLink();
   paint(audio && !audio.paused);
 }
-  initPage();
+    initPage();
 })();
