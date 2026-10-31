@@ -397,3 +397,53 @@ details[open]>summary .chev{transform:rotate(180deg)}
  .hero-copy{font-size:14px}
  .hero-mascot{max-height:245px}
 }
+
+
+/* === MASKOT WASRA & WASRI: UKURAN TERKENDALI DI SEMUA HALAMAN === */
+.hero-mascots {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  min-width: 0;
+  width: 100%;
+  margin: 0;
+  position: relative;
+  z-index: 1;
+}
+.hero-pair {
+  display: block;
+  width: min(100%, 340px);
+  max-width: 340px;
+  height: auto;
+  max-height: 360px;
+  object-fit: contain;
+  object-position: center bottom;
+  filter: drop-shadow(0 10px 14px rgba(20, 6, 8, .22));
+}
+.page-hero .mascot {
+  display: block;
+  width: min(100%, 320px);
+  max-width: 320px;
+  height: auto;
+  max-height: 270px;
+  object-fit: contain;
+  object-position: center bottom;
+  justify-self: end;
+  filter: drop-shadow(0 8px 12px rgba(20, 8, 10, .24));
+}
+@media (max-width: 760px) {
+  .hero-mascots {
+    justify-content: center;
+    margin: 8px auto 0;
+  }
+  .hero-pair {
+    width: min(78vw, 300px);
+    max-height: 270px;
+  }
+  .page-hero .mascot {
+    width: min(70vw, 250px);
+    max-height: 220px;
+    justify-self: center;
+    margin: 8px auto 0;
+  }
+}
