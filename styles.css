@@ -447,3 +447,125 @@ details[open]>summary .chev{transform:rotate(180deg)}
     margin: 8px auto 0;
   }
 }
+
+
+/* ===== FINAL VISUAL REFINEMENT: BRAND + MASCOTS + MOBILE CTA ===== */
+
+/* Footer uses the exact same SiLani logo artwork as the homepage hero. */
+.foot-brand-img{
+  display:block;
+  width:clamp(138px, 18vw, 190px);
+  height:auto;
+  max-height:105px;
+  object-fit:contain;
+  object-position:left center;
+  margin:0 0 8px;
+}
+.foot-brand{display:none !important;}
+
+/* One consistent mascot pair asset across Beranda, Panduan and FAQ. */
+.hero-pair{
+  width:min(100%, 285px) !important;
+  max-width:285px !important;
+  max-height:260px !important;
+}
+.page-hero .mascot{
+  width:min(100%, 230px) !important;
+  max-width:230px !important;
+  max-height:205px !important;
+}
+
+/* Compact action inside the homepage hero so the main task is immediately visible. */
+.hero-quick-cta{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  margin-top:18px;
+  min-height:48px;
+  padding:0 24px;
+  border-radius:999px;
+  color:#fff;
+  background:#a51f32;
+  border:1px solid #e2b96b;
+  box-shadow:0 5px 0 #641725, 0 10px 22px rgba(20,5,8,.18);
+  text-decoration:none;
+  font-weight:800;
+  font-size:15px;
+  transition:transform .18s ease, filter .18s ease;
+}
+.hero-quick-cta:hover{filter:brightness(1.08);transform:translateY(-1px)}
+.hero-quick-cta span{font-size:20px;line-height:1}
+
+/* Keep the normal information card CTA as a secondary path. */
+@media(max-width:760px){
+  .hero{padding:12px 0 18px !important; min-height:0 !important}
+  .hero-in{
+    grid-template-columns:minmax(0,1fr) !important;
+    gap:0 !important;
+    padding:0 18px !important;
+  }
+  .hero-text{padding:14px 0 0 !important}
+  .hero-logo{
+    width:min(68vw, 245px) !important;
+    max-width:245px !important;
+    max-height:132px !important;
+    margin:7px 0 9px !important;
+    object-position:left center !important;
+  }
+  .hero-copy{
+    max-width:100% !important;
+    font-size:14px !important;
+    line-height:1.45 !important;
+  }
+  .hero-quick-cta{
+    margin-top:12px;
+    min-height:44px;
+    padding:0 20px;
+    font-size:14px;
+  }
+  .hero-mascots{
+    width:100% !important;
+    margin:5px auto -4px !important;
+    justify-content:center !important;
+  }
+  .hero-pair{
+    width:min(52vw, 190px) !important;
+    max-width:190px !important;
+    max-height:138px !important;
+  }
+  .primary{
+    margin-top:-8px !important;
+    padding:17px 16px !important;
+    grid-template-columns:minmax(0,1fr) !important;
+    gap:12px !important;
+  }
+  .primary h2{font-size:clamp(23px,6.2vw,29px) !important;line-height:1.16 !important;margin:5px 0 8px !important}
+  .primary p{font-size:14px !important;line-height:1.45 !important;margin:5px 0 !important}
+  .primary .tip{display:none !important}
+  .primary .btn{width:100%;min-height:48px}
+  .page-hero{padding:12px 0 18px !important}
+  .page-hero .hero-in{
+    grid-template-columns:minmax(0,1fr) !important;
+    padding:0 18px !important;
+    gap:0 !important;
+  }
+  .page-hero .hero-text{padding:17px 0 5px !important}
+  .page-hero .mascot{
+    width:min(52vw, 175px) !important;
+    max-width:175px !important;
+    max-height:145px !important;
+    justify-self:center !important;
+    margin:5px auto 0 !important;
+  }
+  .foot{padding:24px 18px !important;display:block !important}
+  .foot-brand-img{width:150px;max-height:82px;margin-bottom:6px}
+  .foot p{margin-top:18px;font-size:13px;line-height:1.65}
+}
+@media(max-width:390px){
+  .hero-logo{width:min(64vw,220px) !important;max-height:118px !important}
+  .hero-pair{width:min(48vw,170px) !important;max-height:125px !important}
+  .hero-copy{font-size:13px !important}
+  .hero-quick-cta{min-height:42px}
+  .page-hero .mascot{width:min(48vw,155px) !important;max-height:130px !important}
+}
