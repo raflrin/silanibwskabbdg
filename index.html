@@ -70,61 +70,118 @@ h1 span{color:var(--gold)}
 @media(max-width:520px){.site-nav{padding:5px 10px;justify-content:stretch;gap:4px}.site-nav a{flex:1;justify-content:center;padding:10px 6px;font-size:11px}}
 
 
-/* SILANI visual refinement: calm palette + office photo on every page */
+.silani-wordmark{display:flex;flex-direction:column;gap:0;margin-left:2px;line-height:1}
+.silani-wordmark strong{font-family:Georgia,"Times New Roman",serif;font-size:27px;letter-spacing:-1.5px;color:#782832;font-style:italic}
+.silani-wordmark strong span{color:#b99a60}
+.silani-wordmark small{font-size:9px;color:#59616a;letter-spacing:.1px;margin-top:4px}
+@media(max-width:700px){.silani-wordmark strong{font-size:22px}.silani-wordmark small{font-size:8px}}
+/* SILANI visual refresh: muted palette + authentic Bawaslu Bandung building background */
 :root{
-  --wine:#8f3038;
-  --wine2:#67262d;
-  --gold:#b99a61;
-  --ink:#27313a;
-  --muted:#69747d;
-  --paper:#f5f2ed;
-  --line:#e5ded5;
-  --white:#fffdf9;
+  --wine:#8f2730; --wine2:#702129; --gold:#b99a60;
+  --ink:#252b32; --muted:#626b75; --paper:#f4f0e9;
+  --line:rgba(119,93,76,.17); --white:#fffdf9;
 }
+html{scroll-behavior:smooth}
 body{
-  background:
-    linear-gradient(rgba(250,248,244,.86),rgba(250,248,244,.91)),
-    url("gedung-bawaslu-bandung.jpeg") center center / cover fixed no-repeat;
+  background:#eee9e1;color:var(--ink);
+  font-family:Inter,"Segoe UI",Arial,sans-serif;
 }
+body:before{
+  content:"";position:fixed;inset:0;z-index:-2;
+  background:
+    linear-gradient(115deg,rgba(248,245,239,.88),rgba(248,245,239,.72)),
+    url("gedung-bawaslu-bandung.jpeg") center 38%/cover no-repeat;
+  transform:translateZ(0);
+}
+body:after{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:linear-gradient(180deg,rgba(255,255,255,.10),rgba(239,231,219,.24));
+}
+.topline{height:4px;background:linear-gradient(90deg,#8f2730 0 70%,#c4a66d 70% 100%)}
 .sitebar,.site-nav-wrap{
-  background:rgba(255,253,249,.91);
-  backdrop-filter:blur(9px);
-  border-color:rgba(220,211,199,.8);
+  background:rgba(255,253,249,.76)!important;
+  border-color:rgba(119,93,76,.14)!important;
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
 }
-.site-nav a{color:#5d5050}
+.sitebar-inner{min-height:68px}
+.logo{width:158px}
+.sitebar-tag{color:#7d3439;letter-spacing:.7px}
+.site-nav{justify-content:flex-end}
+.site-nav a{
+  color:#45484c;border-radius:999px;padding:10px 15px;
+  transition:background .2s ease,color .2s ease;
+}
 .site-nav a:hover,.site-nav a[aria-current="page"]{
-  background:#eee5dc;color:var(--wine2);
+  background:rgba(143,39,48,.10);color:var(--wine)
 }
-.topline{background:linear-gradient(90deg,#8f3038 0 68%,#b99a61 68% 100%)}
-.page-hero{
-  background:
-    linear-gradient(90deg,rgba(250,247,241,.90),rgba(250,247,241,.70)),
-    url("gedung-bawaslu-bandung.jpeg") center 42%/cover;
-  color:var(--ink);
+.hero,.page-hero{
+  background:transparent!important;position:relative;isolation:isolate;
 }
-.page-hero .eyebrow{color:var(--wine2)}
-.page-hero .eyebrow:before{background:var(--gold)}
-.page-hero p{color:#46515a}
-.intro-card,.primary{
-  background:rgba(255,253,249,.91);
-  border-color:#e4d8c8;
-  box-shadow:0 12px 30px rgba(62,48,39,.08);
+.hero:before,.page-hero:before{
+  content:"";position:absolute;inset:0;z-index:-2;
+  background:url("gedung-bawaslu-bandung.jpeg") center 42%/cover no-repeat;
+  opacity:.94;
 }
-.hero:after{
-  background:
-    linear-gradient(90deg,rgba(36,24,22,.56),rgba(45,31,28,.25) 58%,rgba(31,25,22,.08)),
-    linear-gradient(0deg,rgba(30,20,18,.32),transparent 72%);
+.hero:after,.page-hero:after{
+  content:"";position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(90deg,rgba(250,247,241,.94),rgba(250,247,241,.72) 55%,rgba(250,247,241,.30)),
+             linear-gradient(0deg,rgba(250,247,241,.72),rgba(250,247,241,.08));
 }
+.hero{min-height:410px!important;align-items:center!important}
+.hero-inner,.page-hero-inner{color:#252b32!important;text-shadow:none!important}
+.eyebrow{color:#8f2730!important}
 .hero h1{
-  font-family:Georgia,"Times New Roman",serif;
-  font-style:italic;
-  font-weight:700;
-  letter-spacing:-3px;
-  text-shadow:0 3px 16px rgba(0,0,0,.12);
+  color:#8f2730!important;font-family:Georgia,"Times New Roman",serif;
+  font-size:clamp(66px,9vw,112px)!important;letter-spacing:-5px;
+  line-height:.94!important;font-style:italic;font-weight:700;
+  text-shadow:0 2px 0 rgba(255,255,255,.5);
 }
-.hero h1 span{
-  color:#d7b878;
-  text-shadow:0 2px 10px rgba(0,0,0,.16);
+.hero h1 span{color:#b99a60!important}
+.hero-sub{color:#30343a!important;font-size:clamp(18px,2vw,25px)!important;font-weight:700}
+.hero-copy,.page-hero p{color:#424950!important;max-width:620px}
+.page-hero{min-height:260px!important;display:flex;align-items:center}
+.page-hero-inner{padding-top:48px!important;padding-bottom:42px!important}
+.page-hero h1{color:#252b32!important;font-family:Georgia,"Times New Roman",serif;font-size:clamp(34px,5vw,52px)!important}
+.container,.lower-inner{position:relative}
+main,.lower{background:transparent!important}
+.primary,.card,.intro-card,.step,.faq-list details,.section,.contact-card,.info-strip{
+  background:rgba(255,253,249,.84)!important;
+  border:1px solid rgba(255,255,255,.76)!important;
+  box-shadow:0 12px 34px rgba(76,56,43,.09)!important;
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+}
+.primary{border-radius:22px!important}
+.card,.step,.faq-list details{border-radius:18px!important}
+.card:hover{transform:translateY(-3px);box-shadow:0 16px 38px rgba(76,56,43,.13)!important}
+.cta,.button,.btn,.music{
+  background:linear-gradient(135deg,#922d35,#76232b)!important;
+  border-color:transparent!important;color:#fff!important;
+}
+.iconbox,.step-number{background:rgba(185,154,96,.16)!important;color:#87313a!important}
+.section-head h2,.section-title h2{color:#33343a}
+.rule{background:linear-gradient(90deg,#9a3a40,#c6ad7d,transparent)!important}
+.breadcrumb{color:#6c7278}
+.breadcrumb a{color:#8f2730}
+.faq-search{background:rgba(255,253,249,.92)!important;border:1px solid var(--line)!important}
+.lower{background:rgba(255,253,249,.56)!important;backdrop-filter:blur(10px)}
+.music{
+  position:fixed!important;right:22px!important;bottom:20px!important;z-index:50;
+  border-radius:999px!important;padding:12px 18px!important;
+  box-shadow:0 8px 24px rgba(75,30,34,.22)!important;
+}
+footer{background:rgba(255,253,249,.78)!important;color:#51565c!important}
+@media(max-width:700px){
+ .sitebar-inner{padding:9px 15px}
+ .logo{width:132px}
+ .sitebar-tag{font-size:9px;letter-spacing:.3px}
+ .hero{min-height:360px!important}
+ .hero-inner{padding:36px 20px!important}
+ .hero h1{font-size:68px!important;letter-spacing:-3px}
+ .page-hero{min-height:220px!important}
+ .page-hero-inner{padding:34px 20px!important}
+ .site-nav{justify-content:center;padding:0 10px}
+ .site-nav a{font-size:11px;padding:9px 10px}
+ .music{right:12px!important;bottom:12px!important;padding:11px 14px!important}
 }
 
 </style>
@@ -133,7 +190,7 @@ body{
 <div class="topline"></div>
 <header class="sitebar">
   <div class="sitebar-inner">
-    <img class="logo" src="logo-bawaslu-bandung.png" alt="Logo Bawaslu Kabupaten Bandung">
+    <img class="logo" src="logo-bawaslu-bandung.png" alt="Logo Bawaslu Kabupaten Bandung"><div class="silani-wordmark"><strong>Si<span>La</span>ni</strong><small>Sistem Layanan Informasi</small></div>
     <div class="sitebar-tag">Portal Layanan Informasi<br>Bawaslu Kabupaten Bandung</div>
   </div>
 </header>
@@ -148,7 +205,7 @@ body{
 <section class="hero">
   <div class="hero-inner">
     <div class="eyebrow">Layanan Publik Digital</div>
-    <h1 class="silani-wordmark" aria-label="SiLani">SiL<span>ani</span></h1>
+    <h1>SiL<span>ani</span></h1>
     <p class="hero-sub">Sistem Layanan Informasi</p>
     <p class="hero-copy">Akses informasi publik Bawaslu Kabupaten Bandung dengan lebih mudah, jelas, dan terarah melalui satu pintu layanan.</p>
   </div>
