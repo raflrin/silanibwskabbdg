@@ -216,3 +216,80 @@ details[open]>summary .chev{transform:rotate(180deg)}
 }
 @media(max-width:380px){.g4,.g3{grid-template-columns:1fr}.card{min-height:0}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none;animation:none}}
+
+
+/* Revisi SiLani: wordmark lebih proporsional dan tidak bertumpuk */
+.hero .wordmark{
+  font-size:clamp(68px,11vw,104px);
+  line-height:1.22;
+  margin:2px 0 8px;
+  min-height:1.15em;
+  align-items:center;
+}
+.hero .hero-sub{
+  display:block;
+  margin:4px 0 0;
+  line-height:1.25;
+}
+.hero .hero-text{padding-top:42px;padding-bottom:10px}
+.hero{padding-bottom:52px}
+
+/* FAQ: navigasi kategori di kiri, pertanyaan di kanan */
+.faq-layout{
+  display:grid;
+  grid-template-columns:250px minmax(0,1fr);
+  gap:22px;
+  align-items:start;
+  padding-top:28px;
+}
+.faq-sidebar{
+  position:sticky;
+  top:18px;
+  padding:18px 14px;
+  background:linear-gradient(160deg,#fff8eb,#f8eee3);
+  border:1px solid var(--line);
+  border-radius:16px;
+  box-shadow:var(--shadow);
+}
+.faq-side-title{
+  margin:0 8px 12px;
+  color:var(--maroon);
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+.faq-categories{
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+  margin:0;
+  padding:0;
+  overflow:visible;
+}
+.faq-categories .chip{
+  width:100%;
+  min-height:43px;
+  justify-content:flex-start;
+  white-space:normal;
+  text-align:left;
+  border-radius:10px;
+  padding:9px 12px;
+  line-height:1.25;
+}
+.faq-content{min-width:0}
+.faq-content .qlist{margin-top:0}
+.faq-content .q{overflow:hidden}
+.faq-content .qt{line-height:1.4}
+.faq-content .qa{line-height:1.65}
+@media(max-width:760px){
+  .faq-layout{grid-template-columns:1fr;gap:14px}
+  .faq-sidebar{position:static;padding:14px}
+  .faq-categories{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+  .faq-categories .chip{font-size:12px;min-height:40px}
+}
+@media(max-width:640px){
+  .hero .wordmark{font-size:clamp(64px,16vw,88px);line-height:1.2}
+  .hero .hero-text{padding-top:32px}
+  .hero{padding-bottom:42px}
+}
