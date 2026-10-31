@@ -569,3 +569,82 @@ details[open]>summary .chev{transform:rotate(180deg)}
   .hero-quick-cta{min-height:42px}
   .page-hero .mascot{width:min(48vw,155px) !important;max-height:130px !important}
 }
+
+
+/* ==========================================================
+   MASCOT PAIR FIX — one complete transparent illustration
+   Shared by Beranda, Panduan and FAQ. No cropping or seams.
+   ========================================================== */
+.hero-mascots,
+.page-hero .hero-mascots,
+.page-mascots {
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  width:100% !important;
+  min-width:0 !important;
+  height:auto !important;
+  max-height:none !important;
+  margin:0 !important;
+  padding:0 !important;
+  overflow:visible !important;
+  align-self:center !important;
+  position:relative !important;
+  z-index:2 !important;
+}
+.hero-pair,
+.page-hero .hero-pair {
+  display:block !important;
+  width:min(100%, 410px) !important;
+  max-width:410px !important;
+  height:auto !important;
+  max-height:none !important;
+  object-fit:contain !important;
+  object-position:center center !important;
+  margin:0 auto !important;
+  padding:0 !important;
+  overflow:visible !important;
+  filter:drop-shadow(0 10px 14px rgba(20,6,8,.22)) !important;
+}
+.page-hero .hero-in {
+  grid-template-columns:minmax(0,1fr) minmax(210px,330px) !important;
+  align-items:center !important;
+  gap:18px !important;
+}
+.page-hero .page-mascots .hero-pair {
+  width:min(100%, 320px) !important;
+  max-width:320px !important;
+}
+@media (max-width:760px) {
+  .hero-mascots,
+  .page-hero .hero-mascots,
+  .page-mascots {
+    width:min(100%, 360px) !important;
+    margin:12px auto 0 !important;
+    justify-self:center !important;
+  }
+  .hero-pair,
+  .page-hero .hero-pair {
+    width:min(82vw, 320px) !important;
+    max-width:320px !important;
+    max-height:none !important;
+  }
+  .page-hero .hero-in {
+    grid-template-columns:minmax(0,1fr) !important;
+    align-items:center !important;
+  }
+  .page-hero .page-mascots .hero-pair {
+    width:min(76vw, 285px) !important;
+    max-width:285px !important;
+  }
+}
+@media (max-width:390px) {
+  .hero-pair,
+  .page-hero .hero-pair {
+    width:min(84vw, 290px) !important;
+    max-height:none !important;
+  }
+  .page-hero .page-mascots .hero-pair {
+    width:min(78vw, 265px) !important;
+  }
+}
