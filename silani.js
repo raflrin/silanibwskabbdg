@@ -1,42 +1,40 @@
 (function(){
-  var audio=document.getElementById('mars');
-  var btn=document.getElementById('musicBtn');
-  var label=document.getElementById('musicLabel');
-  var KP='silaniMarsPlaying',KT='silaniMarsTime';
-  function store(k,v){try{sessionStorage.setItem(k,v)}catch(e){}}
-  function read(k){try{return sessionStorage.getItem(k)}catch(e){return null}}
+  var audio = document.getElementById('mars');
+  var KP='silaniMarsPlaying';
+  var currentPage = function(){
+    return (location.pathname.split('/').pop() || 'index.html').toLowerCase();
+  };
+
   function paint(on){
+    var btn=document.getElementById('musicBtn');
+    var label=document.getElementById('musicLabel');
     if(!btn)return;
     btn.setAttribute('aria-pressed',String(on));
     btn.setAttribute('aria-label',on?'Jeda Mars Pengawas Pemilu':'Putar Mars Pengawas Pemilu');
     if(label)label.textContent=on?'Mars aktif':'Putar mars';
   }
-  if(audio&&btn){
-    var saved=Number(read(KT)||0);
-    if(saved>0&&isFinite(saved)){
-      audio.addEventListener('loadedmetadata',function(){
-        try{audio.currentTime=Math.min(saved,Math.max(0,audio.duration-1))}catch(e){}
-      },{once:true});
-    }
-    var tryPlay=function(){
-      var p=audio.play();
-      if(p&&p.catch){p.catch(function(){paint(false)})}
-    };
+
+  function bindMusic(){
+    var btn=document.getElementById('musicBtn');
+    if(!btn || !audio || btn.dataset.bound==='1')return;
+    btn.dataset.bound='1';
     btn.addEventListener('click',function(){
-      if(audio.paused){store(KP,'1');tryPlay()}
-      else{audio.pause();store(KP,'0')}
+      if(audio.paused){
+        try{sessionStorage.setItem(KP,'1')}catch(e){}
+        var p=audio.play();
+        if(p&&p.catch)p.catch(function(){paint(false)});
+      }else{
+        audio.pause();
+        try{sessionStorage.setItem(KP,'0')}catch(e){}
+      }
     });
-    audio.addEventListener('play',function(){paint(true)});
-    audio.addEventListener('pause',function(){paint(false)});
-    window.addEventListener('pagehide',function(){
-      store(KT,String(audio.currentTime||0));
-      store(KP,audio.paused?'0':'1');
-    });
-    if(read(KP)==='1'){window.addEventListener('load',tryPlay,{once:true})}
+    paint(!audio.paused);
   }
 
-  var list=document.getElementById('faqList');
-  if(list){
+  function bindFaq(){
+    var list=document.getElementById('faqList');
+    if(!list || list.dataset.bound==='1')return;
+    list.dataset.bound='1';
     var items=Array.prototype.slice.call(list.querySelectorAll('.q'));
     var chips=Array.prototype.slice.call(document.querySelectorAll('.chip'));
     var input=document.getElementById('faqSearch');
@@ -51,7 +49,7 @@
         el.hidden=!show;
         if(show)shown++;
       });
-      empty.hidden=shown>0;
+      if(empty)empty.hidden=shown>0;
     }
     chips.forEach(function(c){
       c.addEventListener('click',function(){
@@ -65,5 +63,63 @@
       });
     });
     if(input)input.addEventListener('input',apply);
+    apply();
   }
+
+  function initPage(){
+    bindMusic();
+    bindFaq();
+    var page=currentPage();
+    document.querySelectorAll('.nav a').forEach(function(a){
+      var target=(a.getAttribute('href')||'').split('/').pop().toLowerCase();
+      if(target===page)a.setAttribute('aria-current','page');
+      else a.removeAttribute('aria-current');
+    });
+  }
+
+  async function navigate(url,push){
+    try{
+      var response=await fetch(url,{headers:{'X-SiLani-Navigation':'1'}});
+      if(!response.ok)throw new Error('Page tidak dapat dimuat');
+      var html=await response.text();
+      var parsed=new DOMParser().parseFromString(html,'text/html');
+      var incomingAudio=parsed.getElementById('mars');
+      if(!incomingAudio)throw new Error('Audio player tidak ditemukan');
+      var preservedAudio=audio;
+      var newBody=parsed.body.cloneNode(true);
+      var staleAudio=newBody.querySelector('#mars');
+      if(staleAudio)staleAudio.remove();
+      newBody.querySelectorAll('script').forEach(function(s){s.remove()});
+      document.body.innerHTML=newBody.innerHTML;
+      document.body.appendChild(preservedAudio);
+      document.title=parsed.title;
+      audio=preservedAudio;
+      if(push)history.pushState({silani:true},'',url);
+      window.scrollTo(0,0);
+      initPage();
+    }catch(err){
+      // Fallback to normal navigation if fetch is unavailable.
+      location.href=url;
+    }
+  }
+
+  document.addEventListener('click',function(event){
+    var link=event.target.closest('a[href]');
+    if(!link || event.defaultPrevented || event.button!==0 ||
+       event.metaKey || event.ctrlKey || event.shiftKey || event.altKey)return;
+    var url=new URL(link.href,location.href);
+    if(url.origin!==location.origin)return;
+    var page=url.pathname.split('/').pop().toLowerCase();
+    if(['index.html','panduan.html','faq.html'].indexOf(page)===-1)return;
+    if(url.pathname===location.pathname && !url.search && !url.hash)return;
+    event.preventDefault();
+    navigate(url.href,true);
+  });
+
+  window.addEventListener('popstate',function(){navigate(location.href,false)});
+  if(audio){
+    audio.addEventListener('play',function(){paint(true)});
+    audio.addEventListener('pause',function(){paint(false)});
+  }
+  initPage();
 })();

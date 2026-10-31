@@ -218,20 +218,46 @@ details[open]>summary .chev{transform:rotate(180deg)}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none;animation:none}}
 
 
-/* Revisi SiLani: wordmark lebih proporsional dan tidak bertumpuk */
-.hero .wordmark{
-  font-size:clamp(68px,11vw,104px);
-  line-height:1.22;
-  margin:2px 0 8px;
-  min-height:1.15em;
-  align-items:center;
+/* Wordmark SiLani: editorial, bersih, dan memiliki jarak yang cukup */
+.hero .hero-text{
+  padding-top:58px;
+  padding-bottom:14px;
 }
+.hero .eyebrow{
+  margin:0 0 22px;
+  font-size:12px;
+  letter-spacing:.19em;
+  gap:12px;
+}
+.hero .eyebrow::before{
+  width:34px;
+  height:2px;
+}
+.hero .wordmark{
+  display:flex;
+  align-items:baseline;
+  gap:.025em;
+  width:max-content;
+  max-width:100%;
+  margin:0 0 20px;
+  padding:0;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:clamp(72px,9.2vw,108px);
+  font-style:italic;
+  font-weight:500;
+  line-height:1;
+  letter-spacing:-.075em;
+  text-shadow:0 3px 14px rgba(0,0,0,.18);
+}
+.hero .wordmark span:first-child{color:#fff8ef}
+.hero .wordmark span:last-child{color:var(--gold)}
 .hero .hero-sub{
   display:block;
-  margin:4px 0 0;
-  line-height:1.25;
+  margin:0;
+  font-size:clamp(20px,2.5vw,27px);
+  line-height:1.22;
 }
-.hero .hero-text{padding-top:42px;padding-bottom:10px}
+.hero .hero-copy{margin-top:12px}
 .hero{padding-bottom:52px}
 
 /* FAQ: navigasi kategori di kiri, pertanyaan di kanan */
@@ -289,7 +315,58 @@ details[open]>summary .chev{transform:rotate(180deg)}
   .faq-categories .chip{font-size:12px;min-height:40px}
 }
 @media(max-width:640px){
-  .hero .wordmark{font-size:clamp(64px,16vw,88px);line-height:1.2}
-  .hero .hero-text{padding-top:32px}
+  .hero .hero-text{padding-top:38px}
+  .hero .eyebrow{margin-bottom:18px;font-size:10px;letter-spacing:.15em}
+  .hero .wordmark{font-size:clamp(62px,15vw,82px);margin-bottom:16px;letter-spacing:-.07em}
+  .hero .hero-sub{font-size:clamp(19px,5vw,24px)}
   .hero{padding-bottom:42px}
+}
+
+
+/* SiLani wordmark — refined editorial treatment */
+.hero .hero-text{
+  padding-top: clamp(54px, 7vw, 82px);
+  padding-bottom: 24px;
+}
+.hero .eyebrow{
+  margin: 0 0 26px;
+  line-height: 1.4;
+  font-size: 12px;
+  letter-spacing: .2em;
+}
+.hero .wordmark{
+  display: block;
+  width: auto;
+  max-width: 100%;
+  margin: 0 0 22px;
+  padding: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(64px, 8.5vw, 104px);
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.06;
+  letter-spacing: -.065em;
+  text-shadow: 0 3px 14px rgba(0,0,0,.16);
+  white-space: nowrap;
+}
+.hero .wordmark span{
+  display: inline;
+}
+.hero .wordmark span:first-child{ color:#fff8ef; }
+.hero .wordmark span:last-child{ color:var(--gold); }
+.hero .hero-sub{
+  margin: 0;
+  font-size: clamp(21px, 2.5vw, 28px);
+  line-height: 1.25;
+}
+.hero .hero-copy{ margin-top: 14px; }
+@media(max-width:640px){
+  .hero .hero-text{ padding-top: 46px; padding-bottom: 20px; }
+  .hero .eyebrow{ margin-bottom: 22px; font-size: 10px; }
+  .hero .wordmark{
+    font-size: clamp(58px, 14vw, 78px);
+    margin-bottom: 20px;
+    letter-spacing: -.06em;
+  }
+  .hero .hero-sub{ font-size: clamp(19px, 5vw, 24px); }
 }
