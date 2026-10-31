@@ -490,6 +490,78 @@ body{margin:0;background:#f5eee4!important;color:var(--silani-ink)}
  .hero .mascot-pair{width:145px!important;right:0!important}
 }
 
+
+/* Header: logo on the left; all three navigation links on the right, same row */
+.sitebar{height:78px!important;min-height:78px!important;position:relative!important;z-index:50!important;background:#fffdf9!important}
+.sitebar-inner{height:78px!important;min-height:78px!important;width:min(1240px,92%)!important;margin:0 auto!important;display:flex!important;align-items:center!important;justify-content:flex-start!important;padding:0!important}
+.sitebar .logo{width:190px!important;max-width:42vw!important;max-height:58px!important;object-fit:contain!important}
+.site-nav-wrap{
+ position:absolute!important;left:auto!important;right:max(4%,calc((100vw - 1240px)/2))!important;
+ top:0!important;width:auto!important;height:78px!important;min-height:78px!important;
+ margin:0!important;padding:0!important;background:transparent!important;border:0!important;
+ box-shadow:none!important;z-index:51!important;pointer-events:none!important;
+}
+.site-nav{
+ width:auto!important;height:78px!important;min-height:78px!important;margin:0!important;padding:0!important;
+ display:flex!important;align-items:center!important;justify-content:flex-end!important;
+ gap:8px!important;pointer-events:auto!important;white-space:nowrap!important;
+}
+.site-nav a,.site-nav a:last-child{
+ display:inline-flex!important;align-items:center!important;justify-content:center!important;
+ margin:0!important;padding:12px 15px!important;border-radius:13px!important;
+ background:transparent!important;color:#57232a!important;
+ font-size:13px!important;font-weight:750!important;text-decoration:none!important;
+ white-space:nowrap!important;box-shadow:none!important;
+}
+.site-nav a:hover,.site-nav a[aria-current="page"],.site-nav a:last-child:hover{
+ background:#f7e8e8!important;color:#941e2b!important;
+}
+.site-nav a.nav-apply{display:none!important}
+@media(max-width:700px){
+ .sitebar,.sitebar-inner{height:96px!important;min-height:96px!important}
+ .sitebar-inner{width:94%!important;align-items:flex-start!important;padding-top:6px!important}
+ .sitebar .logo{width:145px!important;max-height:44px!important}
+ .site-nav-wrap{top:44px!important;left:0!important;right:0!important;width:100%!important;height:50px!important;min-height:50px!important}
+ .site-nav{width:100%!important;height:50px!important;min-height:50px!important;justify-content:center!important;gap:2px!important}
+ .site-nav a,.site-nav a:last-child{font-size:10px!important;padding:9px 10px!important}
+}
+
+/* FAQ layout: categories on the left and real questions/answers on the right */
+.faq-main{max-width:1240px!important;padding:18px 22px 28px!important}
+.faq-layout{display:grid!important;grid-template-columns:245px minmax(0,1fr)!important;gap:18px!important;align-items:start!important}
+.faq-sidebar{background:rgba(255,250,242,.94)!important;border:1px solid #eadfd2!important;border-radius:15px!important;padding:9px!important}
+.faq-category{width:100%!important;display:flex!important;align-items:center!important;gap:10px!important;border:0!important;border-radius:10px!important;padding:11px 12px!important;background:transparent!important;color:#27313a!important;text-align:left!important;cursor:pointer!important;font-size:13px!important}
+.faq-category.active{background:linear-gradient(100deg,#9b2630,#791b25)!important;color:#fff!important}
+.faq-content{min-width:0!important}
+.faq-search-wrap{display:flex!important;align-items:center!important;gap:10px!important;background:#fffaf4!important;border:1px solid #e7d8c9!important;border-radius:999px!important;padding:0 16px!important;margin-bottom:10px!important}
+.faq-search-wrap>span{font-size:22px!important;color:#b64c2d!important}
+.faq-search{border:0!important;background:transparent!important;box-shadow:none!important;width:100%!important;padding:13px 0!important}
+.faq-list{display:grid!important;gap:6px!important}
+.faq-item{display:block!important;background:rgba(255,251,245,.97)!important;border:1px solid #eadfd2!important;border-radius:11px!important;padding:0 13px!important;box-shadow:0 3px 9px rgba(52,25,18,.04)!important}
+.faq-item[hidden]{display:none!important}
+.faq-item summary{display:flex!important;align-items:center!important;gap:10px!important;padding:11px 2px!important;cursor:pointer!important;list-style:none!important;color:#202b34!important;font-size:13px!important;font-weight:650!important}
+.faq-item summary::-webkit-details-marker{display:none!important}
+.qmark{width:19px!important;height:19px!important;flex:0 0 19px!important;border:1.4px solid #c95a36!important;border-radius:50%!important;display:grid!important;place-items:center!important;color:#a32b2b!important;font-size:11px!important;font-weight:800!important}
+.chevron{margin-left:auto!important;color:#84212b!important;font-size:18px!important}
+.faq-item[open] .chevron{transform:rotate(180deg)!important}
+.faq-answer{padding:0 8px 12px 31px!important}
+.faq-answer p{margin:0!important;color:#5d646a!important;font-size:12px!important;line-height:1.6!important}
+.faq-empty{padding:20px!important;color:#6b7379!important;text-align:center!important}
+@media(max-width:700px){
+ .faq-layout{grid-template-columns:1fr!important;gap:10px!important}
+ .faq-sidebar{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:4px!important}
+ .faq-category{font-size:11px!important;padding:9px 8px!important}
+ .faq-item summary{font-size:11px!important}
+}
+
+
+/* Category filter UI without a search bar */
+.faq-content{min-width:0!important}
+.faq-list{display:grid!important;gap:8px!important;margin-top:0!important}
+.faq-item[hidden]{display:none!important}
+.faq-category{cursor:pointer!important;user-select:none!important}
+.faq-category:focus-visible{outline:3px solid #d6ad5b!important;outline-offset:2px!important}
+
 </style>
 </head>
 <body>
@@ -514,17 +586,47 @@ body{margin:0;background:#f5eee4!important;color:var(--silani-ink)}
 <main class="container faq-main">
   <div class="faq-layout">
     <aside class="faq-sidebar" aria-label="Kategori pertanyaan">
-      <button class="faq-category active" data-filter="all"><span>▦</span> Semua Pertanyaan</button>
-      <button class="faq-category" data-filter="permohonan"><span>▤</span> Permohonan Informasi</button>
-      <button class="faq-category" data-filter="keberatan"><span>⚖</span> Keberatan</button>
-      <button class="faq-category" data-filter="biaya"><span>◷</span> Waktu dan Biaya</button>
-      <button class="faq-category" data-filter="akses"><span>▣</span> Akses Informasi</button>
-      <button class="faq-category" data-filter="kontak"><span>♧</span> Kontak dan Layanan Lainnya</button>
+      <button type="button" class="faq-category active" data-filter="all" aria-pressed="true"><span>▦</span> Semua Pertanyaan</button>
+      <button type="button" class="faq-category" data-filter="permohonan" aria-pressed="false"><span>▤</span> Permohonan Informasi</button>
+      <button type="button" class="faq-category" data-filter="keberatan" aria-pressed="false"><span>⚖</span> Keberatan</button>
+      <button type="button" class="faq-category" data-filter="biaya" aria-pressed="false"><span>◷</span> Waktu dan Biaya</button>
+      <button type="button" class="faq-category" data-filter="akses" aria-pressed="false"><span>▣</span> Akses Informasi</button>
+      <button type="button" class="faq-category" data-filter="kontak" aria-pressed="false"><span>♧</span> Kontak dan Layanan Lainnya</button>
     </aside>
     <section class="faq-content" aria-label="Daftar pertanyaan dan jawaban">
-      <div class="faq-search-wrap"><span>⌕</span><input id="faqSearch" class="faq-search" type="search" placeholder="Cari pertanyaan..." aria-label="Cari pertanyaan FAQ"></div>
       <div class="faq-list" id="faqList">
-        {''.join(cards)}
+        <details class="faq-item" data-category="akses">
+      <summary><span class="qmark">?</span><span class="question-text">Apakah SILANI merupakan sistem PPID baru?</span><span class="chevron">⌄</span></summary>
+      <div class="faq-answer"><p>Bukan. SILANI merupakan portal informasi dan navigasi untuk membantu masyarakat menemukan layanan. Pengajuan dan proses permohonan tetap dilakukan melalui sistem atau kanal resmi PPID.</p></div>
+    </details>
+<details class="faq-item" data-category="permohonan">
+      <summary><span class="qmark">?</span><span class="question-text">Bagaimana agar permohonan ditujukan ke Bawaslu Kabupaten Bandung?</span><span class="chevron">⌄</span></summary>
+      <div class="faq-answer"><p>Setelah membuka portal permohonan PPID, pada kolom Kabupaten/Kota pilih <strong>Bawaslu Kab. Bandung</strong>. Periksa kembali pilihan unit sebelum mengirimkan formulir.</p></div>
+    </details>
+<details class="faq-item" data-category="biaya">
+      <summary><span class="qmark">?</span><span class="question-text">Apakah pengajuan permohonan informasi dikenakan biaya?</span><span class="chevron">⌄</span></summary>
+      <div class="faq-answer"><p>Pengajuan permohonan informasi tidak dipungut biaya. Untuk penggandaan atau pengiriman salinan informasi, konfirmasikan ketentuan biayanya kepada petugas PPID.</p></div>
+    </details>
+<details class="faq-item" data-category="biaya">
+      <summary><span class="qmark">?</span><span class="question-text">Berapa lama permohonan diproses?</span><span class="chevron">⌄</span></summary>
+      <div class="faq-answer"><p>Panduan proyek mencantumkan waktu tanggapan paling lambat 10 hari kerja. Periksa tanda terima dan pemberitahuan pada portal PPID untuk rincian proses serta kemungkinan perpanjangan sesuai ketentuan resmi.</p></div>
+    </details>
+<details class="faq-item" data-category="akses">
+      <summary><span class="qmark">?</span><span class="question-text">Bagaimana cara memeriksa status permohonan?</span><span class="chevron">⌄</span></summary>
+      <div class="faq-answer"><p>Buka layanan Cek Status Permohonan dari beranda SILANI atau langsung melalui portal resmi PPID. Ikuti instruksi yang tersedia pada halaman tersebut.</p></div>
+    </details>
+<details class="faq-item" data-category="keberatan">
+      <summary><span class="qmark">?</span><span class="question-text">Apa yang harus dilakukan jika ingin mengajukan keberatan?</span><span class="chevron">⌄</span></summary>
+      <div class="faq-answer"><p>Buka menu Ajukan Keberatan pada portal PPID. Ikuti prosedur dan tenggat waktu yang berlaku sebagaimana tercantum dalam ketentuan resmi atau pemberitahuan yang diterima.</p></div>
+    </details>
+<details class="faq-item" data-category="kontak">
+      <summary><span class="qmark">?</span><span class="question-text">Di mana saya bisa bertanya jika mengalami kendala?</span><span class="chevron">⌄</span></summary>
+      <div class="faq-answer"><p>Hubungi petugas melalui WhatsApp di nomor <strong>0812-9778-6606</strong> atau email PPID <strong>ppid.bawaslukabbdg@gmail.com</strong>. Alamat kantor: Jl. Raya Gading Tutuka I No. I, Desa Cingcin, Kecamatan Soreang, Kabupaten Bandung. Sampaikan kendala secara ringkas dan jangan mengirimkan data pribadi yang tidak diperlukan.</p></div>
+    </details>
+<details class="faq-item" data-category="akses">
+      <summary><span class="qmark">?</span><span class="question-text">Apakah saya bisa meminta semua jenis informasi?</span><span class="chevron">⌄</span></summary>
+      <div class="faq-answer"><p>Permohonan diproses berdasarkan ketentuan keterbukaan informasi publik dan status informasi yang dimohonkan. Periksa Daftar Informasi Publik serta ketentuan pada portal PPID untuk mengetahui informasi yang tersedia.</p></div>
+    </details>
       </div>
       <p class="faq-empty" id="faqEmpty" hidden>Pertanyaan tidak ditemukan. Coba kata kunci atau kategori lain.</p>
     </section>
@@ -538,6 +640,33 @@ body{margin:0;background:#f5eee4!important;color:var(--silani-ink)}
 <button class="music" id="silaniMusicButton" type="button" aria-pressed="false" aria-label="Putar atau hentikan Mars Pengawas Pemilu">
   <span class="music-dot"></span><span id="silaniMusicLabel">Putar Mars Pengawas Pemilu</span>
 </button>
+
+<script>
+(() => {
+  const buttons = Array.from(document.querySelectorAll('.faq-category'));
+  const items = Array.from(document.querySelectorAll('.faq-item'));
+  if (!buttons.length || !items.length) return;
+
+  function applyFilter(filter) {
+    items.forEach(item => {
+      const matches = filter === 'all' || item.dataset.category === filter;
+      item.hidden = !matches;
+      if (!matches) item.open = false;
+    });
+    buttons.forEach(button => {
+      const selected = button.dataset.filter === filter;
+      button.classList.toggle('active', selected);
+      button.setAttribute('aria-pressed', String(selected));
+    });
+  }
+
+  buttons.forEach(button => {
+    button.addEventListener('click', () => applyFilter(button.dataset.filter));
+  });
+  applyFilter('all');
+})();
+</script>
+
 <script>
 (() => {
   const audio = document.getElementById('silaniMars');
