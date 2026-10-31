@@ -528,6 +528,75 @@ body{margin:0;background:#f5eee4!important;color:var(--silani-ink)}
   .site-nav a,.site-nav a:last-child{font-size:9px!important;padding:8px 6px!important}
 }
 
+
+/* Panduan page: composition follows the supplied mockup; homepage and FAQ are untouched */
+.page-hero{min-height:176px!important;display:flex!important;align-items:center!important}
+.page-hero-inner{width:100%!important;max-width:1240px!important;margin:0 auto!important;padding:23px 34px!important}
+.page-hero h1{font-size:clamp(30px,4vw,43px)!important;margin:7px 0 5px!important;max-width:65%!important}
+.page-hero p{font-size:12px!important;line-height:1.45!important;max-width:58%!important}
+.page-hero .eyebrow{font-size:9px!important;letter-spacing:1.5px!important}
+.page-hero .mascot-pair{width:clamp(150px,18vw,225px)!important;right:5%!important;bottom:0!important;max-height:96%!important}
+.container{max-width:1240px!important;padding:0 22px 38px!important}
+.guide-overview{margin:16px 0 28px!important}
+.guide-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.guide-card{
+ display:flex;align-items:flex-start;gap:13px;min-height:112px;
+ padding:17px 18px;border-radius:15px;text-decoration:none;
+ background:linear-gradient(120deg,#fffaf2,#fffdf9);
+ border:1px solid #eadfd2;box-shadow:0 6px 18px rgba(65,30,18,.07);
+ transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;
+}
+.guide-card:hover{transform:translateY(-2px);border-color:#d7b66b;box-shadow:0 9px 22px rgba(65,30,18,.11)}
+.guide-icon{
+ flex:0 0 54px;width:54px;height:54px;border-radius:50%;
+ display:grid;place-items:center;background:#f8e5d0;color:#b53e2b;
+ font-size:27px;font-weight:800;
+}
+.guide-card-copy{display:flex;flex-direction:column;align-items:flex-start;gap:5px;min-width:0}
+.guide-card-copy strong{font-family:Georgia,"Times New Roman",serif;font-size:15px;line-height:1.18;color:#17232d}
+.guide-card-copy small{font-size:11px;line-height:1.45;color:#3f4850}
+.guide-arrow{display:grid;place-items:center;width:25px;height:25px;border-radius:50%;background:#97232d;color:white;font-size:14px;margin-top:2px}
+.guide-info{
+ display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;
+ margin-top:12px;padding:14px 10px;border-radius:14px;
+ background:rgba(255,250,242,.92);border:1px solid #eadfd2;
+ box-shadow:0 5px 16px rgba(65,30,18,.05);
+}
+.guide-info-item{display:flex;align-items:flex-start;gap:9px;padding:0 11px;min-width:0}
+.guide-info-item+.guide-info-item{border-left:1px solid #e2d5c9}
+.guide-info-icon{flex:0 0 26px;color:#d94b26;font-size:24px;line-height:1}
+.guide-info-item strong{display:block;font-size:10px;color:#17232d;margin-bottom:4px}
+.guide-info-item small{display:block;font-size:9px;line-height:1.45;color:#3f4850;overflow-wrap:anywhere}
+.guide-precheck{margin-top:10px;padding:10px 13px;border-left:3px solid #d2aa58;background:rgba(255,250,242,.8);border-radius:0 9px 9px 0;font-size:11px;line-height:1.5;color:#5b514b}
+.guide-precheck strong{color:#79212a}
+#permohonan,#keberatan{scroll-margin-top:18px}
+#permohonan .section-title,#keberatan .section-title{margin-top:25px}
+@media(max-width:760px){
+ .page-hero{min-height:190px!important}
+ .page-hero-inner{padding:25px 18px!important}
+ .page-hero h1{font-size:30px!important;max-width:72%!important}
+ .page-hero p{font-size:11px!important;max-width:68%!important}
+ .page-hero .mascot-pair{width:140px!important;right:0!important}
+ .container{padding:0 13px 30px!important}
+ .guide-cards{gap:8px}
+ .guide-card{min-height:125px;padding:12px 10px;gap:8px}
+ .guide-icon{flex-basis:40px;width:40px;height:40px;font-size:21px}
+ .guide-card-copy strong{font-size:12px}
+ .guide-card-copy small{font-size:9px}
+ .guide-info{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:12px;padding:12px 8px}
+ .guide-info-item{padding:0 8px}
+ .guide-info-item:nth-child(3){border-left:0}
+ .guide-info-item:nth-child(2n){border-left:1px solid #e2d5c9}
+ .guide-info-item strong{font-size:10px}
+ .guide-info-item small{font-size:9px}
+}
+@media(max-width:420px){
+ .guide-cards{grid-template-columns:1fr}
+ .guide-card{min-height:100px}
+ .page-hero .mascot-pair{width:115px!important}
+ .page-hero h1{font-size:27px!important}
+}
+
 </style>
 </head>
 <body>
@@ -550,11 +619,35 @@ body{margin:0;background:#f5eee4!important;color:var(--silani-ink)}
 <p>Panduan langkah demi langkah untuk mengakses layanan informasi publik Bawaslu Kabupaten Bandung.</p>
 </div><img class="mascot-pair" src="wasra-wasri-pair.png" alt="Maskot pengawas pemilu Wasra dan Wasri"></section>
 <main class="container">
-<div class="breadcrumb"><a href="index.html">Beranda</a> &nbsp; / &nbsp; Panduan Layanan</div>
+<section class="guide-overview" aria-label="Ringkasan panduan layanan">
+  <div class="guide-cards">
+    <a class="guide-card" href="#permohonan">
+      <span class="guide-icon" aria-hidden="true">▤</span>
+      <span class="guide-card-copy">
+        <strong>Cara Mengajukan<br>Permohonan Informasi</strong>
+        <small>12 langkah pengajuan permohonan informasi publik melalui layanan PPID Bawaslu Kabupaten Bandung.</small>
+        <span class="guide-arrow" aria-hidden="true">➜</span>
+      </span>
+    </a>
+    <a class="guide-card" href="#keberatan">
+      <span class="guide-icon" aria-hidden="true">⚖</span>
+      <span class="guide-card-copy">
+        <strong>Cara Mengajukan<br>Keberatan</strong>
+        <small>4 langkah pengajuan keberatan jika Anda tidak puas dengan tanggapan atas permohonan informasi.</small>
+        <span class="guide-arrow" aria-hidden="true">➜</span>
+      </span>
+    </a>
+  </div>
+  <div class="guide-info">
+    <div class="guide-info-item"><span class="guide-info-icon">◷</span><span><strong>Jam Layanan</strong><small>Senin–Jumat<br>09.00–15.00 WIB</small></span></div>
+    <div class="guide-info-item"><span class="guide-info-icon">＄</span><span><strong>Biaya Layanan</strong><small>Gratis,<br>tanpa dipungut biaya.</small></span></div>
+    <div class="guide-info-item"><span class="guide-info-icon">♦</span><span><strong>Alamat Kantor</strong><small>Jl. Raya Gading Tutuka I No. 1,<br>Desa Cingcin, Kec. Soreang,<br>Kabupaten Bandung.</small></span></div>
+    <div class="guide-info-item"><span class="guide-info-icon">☏</span><span><strong>Bantuan Layanan</strong><small>0812-9778-6606<br>ppid.bawaslukabbdg@gmail.com</small></span></div>
+  </div>
+  <div class="guide-precheck"><strong>Sebelum mengajukan:</strong> periksa terlebih dahulu Daftar Informasi Publik (DIP). Informasi yang dibutuhkan mungkin sudah tersedia.</div>
+</section>
 
-<div class="intro-card"><strong>Sebelum mengajukan permohonan</strong><br>Periksa terlebih dahulu menu <strong>Cari Informasi</strong> atau Daftar Informasi Publik (DIP). Informasi yang dibutuhkan mungkin sudah tersedia, sehingga Anda tidak perlu mengajukan permohonan baru.</div>
-
-<section>
+<section id="permohonan">
   <div class="section-title"><h2>1. Cara Mengajukan Permohonan Informasi</h2><p>Ikuti langkah berikut pada portal resmi PPID Bawaslu.</p><div class="rule"></div></div>
   <div class="steps">
     <article class="step"><div class="step-number">01</div><h3>Buka layanan</h3><p>Buka SILANI, pilih <strong>Ajukan Informasi</strong>, lalu lanjutkan ke halaman PPID Bawaslu.</p></article>
@@ -573,7 +666,7 @@ body{margin:0;background:#f5eee4!important;color:var(--silani-ink)}
   <div class="info-strip"><strong>Biaya:</strong> permohonan informasi tidak dipungut biaya. Untuk penggandaan/fotokopi, pemohon menggandakan sendiri atau menyediakan CD/flashdisk untuk perekaman data, sesuai panduan yang diberikan.</div>
 </section>
 
-<section>
+<section id="keberatan">
   <div class="section-title"><h2>2. Cara Mengajukan Keberatan</h2><p>Gunakan prosedur keberatan apabila tidak puas dengan tanggapan atas permohonan informasi.</p><div class="rule"></div></div>
   <div class="steps">
     <article class="step"><div class="step-number">01</div><h3>Perhatikan tenggat</h3><p>Panduan yang diberikan menyebut keberatan diajukan paling lambat <strong>30 hari kerja</strong> setelah menerima pemberitahuan tertulis dan/atau keputusan PPID tentang penolakan.</p></article>
