@@ -1,4 +1,21 @@
+var SURVEY_FORM_URL = '';
+function configureSurveyLink() {
+  var link = document.getElementById('surveyLink');
+  if (!link) return;
 
+  if (SURVEY_FORM_URL &&
+      SURVEY_FORM_URL.indexOf('https://docs.google.com/forms/') === 0) {
+    link.href = SURVEY_FORM_URL;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    link.removeAttribute('aria-disabled');
+    link.textContent = 'Isi Survei Kepuasan';
+  } else {
+    link.href = '#';
+    link.setAttribute('aria-disabled', 'true');
+    link.textContent = 'Formulir segera tersedia';
+  }
+}
 (function () {
   var audio = document.getElementById('mars');
 
