@@ -68,6 +68,64 @@ a{color:inherit;-webkit-tap-highlight-color:transparent}
 @media(max-width:760px){.steps{grid-template-columns:1fr}.duo{grid-template-columns:1fr}.page-hero-inner{padding:38px 19px}.container{padding:0 15px 35px}.sitebar-inner{padding:10px 15px}.logo{width:145px}.footer-inner{flex-direction:column;align-items:flex-start}}
 @media(max-width:520px){.site-nav{padding:5px 10px;justify-content:stretch;gap:4px}.site-nav a{flex:1;justify-content:center;padding:10px 6px;font-size:11px}.sitebar-tag{font-size:9px;letter-spacing:.8px}.page-hero h1{letter-spacing:-.8px}.section-title h2{font-size:21px}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+
+/* SILANI visual refinement: calm palette + office photo on every page */
+:root{
+  --wine:#8f3038;
+  --wine2:#67262d;
+  --gold:#b99a61;
+  --ink:#27313a;
+  --muted:#69747d;
+  --paper:#f5f2ed;
+  --line:#e5ded5;
+  --white:#fffdf9;
+}
+body{
+  background:
+    linear-gradient(rgba(250,248,244,.86),rgba(250,248,244,.91)),
+    url("gedung-bawaslu-bandung.jpeg") center center / cover fixed no-repeat;
+}
+.sitebar,.site-nav-wrap{
+  background:rgba(255,253,249,.91);
+  backdrop-filter:blur(9px);
+  border-color:rgba(220,211,199,.8);
+}
+.site-nav a{color:#5d5050}
+.site-nav a:hover,.site-nav a[aria-current="page"]{
+  background:#eee5dc;color:var(--wine2);
+}
+.topline{background:linear-gradient(90deg,#8f3038 0 68%,#b99a61 68% 100%)}
+.page-hero{
+  background:
+    linear-gradient(90deg,rgba(250,247,241,.90),rgba(250,247,241,.70)),
+    url("gedung-bawaslu-bandung.jpeg") center 42%/cover;
+  color:var(--ink);
+}
+.page-hero .eyebrow{color:var(--wine2)}
+.page-hero .eyebrow:before{background:var(--gold)}
+.page-hero p{color:#46515a}
+.intro-card,.primary{
+  background:rgba(255,253,249,.91);
+  border-color:#e4d8c8;
+  box-shadow:0 12px 30px rgba(62,48,39,.08);
+}
+.hero:after{
+  background:
+    linear-gradient(90deg,rgba(36,24,22,.56),rgba(45,31,28,.25) 58%,rgba(31,25,22,.08)),
+    linear-gradient(0deg,rgba(30,20,18,.32),transparent 72%);
+}
+.hero h1{
+  font-family:Georgia,"Times New Roman",serif;
+  font-style:italic;
+  font-weight:700;
+  letter-spacing:-3px;
+  text-shadow:0 3px 16px rgba(0,0,0,.12);
+}
+.hero h1 span{
+  color:#d7b878;
+  text-shadow:0 2px 10px rgba(0,0,0,.16);
+}
+
 </style>
 </head>
 <body>
