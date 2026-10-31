@@ -215,6 +215,156 @@ body{background:#f5eee4!important;color:var(--ink)}
  .site-nav a{font-size:9px!important;padding:9px 6px!important}
 }
 
+
+/* === Final shared header and hero: matched across Beranda, Panduan, FAQ === */
+:root{
+ --silani-maroon:#8e1e29;--silani-deep:#4c151d;--silani-gold:#d4ad62;
+ --silani-cream:#fff7eb;--silani-ink:#17232d;
+}
+html{scroll-behavior:smooth}
+body{margin:0;background:#f5eee4!important;color:var(--silani-ink)}
+/* One unified white header row */
+.sitebar{
+ background:rgba(255,253,250,.98)!important;
+ border:0!important;border-bottom:1px solid #e9e0d7!important;
+ box-shadow:0 2px 12px rgba(40,20,18,.045);
+}
+.sitebar-inner{
+ max-width:1240px!important;min-height:60px!important;
+ margin:0 auto!important;padding:7px 22px!important;
+ display:flex!important;align-items:center!important;gap:18px!important;
+}
+.logo{width:158px!important;max-width:42%!important;height:auto!important;max-height:46px!important;object-fit:contain}
+.sitebar-tag{display:none!important}
+.site-nav-wrap{
+ background:transparent!important;border:0!important;box-shadow:none!important;
+ position:absolute!important;z-index:20!important;top:0;left:0;right:0;
+ height:60px!important;pointer-events:none!important;
+}
+.site-nav{
+ max-width:1240px!important;height:60px!important;margin:0 auto!important;
+ padding:0 22px!important;display:flex!important;align-items:center!important;
+ justify-content:flex-end!important;gap:8px!important;pointer-events:auto!important;
+}
+.site-nav a{
+ display:inline-flex!important;align-items:center!important;justify-content:center!important;
+ min-height:38px!important;padding:0 15px!important;border-radius:12px!important;
+ color:#512b2d!important;background:transparent!important;
+ font-size:12px!important;font-weight:800!important;text-decoration:none!important;
+}
+.site-nav a:hover,.site-nav a[aria-current="page"]{
+ color:var(--silani-maroon)!important;background:#f7e7e8!important;
+}
+.site-nav a[aria-current="page"]{box-shadow:none!important}
+.site-nav a:last-child{display:none!important}
+/* Same building-photo hero and maroon-to-clear overlay on every page */
+.hero,.page-hero{
+ position:relative!important;isolation:isolate!important;overflow:hidden!important;
+ background:#4c1b22!important;
+}
+.hero{min-height:390px!important;display:flex!important;align-items:center!important}
+.page-hero{min-height:270px!important;display:flex!important;align-items:center!important}
+.hero:before,.page-hero:before{
+ content:"";position:absolute!important;inset:0!important;z-index:-2!important;
+ display:block!important;background:url("gedung-bawaslu-bandung.jpeg") center 43%/cover no-repeat!important;
+ transform:scale(1.015);
+}
+.hero:after,.page-hero:after{
+ content:"";position:absolute!important;inset:0!important;z-index:-1!important;
+ display:block!important;
+ background:
+ linear-gradient(90deg,rgba(52,13,20,.92) 0%,rgba(68,17,24,.82) 31%,rgba(68,22,27,.42) 57%,rgba(23,30,34,.06) 100%),
+ linear-gradient(0deg,rgba(54,13,19,.28),transparent 65%)!important;
+}
+.hero-inner,.page-hero-inner{
+ width:100%!important;max-width:1240px!important;margin:0 auto!important;
+ padding:40px 24px 36px!important;position:relative!important;z-index:3!important;
+ color:#fff!important;
+}
+.hero-inner{max-width:1240px!important}
+.hero .eyebrow,.page-hero .eyebrow{
+ color:#f2d79b!important;font-size:11px!important;font-weight:900!important;
+ letter-spacing:2px!important;text-transform:uppercase!important;
+}
+.hero .eyebrow:before,.page-hero .eyebrow:before{background:var(--silani-gold)!important}
+.hero h1.silani-wordmark{
+ display:flex!important;align-items:baseline!important;gap:0!important;
+ width:max-content!important;max-width:100%!important;
+ margin:13px 0 14px!important;
+ font-family:"Brush Script MT","Segoe Script","URW Chancery L",cursive!important;
+ font-size:clamp(82px,9.5vw,132px)!important;line-height:.82!important;
+ letter-spacing:-5px!important;font-weight:700!important;font-style:italic!important;
+ color:#fff8ef!important;text-shadow:0 4px 18px rgba(0,0,0,.22)!important;
+}
+.hero h1.silani-wordmark .silani-si{color:#fff8ef!important}
+.hero h1.silani-wordmark .silani-lani{color:#d9b260!important}
+.hero-sub{color:#fff!important;font-size:clamp(18px,2vw,24px)!important;font-weight:750!important}
+.hero-copy{color:#f7eae3!important;max-width:540px!important;font-size:14px!important;line-height:1.6!important}
+.page-hero-inner{max-width:1240px!important}
+.page-hero h1{
+ color:#fff!important;font-family:Georgia,"Times New Roman",serif!important;
+ font-size:clamp(34px,4vw,48px)!important;line-height:1.1!important;
+ margin:0 0 10px!important;letter-spacing:-.8px!important;
+}
+.page-hero p{color:#f8eae2!important;max-width:550px!important;font-size:14px!important;line-height:1.6!important}
+.page-hero .breadcrumb{color:#f6e4d7!important}
+.page-hero .breadcrumb a{color:#f2d79b!important}
+/* Paired Wasra & Wasri placed on the right side of each hero */
+.mascot-pair{
+ position:absolute!important;z-index:2!important;
+ right:max(4%,calc((100vw - 1240px)/2 + 18px))!important;
+ bottom:0!important;width:clamp(220px,27vw,365px)!important;
+ height:auto!important;max-height:94%!important;object-fit:contain!important;
+ object-position:bottom center!important;
+ filter:drop-shadow(0 12px 13px rgba(20,8,10,.28))!important;
+ pointer-events:none!important;
+}
+.page-hero .mascot-pair{
+ width:clamp(170px,21vw,285px)!important;
+ right:max(5%,calc((100vw - 1240px)/2 + 28px))!important;
+ bottom:0!important;max-height:96%!important;
+}
+/* Keep the service section visually close to the reference collage */
+.container{max-width:1240px!important}
+.primary-wrap{margin-top:-22px!important}
+.primary{border-radius:18px!important}
+.card{border-radius:17px!important}
+.music{z-index:40!important}
+@media(max-width:760px){
+ .sitebar-inner{min-height:58px!important;padding:6px 14px!important}
+ .logo{width:132px!important;max-height:42px!important}
+ .site-nav-wrap,.site-nav{height:58px!important}
+ .site-nav{padding:0 10px 0 145px!important;gap:2px!important}
+ .site-nav a{font-size:10px!important;min-height:34px!important;padding:0 8px!important}
+ .hero{min-height:365px!important}
+ .hero-inner{padding:36px 18px 34px!important}
+ .hero h1.silani-wordmark{font-size:78px!important;letter-spacing:-3px!important}
+ .hero-copy{max-width:66%!important;font-size:12px!important}
+ .mascot-pair{width:180px!important;right:-7px!important;bottom:0!important;opacity:.98}
+ .page-hero{min-height:250px!important}
+ .page-hero-inner{padding:32px 18px 28px!important}
+ .page-hero h1{font-size:34px!important;max-width:70%}
+ .page-hero p{max-width:68%!important;font-size:12px!important}
+ .page-hero .mascot-pair{width:145px!important;right:-5px!important}
+}
+@media(max-width:430px){
+ .sitebar-inner{padding:5px 10px!important}
+ .logo{width:112px!important}
+ .site-nav-wrap,.site-nav{height:54px!important}
+ .site-nav{padding-left:115px!important;padding-right:5px!important}
+ .site-nav a{font-size:9px!important;padding:0 5px!important}
+ .hero{min-height:350px!important}
+ .hero-inner{padding:30px 14px!important}
+ .hero h1.silani-wordmark{font-size:68px!important}
+ .hero-copy{max-width:64%!important}
+ .mascot-pair{width:140px!important;right:-8px!important}
+ .page-hero{min-height:230px!important}
+ .page-hero-inner{padding:28px 14px!important}
+ .page-hero h1{font-size:29px!important}
+ .page-hero p{max-width:64%!important}
+ .page-hero .mascot-pair{width:115px!important;right:-7px!important}
+}
+
 </style>
 </head>
 <body>
@@ -222,15 +372,14 @@ body{background:#f5eee4!important;color:var(--ink)}
 <header class="sitebar">
   <div class="sitebar-inner">
     <img class="logo" src="logo-bawaslu-bandung.png" alt="Logo Bawaslu Kabupaten Bandung">
-    <div class="sitebar-tag">Portal Layanan Informasi<br>Bawaslu Kabupaten Bandung</div>
   </div>
 </header>
 <nav class="site-nav-wrap" aria-label="Navigasi utama">
   <div class="site-nav">
     <a href="index.html" aria-current="page">⌂ Beranda</a>
-    <a href="panduan.html">☷ Panduan Layanan</a>
-    <a href="faq.html">? FAQ</a>
-  <a class="nav-apply" href="https://ppidapp.bawaslu.go.id" target="_blank" rel="noopener noreferrer">▣ Ajukan Informasi</a></div>
+    <a href="panduan.html" >☷ Panduan Layanan</a>
+    <a href="faq.html" >? FAQ</a>
+  </div>
 </nav>
 
 <section class="hero">
@@ -240,7 +389,7 @@ body{background:#f5eee4!important;color:var(--ink)}
     <p class="hero-sub">Sistem Layanan Informasi</p>
     <p class="hero-copy">Akses informasi publik Bawaslu Kabupaten Bandung dengan lebih mudah, jelas, dan terarah melalui satu pintu layanan.</p>
   </div>
-<img class="mascot-pair" src="wwasra-wasri-pair.png" alt="Maskot pengawas pemilu Wasra dan Wasri">
+<img class="mascot-pair" src="wasra-wasri-pair.png" alt="Maskot pengawas pemilu Wasra dan Wasri">
 </section>
 
 <main>
