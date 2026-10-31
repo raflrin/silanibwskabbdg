@@ -43,7 +43,7 @@
     var empty=document.getElementById('faqEmpty');
     var cat='all';
     function apply(){
-      var term=(input.value||'').trim().toLowerCase(),shown=0;
+      var term=input?(input.value||'').trim().toLowerCase():'',shown=0;
       items.forEach(function(el){
         var okCat=cat==='all'||el.getAttribute('data-cat')===cat;
         var okTerm=!term||el.textContent.toLowerCase().indexOf(term)>-1;
@@ -64,6 +64,6 @@
         apply();
       });
     });
-    input.addEventListener('input',apply);
+    if(input)input.addEventListener('input',apply);
   }
 })();
