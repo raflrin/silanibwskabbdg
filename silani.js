@@ -1,4 +1,4 @@
-var SURVEY_FORM_URL = '';
+var SURVEY_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSeKS85GCZxb2eptfXGz6tHEKmWDMq-11Tqvwq94D08Kd5Io9Q/viewform';
 function configureSurveyLink() {
   var link = document.getElementById('surveyLink');
   if (!link) return;
@@ -179,6 +179,11 @@ function configureSurveyLink() {
       paint(false);
     });
   }
-
+function initPage() {
+  bindMusic();
+  bindFaq();
+  configureSurveyLink();
+  paint(audio && !audio.paused);
+}
   initPage();
 })();
