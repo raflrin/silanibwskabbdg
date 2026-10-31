@@ -1,714 +1,124 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#78131b">
-<meta name="description" content="SILANI — Sistem Layanan Informasi Bawaslu Kabupaten Bandung.">
-<title>SILANI | Bawaslu Kabupaten Bandung</title>
-<style>
-:root{--wine:#a51f2b;--wine2:#74141d;--gold:#c7a34b;--ink:#20252b;--muted:#667085;--paper:#f5f6f8;--line:#e2e5e9;--white:#fff}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,"Segoe UI",Arial,sans-serif}
-a{color:inherit;-webkit-tap-highlight-color:transparent}
-.topline{height:5px;background:linear-gradient(90deg,var(--wine) 0 68%,var(--gold) 68% 100%)}
-.sitebar{background:#fff;border-bottom:1px solid #e8dfda}
-.sitebar-inner{max-width:1180px;margin:auto;padding:10px 22px;display:flex;align-items:center;gap:14px}
-.logo{width:170px;max-width:40%;height:auto;object-fit:contain}
-.sitebar-tag{margin-left:auto;text-align:right;font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:var(--wine);font-weight:800}
-.hero{position:relative;isolation:isolate;min-height:380px;display:flex;align-items:flex-end;overflow:hidden;background:#392c2a}
-.hero:before{content:"";position:absolute;inset:0;z-index:-2;background:url("gedung-bawaslu-bandung.jpeg") center 43%/cover no-repeat;transform:scale(1.015)}
-.hero:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(36,8,12,.82),rgba(51,13,17,.53) 52%,rgba(31,20,20,.13)),linear-gradient(0deg,rgba(25,10,12,.52),transparent 70%)}
-.hero-inner{width:100%;max-width:1180px;margin:0 auto;padding:48px 24px 38px;color:#fff}
-.eyebrow{display:inline-flex;align-items:center;gap:9px;color:#f3dca5;font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase}
-.eyebrow:before{content:"";display:block;width:28px;height:2px;background:var(--gold)}
-h1{font-size:clamp(43px,8vw,76px);line-height:.98;letter-spacing:-2.5px;margin:14px 0 12px;font-weight:850}
-h1 span{color:var(--gold)}
-.hero-sub{font-size:clamp(16px,2.5vw,21px);font-weight:600;margin:0}
-.hero-copy{font-size:14px;max-width:520px;line-height:1.7;color:#f4e8e5;margin:12px 0 0}
-.container{max-width:1120px;margin:auto;padding:0 22px 38px}
-.primary-wrap{margin-top:-24px;position:relative;z-index:2}
-.primary{background:linear-gradient(120deg,#fff4dd,#fffaf0);border:1px solid #e7d1a0;border-radius:18px;box-shadow:0 16px 38px #3810141a;padding:24px;display:grid;grid-template-columns:1fr minmax(220px,300px);align-items:center;gap:20px}
-.kicker{font-size:11px;letter-spacing:1.6px;font-weight:900;color:var(--wine);text-transform:uppercase}
-.primary h2{margin:8px 0 8px;color:var(--wine2);font-size:clamp(24px,4vw,35px);line-height:1.15}
-.primary p{margin:0;color:#675455;font-size:14px;line-height:1.6;max-width:620px}
-.cta{display:flex;justify-content:center;align-items:center;gap:12px;min-height:66px;background:var(--wine);color:#fff;text-decoration:none;border-radius:12px;padding:17px 20px;font-weight:850;font-size:16px;box-shadow:0 5px 0 var(--wine2);transition:transform .15s,background .15s}
-.cta:hover{background:var(--wine2);transform:translateY(-2px)}
-.cta .arrow{font-size:22px;color:var(--gold)}
-.section{padding-top:31px}
-.section-head{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:14px}
-.section h2{margin:0;color:var(--wine);font-size:22px;letter-spacing:-.4px}
-.section-head p{margin:4px 0 0;color:var(--muted);font-size:13px}
-.rule{height:3px;width:58px;background:var(--gold);border-radius:5px;margin-top:10px}
-.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px}
-.card{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:9px;padding:19px 17px 18px;min-height:166px;background:#fff;border:1px solid var(--line);border-radius:14px;text-decoration:none;box-shadow:0 4px 13px #28161606;transition:transform .18s,border-color .18s,box-shadow .18s;overflow:hidden}
-.card:before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--wine)}
-.card:hover{transform:translateY(-3px);border-color:#d6b96e;box-shadow:0 12px 25px #28161612}
-.iconbox{width:42px;height:42px;display:grid;place-items:center;background:#f8e9eb;color:var(--wine);border-radius:12px;font-size:22px}
-.card strong{color:#3a2224;font-size:15px;line-height:1.35}
-.card small{color:var(--muted);font-size:12px;line-height:1.5}
-.card .go{margin-top:auto;color:var(--wine);font-size:12px;font-weight:800}
-.lower{background:#f4ebe5;border-top:1px solid #e6d7ce}
-.lower-inner{max-width:1120px;margin:auto;padding:25px 22px}
-.lower .grid{grid-template-columns:repeat(3,minmax(0,1fr))}
-.lower .card{min-height:135px;background:#fffdfb}
-.footer{background:#311014;color:#f6e9e7}
-.footer-inner{max-width:1120px;margin:auto;padding:22px;display:flex;justify-content:space-between;align-items:center;gap:18px;font-size:12px}
-.footer strong{color:var(--gold);letter-spacing:1px}
-.music{position:fixed;right:14px;bottom:14px;z-index:10;display:flex;align-items:center;gap:10px;padding:10px 13px;border:1px solid #e5d1a1;border-radius:999px;background:#fffaf0;color:var(--wine);box-shadow:0 8px 25px #1c0a0b28;font:700 12px Arial,sans-serif;cursor:pointer}
-.music .music-dot{width:9px;height:9px;border-radius:50%;background:#b58c35;box-shadow:0 0 0 4px #b58c3520}
-.music[aria-pressed="true"] .music-dot{background:#23834a;box-shadow:0 0 0 4px #23834a20}
-@media(max-width:800px){.hero{min-height:340px}.hero-inner{padding:42px 20px 42px}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.lower .grid{grid-template-columns:repeat(2,minmax(0,1fr))}.primary{grid-template-columns:1fr}.cta{width:100%}.sitebar-inner{padding:10px 16px}.logo{width:145px}}
-@media(max-width:420px){.hero{min-height:330px}.hero:before{background-position:57% center}.hero-inner{padding:34px 17px 40px}h1{letter-spacing:-1.5px}.container{padding:0 12px 28px}.primary{padding:20px 16px;gap:15px}.grid,.lower .grid{gap:9px}.card{padding:14px 12px;min-height:157px}.card strong{font-size:14px}.card small{font-size:11px}.iconbox{width:38px;height:38px}.section h2{font-size:20px}.footer-inner{flex-direction:column;align-items:flex-start}.music{right:9px;bottom:9px}}
-@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
-
-.site-nav{max-width:1180px;margin:auto;padding:0 22px;display:flex;gap:8px;align-items:center;justify-content:flex-end;flex-wrap:wrap}
-.site-nav-wrap{background:#fff;border-bottom:1px solid #e8dfda}
-.site-nav a{display:inline-flex;align-items:center;gap:7px;text-decoration:none;color:#5e3034;font-size:12px;font-weight:800;padding:11px 13px;border-radius:9px}
-.site-nav a:hover,.site-nav a[aria-current="page"]{background:#f8e9eb;color:var(--wine)}
-@media(max-width:520px){.site-nav{padding:5px 10px;justify-content:stretch;gap:4px}.site-nav a{flex:1;justify-content:center;padding:10px 6px;font-size:11px}}
-
-
-/* Wordmark-only refinement: leave the existing page design and building background unchanged */
-.hero h1.silani-wordmark{
-  display:flex;align-items:baseline;gap:0;
-  margin:0 0 8px;
-  font-family:"Brush Script MT","Segoe Script","URW Chancery L",cursive;
-  font-size:clamp(78px,10vw,124px);
-  font-weight:700;font-style:italic;
-  line-height:.9;letter-spacing:-5px;
-  text-shadow:0 3px 10px rgba(34,18,15,.18);
-}
-.hero h1.silani-wordmark .silani-si{
-  color:#fffaf3;
-  -webkit-text-stroke:1px rgba(105,25,31,.25);
-}
-.hero h1.silani-wordmark .silani-lani{
-  color:#d9b66d;
-  margin-left:-3px;
-  -webkit-text-stroke:.5px rgba(85,48,26,.15);
-}
-@media(max-width:640px){
- .hero h1.silani-wordmark{font-size:78px;letter-spacing:-3px}
-}
-
-
-/* ===== SILANI UI implementation: approved visual mockup ===== */
-:root{
- --wine:#8f1d28;--wine-dark:#5e111a;--wine-soft:#f7e9e7;
- --gold:#d2aa58;--ink:#17232d;--muted:#657078;
- --cream:#fbf4e9;--line:#eadfd2;
-}
-html{scroll-behavior:smooth}
-body{background:#f5eee4!important;color:var(--ink)}
-.topline{height:4px!important;background:linear-gradient(90deg,var(--wine) 0 72%,var(--gold) 72%)!important}
-.sitebar{background:rgba(255,253,249,.97)!important;border:0!important;border-bottom:1px solid #e9dfd4!important}
-.sitebar-inner{max-width:1240px!important;min-height:58px;padding:7px 22px!important}
-.logo{width:158px!important;max-height:48px}
-.sitebar-tag{display:none!important}
-.site-nav-wrap{background:rgba(255,253,249,.97)!important;border:0!important;border-bottom:1px solid #e9dfd4!important}
-.site-nav{max-width:1240px!important;min-height:48px;padding:0 22px!important;gap:8px!important;justify-content:flex-end!important}
-.site-nav a{font-size:12px!important;font-weight:800!important;color:#4b3030!important;padding:11px 14px!important;border-radius:12px!important}
-.site-nav a:hover,.site-nav a[aria-current="page"]{background:#f7e8e8!important;color:var(--wine)!important}
-.site-nav a:last-child{background:var(--wine)!important;color:white!important;border-radius:999px!important;margin-left:10px;padding:11px 20px!important}
-.hero,.page-hero{
- position:relative;isolation:isolate;overflow:hidden;
- background:#4a1a20!important;
-}
-.hero{min-height:390px!important;align-items:flex-end!important}
-.hero:before,.page-hero:before{
- content:"";position:absolute;inset:0;z-index:-2;
- background:url("gedung-bawaslu-bandung.jpeg") center 42%/cover no-repeat!important;
- transform:scale(1.01);
-}
-.hero:after,.page-hero:after{
- content:"";position:absolute;inset:0;z-index:-1;
- background:linear-gradient(90deg,rgba(50,10,17,.92) 0%,rgba(74,18,25,.80) 33%,rgba(67,22,24,.34) 62%,rgba(20,27,30,.10) 100%),
-            linear-gradient(0deg,rgba(51,14,18,.36),transparent 70%)!important;
-}
-.hero-inner{max-width:1240px!important;padding:46px 24px 34px!important;position:relative;z-index:2}
-.eyebrow{color:#f1d79c!important;font-size:11px!important;letter-spacing:2px!important;font-weight:900!important}
-.hero h1.silani-wordmark{
- font-family:"Brush Script MT","Segoe Script","URW Chancery L",cursive!important;
- font-size:clamp(82px,10vw,132px)!important;line-height:.83!important;
- letter-spacing:-5px!important;font-style:italic!important;font-weight:700!important;
- margin:12px 0 16px!important;color:#fff8ef!important;
- text-shadow:0 4px 16px rgba(0,0,0,.22)!important;
-}
-.hero h1.silani-wordmark .silani-si{color:#fff8ef!important}
-.hero h1.silani-wordmark .silani-lani{color:#d7ae59!important}
-.hero-sub{font-size:clamp(18px,2.2vw,24px)!important;color:white!important;font-weight:750!important}
-.hero-copy{max-width:520px!important;color:#f7e9df!important;font-size:14px!important;line-height:1.6!important}
-.container{max-width:1240px!important}
-.primary-wrap{margin-top:-22px!important}
-.primary{border-radius:18px!important;background:linear-gradient(115deg,#fff1d8,#fffaf1)!important;border-color:#e9d7b5!important}
-.cta{background:linear-gradient(135deg,#a92c32,#791923)!important;border-radius:14px!important}
-.section h2{color:var(--wine)!important}
-.grid{gap:13px!important}
-.card{background:rgba(255,251,245,.96)!important;border:1px solid #eadfd2!important;border-radius:17px!important;box-shadow:0 8px 22px rgba(52,25,18,.08)!important}
-.card:before{background:var(--wine)!important}
-.card:hover{border-color:#d8b76e!important}
-.iconbox{background:#f8e6d4!important;color:#b64b2d!important;border-radius:50%!important}
-.card strong{color:#17232d!important;font-family:Georgia,"Times New Roman",serif!important}
-.card small{color:#58616a!important}
-.lower{background:rgba(255,247,235,.94)!important;border-color:#ead9c6!important}
-.lower .card{background:#fffaf3!important}
-.footer{background:#351218!important}
-.page-hero{min-height:250px!important;display:flex;align-items:center}
-.page-hero-inner{max-width:1240px!important;padding:38px 24px 30px!important;position:relative;z-index:2}
-.page-hero h1{color:#fff!important;font-family:Georgia,"Times New Roman",serif!important;font-size:clamp(34px,4vw,50px)!important}
-.page-hero p{color:#fff1e8!important;max-width:560px!important}
-.page-hero .eyebrow{color:#f1d79c!important}
-.breadcrumb{color:#737b81!important}
-.breadcrumb a{color:var(--wine)!important}
-.intro-card,.step,.faq-list details,.detail-card,.info-strip{
- background:rgba(255,251,245,.96)!important;border:1px solid #eadfd2!important;
- border-radius:16px!important;box-shadow:0 8px 22px rgba(52,25,18,.06)!important;
-}
-.section-title h2{color:#77202a!important;font-family:Georgia,"Times New Roman",serif!important}
-.step-number{background:#f7e5d1!important;color:#a02b2d!important;border-radius:50%!important}
-.step h3,.detail-card h3{color:#79232c!important}
-.faq-search{background:#fffaf4!important;border:1px solid #e7d8c9!important;border-radius:999px!important}
-.faq-list details summary{color:#24303a!important}
-.faq-list details p{color:#5c646c!important}
-.music{background:#fff8ed!important;color:#81212a!important;border-color:#e6d5b6!important;box-shadow:0 7px 20px rgba(35,10,12,.20)!important}
-.music .music-dot{background:#b68b39!important}
-.footer-inner{max-width:1240px!important}
-
-/* Wasra & Wasri: decorative but never obstruct the page content */
-.mascot-pair{
- position:absolute;z-index:3;right:max(3.5%,calc((100vw - 1240px)/2 + 12px));
- bottom:4px;width:clamp(170px,25vw,340px);height:auto;
- max-height:88%;object-fit:contain;object-position:bottom right;
- filter:drop-shadow(0 12px 14px rgba(22,10,10,.28));
- pointer-events:none;
-}
-.page-hero .mascot-pair{
- width:clamp(140px,19vw,245px);right:max(5%,calc((100vw - 1240px)/2 + 28px));
- bottom:-2px;max-height:95%;
-}
-@media(max-width:760px){
- .sitebar-inner{padding:7px 14px!important}
- .logo{width:138px!important}
- .site-nav{padding:0 10px!important;justify-content:center!important;gap:3px!important}
- .site-nav a{font-size:10px!important;padding:10px 8px!important}
- .site-nav a:last-child{margin-left:2px;padding:10px 11px!important}
- .hero{min-height:390px!important}
- .hero-inner{padding:38px 18px 30px!important}
- .hero h1.silani-wordmark{font-size:80px!important;letter-spacing:-3px!important}
- .hero-copy{max-width:78%!important;font-size:12px!important}
- .mascot-pair{width:150px;right:0;bottom:0;opacity:.94}
- .page-hero{min-height:235px!important}
- .page-hero-inner{padding:34px 18px 25px!important}
- .page-hero .mascot-pair{width:118px;right:2px;opacity:.92}
- .container{padding-left:15px!important;padding-right:15px!important}
- .grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
- .lower .grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
- .steps{grid-template-columns:1fr!important}
-}
-@media(max-width:420px){
- .hero{min-height:365px!important}
- .hero-copy{max-width:72%!important}
- .mascot-pair{width:125px;right:-4px}
- .page-hero .mascot-pair{width:95px}
- .site-nav a{font-size:9px!important;padding:9px 6px!important}
-}
-
-
-/* === Final shared header and hero: matched across Beranda, Panduan, FAQ === */
-:root{
- --silani-maroon:#8e1e29;--silani-deep:#4c151d;--silani-gold:#d4ad62;
- --silani-cream:#fff7eb;--silani-ink:#17232d;
-}
-html{scroll-behavior:smooth}
-body{margin:0;background:#f5eee4!important;color:var(--silani-ink)}
-/* One unified white header row */
-.sitebar{
- background:rgba(255,253,250,.98)!important;
- border:0!important;border-bottom:1px solid #e9e0d7!important;
- box-shadow:0 2px 12px rgba(40,20,18,.045);
-}
-.sitebar-inner{
- max-width:1240px!important;min-height:60px!important;
- margin:0 auto!important;padding:7px 22px!important;
- display:flex!important;align-items:center!important;gap:18px!important;
-}
-.logo{width:158px!important;max-width:42%!important;height:auto!important;max-height:46px!important;object-fit:contain}
-.sitebar-tag{display:none!important}
-.site-nav-wrap{
- background:transparent!important;border:0!important;box-shadow:none!important;
- position:absolute!important;z-index:20!important;top:0;left:0;right:0;
- height:60px!important;pointer-events:none!important;
-}
-.site-nav{
- max-width:1240px!important;height:60px!important;margin:0 auto!important;
- padding:0 22px!important;display:flex!important;align-items:center!important;
- justify-content:flex-end!important;gap:8px!important;pointer-events:auto!important;
-}
-.site-nav a{
- display:inline-flex!important;align-items:center!important;justify-content:center!important;
- min-height:38px!important;padding:0 15px!important;border-radius:12px!important;
- color:#512b2d!important;background:transparent!important;
- font-size:12px!important;font-weight:800!important;text-decoration:none!important;
-}
-.site-nav a:hover,.site-nav a[aria-current="page"]{
- color:var(--silani-maroon)!important;background:#f7e7e8!important;
-}
-.site-nav a[aria-current="page"]{box-shadow:none!important}
-.site-nav a:last-child{display:none!important}
-/* Same building-photo hero and maroon-to-clear overlay on every page */
-.hero,.page-hero{
- position:relative!important;isolation:isolate!important;overflow:hidden!important;
- background:#4c1b22!important;
-}
-.hero{min-height:390px!important;display:flex!important;align-items:center!important}
-.page-hero{min-height:270px!important;display:flex!important;align-items:center!important}
-.hero:before,.page-hero:before{
- content:"";position:absolute!important;inset:0!important;z-index:-2!important;
- display:block!important;background:url("gedung-bawaslu-bandung.jpeg") center 43%/cover no-repeat!important;
- transform:scale(1.015);
-}
-.hero:after,.page-hero:after{
- content:"";position:absolute!important;inset:0!important;z-index:-1!important;
- display:block!important;
- background:
- linear-gradient(90deg,rgba(52,13,20,.92) 0%,rgba(68,17,24,.82) 31%,rgba(68,22,27,.42) 57%,rgba(23,30,34,.06) 100%),
- linear-gradient(0deg,rgba(54,13,19,.28),transparent 65%)!important;
-}
-.hero-inner,.page-hero-inner{
- width:100%!important;max-width:1240px!important;margin:0 auto!important;
- padding:40px 24px 36px!important;position:relative!important;z-index:3!important;
- color:#fff!important;
-}
-.hero-inner{max-width:1240px!important}
-.hero .eyebrow,.page-hero .eyebrow{
- color:#f2d79b!important;font-size:11px!important;font-weight:900!important;
- letter-spacing:2px!important;text-transform:uppercase!important;
-}
-.hero .eyebrow:before,.page-hero .eyebrow:before{background:var(--silani-gold)!important}
-.hero h1.silani-wordmark{
- display:flex!important;align-items:baseline!important;gap:0!important;
- width:max-content!important;max-width:100%!important;
- margin:13px 0 14px!important;
- font-family:"Brush Script MT","Segoe Script","URW Chancery L",cursive!important;
- font-size:clamp(82px,9.5vw,132px)!important;line-height:.82!important;
- letter-spacing:-5px!important;font-weight:700!important;font-style:italic!important;
- color:#fff8ef!important;text-shadow:0 4px 18px rgba(0,0,0,.22)!important;
-}
-.hero h1.silani-wordmark .silani-si{color:#fff8ef!important}
-.hero h1.silani-wordmark .silani-lani{color:#d9b260!important}
-.hero-sub{color:#fff!important;font-size:clamp(18px,2vw,24px)!important;font-weight:750!important}
-.hero-copy{color:#f7eae3!important;max-width:540px!important;font-size:14px!important;line-height:1.6!important}
-.page-hero-inner{max-width:1240px!important}
-.page-hero h1{
- color:#fff!important;font-family:Georgia,"Times New Roman",serif!important;
- font-size:clamp(34px,4vw,48px)!important;line-height:1.1!important;
- margin:0 0 10px!important;letter-spacing:-.8px!important;
-}
-.page-hero p{color:#f8eae2!important;max-width:550px!important;font-size:14px!important;line-height:1.6!important}
-.page-hero .breadcrumb{color:#f6e4d7!important}
-.page-hero .breadcrumb a{color:#f2d79b!important}
-/* Paired Wasra & Wasri placed on the right side of each hero */
-.mascot-pair{
- position:absolute!important;z-index:2!important;
- right:max(4%,calc((100vw - 1240px)/2 + 18px))!important;
- bottom:0!important;width:clamp(220px,27vw,365px)!important;
- height:auto!important;max-height:94%!important;object-fit:contain!important;
- object-position:bottom center!important;
- filter:drop-shadow(0 12px 13px rgba(20,8,10,.28))!important;
- pointer-events:none!important;
-}
-.page-hero .mascot-pair{
- width:clamp(170px,21vw,285px)!important;
- right:max(5%,calc((100vw - 1240px)/2 + 28px))!important;
- bottom:0!important;max-height:96%!important;
-}
-/* Keep the service section visually close to the reference collage */
-.container{max-width:1240px!important}
-.primary-wrap{margin-top:-22px!important}
-.primary{border-radius:18px!important}
-.card{border-radius:17px!important}
-.music{z-index:40!important}
-@media(max-width:760px){
- .sitebar-inner{min-height:58px!important;padding:6px 14px!important}
- .logo{width:132px!important;max-height:42px!important}
- .site-nav-wrap,.site-nav{height:58px!important}
- .site-nav{padding:0 10px 0 145px!important;gap:2px!important}
- .site-nav a{font-size:10px!important;min-height:34px!important;padding:0 8px!important}
- .hero{min-height:365px!important}
- .hero-inner{padding:36px 18px 34px!important}
- .hero h1.silani-wordmark{font-size:78px!important;letter-spacing:-3px!important}
- .hero-copy{max-width:66%!important;font-size:12px!important}
- .mascot-pair{width:180px!important;right:-7px!important;bottom:0!important;opacity:.98}
- .page-hero{min-height:250px!important}
- .page-hero-inner{padding:32px 18px 28px!important}
- .page-hero h1{font-size:34px!important;max-width:70%}
- .page-hero p{max-width:68%!important;font-size:12px!important}
- .page-hero .mascot-pair{width:145px!important;right:-5px!important}
-}
-@media(max-width:430px){
- .sitebar-inner{padding:5px 10px!important}
- .logo{width:112px!important}
- .site-nav-wrap,.site-nav{height:54px!important}
- .site-nav{padding-left:115px!important;padding-right:5px!important}
- .site-nav a{font-size:9px!important;padding:0 5px!important}
- .hero{min-height:350px!important}
- .hero-inner{padding:30px 14px!important}
- .hero h1.silani-wordmark{font-size:68px!important}
- .hero-copy{max-width:64%!important}
- .mascot-pair{width:140px!important;right:-8px!important}
- .page-hero{min-height:230px!important}
- .page-hero-inner{padding:28px 14px!important}
- .page-hero h1{font-size:29px!important}
- .page-hero p{max-width:64%!important}
- .page-hero .mascot-pair{width:115px!important;right:-7px!important}
-}
-
-
-/* Header one-row layout, consistent across Beranda, Panduan, and FAQ */
-.sitebar{
-  width:100%!important;min-height:76px!important;height:76px!important;
-  display:block!important;background:#fffdf9!important;
-  border:0!important;border-bottom:1px solid #eadfd2!important;
-  box-shadow:0 2px 8px rgba(40,20,15,.045)!important;
-  position:relative!important;z-index:30!important;
-}
-.sitebar-inner{
-  width:min(1240px,92%)!important;max-width:1240px!important;
-  height:76px!important;min-height:76px!important;margin:0 auto!important;
-  padding:0!important;display:flex!important;align-items:center!important;
-  justify-content:space-between!important;gap:24px!important;
-}
-.sitebar .logo{width:190px!important;max-width:42vw!important;max-height:58px!important;object-fit:contain!important}
-.site-nav-wrap{
-  position:absolute!important;top:0!important;left:0!important;right:0!important;
-  height:76px!important;min-height:76px!important;margin:0!important;
-  padding:0!important;background:transparent!important;border:0!important;
-  box-shadow:none!important;z-index:31!important;pointer-events:none!important;
-}
-.site-nav{
-  width:min(1240px,92%)!important;max-width:1240px!important;height:76px!important;
-  min-height:76px!important;margin:0 auto!important;padding:0!important;
-  display:flex!important;align-items:center!important;justify-content:flex-end!important;
-  gap:8px!important;pointer-events:auto!important;
-}
-.site-nav a{
-  color:#59232a!important;font-size:13px!important;font-weight:750!important;
-  text-decoration:none!important;padding:12px 16px!important;border-radius:13px!important;
-  background:transparent!important;white-space:nowrap!important;
-}
-.site-nav a:hover,.site-nav a[aria-current="page"]{
-  background:#f7e8e8!important;color:#941e2b!important;
-}
-.site-nav a:last-child{margin:0!important}
-.site-nav a.nav-apply{display:none!important}
-@media(max-width:680px){
- .sitebar,.sitebar-inner{height:96px!important;min-height:96px!important}
- .sitebar-inner{width:94%!important;align-items:flex-start!important;padding-top:7px!important}
- .sitebar .logo{width:145px!important;max-height:44px!important}
- .site-nav-wrap{top:43px!important;height:49px!important;min-height:49px!important}
- .site-nav{width:100%!important;height:49px!important;min-height:49px!important;justify-content:center!important;gap:2px!important}
- .site-nav a{font-size:10px!important;padding:9px 10px!important}
-}
-
-
-/* Hero alignment: copy stays on the left, mascot stays on the right */
-.page-hero{
- position:relative!important;display:flex!important;align-items:center!important;
- min-height:300px!important;overflow:hidden!important;isolation:isolate!important;
-}
-.page-hero:before{content:"";position:absolute;inset:0;z-index:-2;background:url("gedung-bawaslu-bandung.jpeg") center 42%/cover no-repeat!important}
-.page-hero:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(65,15,23,.94) 0%,rgba(75,18,26,.78) 43%,rgba(57,20,24,.28) 76%,rgba(20,25,29,.12) 100%)!important}
-.page-hero-inner{
- width:100%!important;max-width:none!important;margin:0!important;
- padding:40px 5.2%!important;position:relative!important;z-index:2!important;
- text-align:left!important;align-self:center!important;
-}
-.page-hero-inner .eyebrow,.page-hero-inner h1,.page-hero-inner p{text-align:left!important;margin-left:0!important}
-.page-hero h1{font-size:clamp(34px,4.2vw,54px)!important;max-width:720px!important;line-height:1.12!important}
-.page-hero p{max-width:610px!important;font-size:16px!important;line-height:1.55!important}
-.page-hero .mascot-pair{
- position:absolute!important;z-index:3!important;
- width:clamp(230px,24vw,340px)!important;height:auto!important;
- max-height:94%!important;object-fit:contain!important;object-position:center bottom!important;
- right:5.5%!important;bottom:0!important;display:block!important;
- opacity:1!important;visibility:visible!important;
- filter:drop-shadow(0 12px 14px rgba(20,8,10,.24))!important;
- pointer-events:none!important;
-}
-.hero{position:relative!important;isolation:isolate!important}
-.hero .mascot-pair{
- position:absolute!important;z-index:3!important;width:clamp(250px,28vw,390px)!important;
- right:5%!important;bottom:0!important;max-height:95%!important;object-fit:contain!important;
- display:block!important;visibility:visible!important;opacity:1!important;
-}
-@media(max-width:680px){
- .page-hero{min-height:250px!important}
- .page-hero-inner{padding:28px 18px!important}
- .page-hero h1{font-size:30px!important;max-width:72%!important}
- .page-hero p{font-size:12px!important;max-width:70%!important}
- .page-hero .mascot-pair{width:145px!important;right:0!important;max-height:82%!important}
- .hero .mascot-pair{width:145px!important;right:0!important}
-}
-
-
-/* Header: logo on the left; all three navigation links on the right, same row */
-.sitebar{height:78px!important;min-height:78px!important;position:relative!important;z-index:50!important;background:#fffdf9!important}
-.sitebar-inner{height:78px!important;min-height:78px!important;width:min(1240px,92%)!important;margin:0 auto!important;display:flex!important;align-items:center!important;justify-content:flex-start!important;padding:0!important}
-.sitebar .logo{width:190px!important;max-width:42vw!important;max-height:58px!important;object-fit:contain!important}
-.site-nav-wrap{
- position:absolute!important;left:auto!important;right:max(4%,calc((100vw - 1240px)/2))!important;
- top:0!important;width:auto!important;height:78px!important;min-height:78px!important;
- margin:0!important;padding:0!important;background:transparent!important;border:0!important;
- box-shadow:none!important;z-index:51!important;pointer-events:none!important;
-}
-.site-nav{
- width:auto!important;height:78px!important;min-height:78px!important;margin:0!important;padding:0!important;
- display:flex!important;align-items:center!important;justify-content:flex-end!important;
- gap:8px!important;pointer-events:auto!important;white-space:nowrap!important;
-}
-.site-nav a,.site-nav a:last-child{
- display:inline-flex!important;align-items:center!important;justify-content:center!important;
- margin:0!important;padding:12px 15px!important;border-radius:13px!important;
- background:transparent!important;color:#57232a!important;
- font-size:13px!important;font-weight:750!important;text-decoration:none!important;
- white-space:nowrap!important;box-shadow:none!important;
-}
-.site-nav a:hover,.site-nav a[aria-current="page"],.site-nav a:last-child:hover{
- background:#f7e8e8!important;color:#941e2b!important;
-}
-.site-nav a.nav-apply{display:none!important}
-@media(max-width:700px){
- .sitebar,.sitebar-inner{height:96px!important;min-height:96px!important}
- .sitebar-inner{width:94%!important;align-items:flex-start!important;padding-top:6px!important}
- .sitebar .logo{width:145px!important;max-height:44px!important}
- .site-nav-wrap{top:44px!important;left:0!important;right:0!important;width:100%!important;height:50px!important;min-height:50px!important}
- .site-nav{width:100%!important;height:50px!important;min-height:50px!important;justify-content:center!important;gap:2px!important}
- .site-nav a,.site-nav a:last-child{font-size:10px!important;padding:9px 10px!important}
-}
-
-
-
-/* FINAL NAV FIX: all three links stay visible on every page */
-.sitebar{
-  position:relative!important;
-  height:82px!important;min-height:82px!important;
-  background:#fffdf9!important;
-  z-index:40!important;
-}
-.sitebar-inner{
-  width:min(1240px,92%)!important;max-width:1240px!important;
-  height:82px!important;min-height:82px!important;
-  margin:0 auto!important;padding:0!important;
-  display:flex!important;align-items:center!important;justify-content:flex-start!important;
-}
-.sitebar .logo{width:190px!important;max-width:40vw!important;max-height:60px!important;object-fit:contain!important}
-.site-nav-wrap{
-  position:absolute!important;top:0!important;right:max(3%,calc((100vw - 1240px)/2))!important;left:auto!important;
-  width:570px!important;height:82px!important;min-height:82px!important;
-  margin:0!important;padding:0!important;
-  display:block!important;background:transparent!important;border:0!important;box-shadow:none!important;
-  z-index:45!important;pointer-events:none!important;overflow:visible!important;
-}
-.site-nav{
-  display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;
-  width:100%!important;height:82px!important;min-height:82px!important;
-  margin:0!important;padding:0!important;gap:8px!important;
-  align-items:center!important;justify-content:flex-end!important;
-  white-space:nowrap!important;overflow:visible!important;pointer-events:auto!important;
-}
-.site-nav a,.site-nav a:last-child{
-  display:inline-flex!important;flex:0 0 auto!important;visibility:visible!important;
-  opacity:1!important;position:static!important;transform:none!important;
-  align-items:center!important;justify-content:center!important;
-  margin:0!important;padding:12px 15px!important;
-  color:#59232a!important;background:transparent!important;
-  border:0!important;border-radius:13px!important;
-  font-size:13px!important;font-weight:750!important;line-height:1.2!important;
-  text-decoration:none!important;white-space:nowrap!important;
-}
-.site-nav a:hover,.site-nav a[aria-current="page"]{
-  background:#f7e8e8!important;color:#941e2b!important;
-}
-.site-nav a.nav-apply{display:none!important}
-@media(max-width:760px){
-  .sitebar,.sitebar-inner{height:104px!important;min-height:104px!important}
-  .sitebar-inner{width:94%!important;align-items:flex-start!important;padding-top:6px!important}
-  .sitebar .logo{width:145px!important;max-height:44px!important}
-  .site-nav-wrap{
-    position:absolute!important;top:48px!important;left:0!important;right:0!important;
-    width:100%!important;height:54px!important;min-height:54px!important;
-  }
-  .site-nav{
-    width:100%!important;height:54px!important;min-height:54px!important;
-    justify-content:center!important;gap:2px!important;padding:0 5px!important;
-  }
-  .site-nav a,.site-nav a:last-child{
-    font-size:10px!important;padding:9px 9px!important;
-  }
-}
-@media(max-width:390px){
-  .site-nav{gap:0!important}
-  .site-nav a,.site-nav a:last-child{font-size:9px!important;padding:8px 6px!important}
-}
-
-</style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#4c151d">
+<title>SiLani | Sistem Layanan Informasi Bawaslu Kabupaten Bandung</title>
+<meta name="description" content="SiLani: satu pintu akses layanan informasi publik Bawaslu Kabupaten Bandung. Ajukan permohonan, telusuri daftar informasi, cek status, dan hubungi petugas.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="SiLani | Sistem Layanan Informasi Bawaslu Kabupaten Bandung">
+<meta property="og:description" content="SiLani: satu pintu akses layanan informasi publik Bawaslu Kabupaten Bandung. Ajukan permohonan, telusuri daftar informasi, cek status, dan hubungi petugas.">
+<meta property="og:image" content="gedung-bawaslu-bandung.jpeg">
+<link rel="icon" href="logo-bawaslu-bandung.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+<symbol id="i-file-text" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4" /> <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" /> <path d="M9 9l1 0" /> <path d="M9 13l6 0" /> <path d="M9 17l6 0" /></symbol>
+<symbol id="i-list-details" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 5h8" /> <path d="M13 9h5" /> <path d="M13 15h8" /> <path d="M13 19h5" /> <path d="M3 4m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" /> <path d="M3 14m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" /></symbol>
+<symbol id="i-clipboard-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2" /> <path d="M9 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" /> <path d="M9 14l2 2l4 -4" /></symbol>
+<symbol id="i-brand-whatsapp" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9" /> <path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1" /></symbol>
+<symbol id="i-message-report" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 4a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-5l-5 3v-3h-2a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12z" /> <path d="M12 8v3" /> <path d="M12 14v.01" /></symbol>
+<symbol id="i-world" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" /> <path d="M3.6 9h16.8" /> <path d="M3.6 15h16.8" /> <path d="M11.5 3a17 17 0 0 0 0 18" /> <path d="M12.5 3a17 17 0 0 1 0 18" /></symbol>
+<symbol id="i-brand-instagram" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8a4 4 0 0 1 4 -4h8a4 4 0 0 1 4 4v8a4 4 0 0 1 -4 4h-8a4 4 0 0 1 -4 -4z" /> <path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" /> <path d="M16.5 7.5v.01" /></symbol>
+<symbol id="i-building" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l18 0" /> <path d="M9 8l1 0" /> <path d="M9 12l1 0" /> <path d="M9 16l1 0" /> <path d="M14 8l1 0" /> <path d="M14 12l1 0" /> <path d="M14 16l1 0" /> <path d="M5 21v-16a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v16" /></symbol>
+<symbol id="i-map-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 18.5l-3 -1.5l-6 3v-13l6 -3l6 3l6 -3v7.5" /> <path d="M9 4v13" /> <path d="M15 7v5.5" /> <path d="M21.121 20.121a3 3 0 1 0 -4.242 0c.418 .419 1.125 1.045 2.121 1.879c1.051 -.89 1.759 -1.516 2.121 -1.879z" /> <path d="M19 18v.01" /></symbol>
+<symbol id="i-building-bank" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l18 0" /> <path d="M3 10l18 0" /> <path d="M5 6l7 -3l7 3" /> <path d="M4 10l0 11" /> <path d="M20 10l0 11" /> <path d="M8 14l0 3" /> <path d="M12 14l0 3" /> <path d="M16 14l0 3" /></symbol>
+<symbol id="i-scale" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 20l10 0" /> <path d="M6 6l6 -1l6 1" /> <path d="M12 3l0 17" /> <path d="M9 12l-3 -6l-3 6a3 3 0 0 0 6 0" /> <path d="M21 12l-3 -6l-3 6a3 3 0 0 0 6 0" /></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" /> <path d="M12 7v5l3 3" /></symbol>
+<symbol id="i-cash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 15h-3a1 1 0 0 1 -1 -1v-8a1 1 0 0 1 1 -1h12a1 1 0 0 1 1 1v3" /> <path d="M7 9m0 1a1 1 0 0 1 1 -1h12a1 1 0 0 1 1 1v8a1 1 0 0 1 -1 1h-12a1 1 0 0 1 -1 -1z" /> <path d="M12 14a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /></symbol>
+<symbol id="i-map-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" /> <path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z" /></symbol>
+<symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2" /></symbol>
+<symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" /> <path d="M3 7l9 6l9 -6" /></symbol>
+<symbol id="i-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l-2 0l9 -9l9 9l-2 0" /> <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" /> <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" /></symbol>
+<symbol id="i-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" /> <path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" /> <path d="M3 6l0 13" /> <path d="M12 6l0 13" /> <path d="M21 6l0 13" /></symbol>
+<symbol id="i-help-circle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" /> <path d="M12 16v.01" /> <path d="M12 13a2 2 0 0 0 .914 -3.782a1.98 1.98 0 0 0 -2.414 .483" /></symbol>
+<symbol id="i-external-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6" /> <path d="M11 13l9 -9" /> <path d="M15 4h5v5" /></symbol>
+<symbol id="i-info-circle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" /> <path d="M12 9h.01" /> <path d="M11 12h1v4h1" /></symbol>
+<symbol id="i-music" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" /> <path d="M13 17a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" /> <path d="M9 17v-13h10v13" /> <path d="M9 8h10" /></symbol>
+<symbol id="i-layout-grid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" /> <path d="M14 4m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" /> <path d="M4 14m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" /> <path d="M14 14m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" /></symbol>
+<symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" /> <path d="M21 21l-6 -6" /></symbol>
+<symbol id="i-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l14 0" /> <path d="M13 18l6 -6" /> <path d="M13 6l6 6" /></symbol>
+<symbol id="i-chevron-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6l6 -6" /></symbol>
+<symbol id="i-qrcode" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" /> <path d="M7 17l0 .01" /> <path d="M14 4m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" /> <path d="M7 7l0 .01" /> <path d="M4 14m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" /> <path d="M17 7l0 .01" /> <path d="M14 14l3 0" /> <path d="M20 14l0 .01" /> <path d="M14 14l0 3" /> <path d="M14 20l3 0" /> <path d="M17 17l3 0" /> <path d="M20 17l0 3" /></symbol>
+<symbol id="i-list-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 5.5l1.5 1.5l2.5 -2.5" /> <path d="M3.5 11.5l1.5 1.5l2.5 -2.5" /> <path d="M3.5 17.5l1.5 1.5l2.5 -2.5" /> <path d="M11 6l9 0" /> <path d="M11 12l9 0" /> <path d="M11 18l9 0" /></symbol>
+<symbol id="i-device-mobile" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 5a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2v-14z" /> <path d="M11 4h2" /> <path d="M12 17v.01" /></symbol>
+<symbol id="i-send" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14l11 -11" /> <path d="M21 3l-6.5 18a.55 .55 0 0 1 -1 0l-3.5 -7l-7 -3.5a.55 .55 0 0 1 0 -1l18 -6.5" /></symbol>
+<symbol id="i-player-pause" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 5m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v12a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" /> <path d="M14 5m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v12a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" /></symbol>
+<symbol id="i-player-play" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4v16l13 -8z" /></symbol>
+<symbol id="i-file-upload" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4" /> <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" /> <path d="M12 11v6" /> <path d="M9.5 13.5l2.5 -2.5l2.5 2.5" /></symbol>
+</svg>
+<a class="skip" href="#isi">Lewati ke isi</a>
 <div class="topline"></div>
-<header class="sitebar">
-  <div class="sitebar-inner">
-    <img class="logo" src="logo-bawaslu-bandung.png" alt="Logo Bawaslu Kabupaten Bandung">
+<header class="site-header">
+  <div class="bar">
+    <a class="brand" href="index.html" aria-label="SiLani, beranda"><img src="logo-bawaslu-bandung.png" alt="Bawaslu Kabupaten Bandung"></a>
+    <nav class="nav" aria-label="Navigasi utama"><a href="index.html" aria-current="page"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-home"/></svg><span>Beranda</span></a><a href="panduan.html"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-book"/></svg><span>Panduan</span></a><a href="faq.html"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-help-circle"/></svg><span>FAQ</span></a></nav>
+    <button class="music" id="musicBtn" type="button" aria-pressed="false" aria-label="Putar Mars Pengawas Pemilu">
+      <svg class="ic" aria-hidden="true" focusable="false"><use href="#i-music"/></svg><span class="music-label" id="musicLabel">Putar mars</span>
+      <span class="eq" aria-hidden="true"><i></i><i></i><i></i></span>
+    </button>
   </div>
 </header>
-<nav class="site-nav-wrap" aria-label="Navigasi utama">
-  <div class="site-nav">
-    <a href="index.html" aria-current="page">⌂ Beranda</a>
-    <a href="panduan.html" >☷ Panduan Layanan</a>
-    <a href="faq.html" >? FAQ</a>
-  </div>
-</nav>
 
 <section class="hero">
-  <div class="hero-inner">
-    <div class="eyebrow">Layanan Publik Digital</div>
-    <h1 class="silani-wordmark"><span class="silani-si">Si</span><span class="silani-lani">Lani</span></h1>
-    <p class="hero-sub">Sistem Layanan Informasi</p>
-    <p class="hero-copy">Akses informasi publik Bawaslu Kabupaten Bandung dengan lebih mudah, jelas, dan terarah melalui satu pintu layanan.</p>
+  <div class="hero-in">
+    <div class="hero-text">
+      <p class="eyebrow">Layanan publik digital</p>
+      <h1 class="wordmark"><span>Si</span><span>Lani</span></h1>
+      <p class="hero-sub">Sistem Layanan Informasi</p>
+      <p class="hero-copy">Akses informasi publik Bawaslu Kabupaten Bandung dengan lebih mudah, jelas, dan terarah melalui satu pintu layanan.</p>
+    </div>
+    <img class="mascot" src="wasra-wasri-pair.png" alt="Maskot pengawas pemilu Wasra dan Wasri">
   </div>
-<img class="mascot-pair" src="wasra-wasri-pair.png" alt="Maskot pengawas pemilu Wasra dan Wasri">
 </section>
-
-<main>
-  <div class="container">
-    <section class="primary-wrap" aria-labelledby="primary-title">
-      <div class="primary">
-        <div>
-          <div class="kicker">Mulai dari sini · Layanan utama</div>
-          <h2 id="primary-title">Ajukan Permohonan Informasi</h2>
-          <p>Sampaikan kebutuhan informasi publik melalui portal resmi PPID. Tekan tombol untuk melanjutkan pengajuan.</p>
-        </div>
-        <a class="cta" href="https://ppidapp.bawaslu.go.id" target="_blank" rel="noopener noreferrer">
-          Ajukan Informasi <span class="arrow" aria-hidden="true">↗</span>
-        </a>
+<main id="isi">
+  <div class="wrap">
+    <section class="primary" aria-labelledby="t-utama">
+      <div class="primary-body">
+        <p class="kicker">Mulai dari sini</p>
+        <h2 id="t-utama">Ajukan permohonan informasi</h2>
+        <p>Sampaikan kebutuhan informasi publik Anda melalui portal resmi PPID.</p>
+        <p class="tip"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-info-circle"/></svg><span>Pada kolom Kabupaten/Kota di formulir, pilih <strong>Bawaslu Kab. Bandung</strong>.</span></p>
       </div>
+      <a class="btn" href="https://ppidapp.bawaslu.go.id" target="_blank" rel="noopener noreferrer">Ajukan informasi <svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
     </section>
 
-    <section class="section" aria-labelledby="service-title">
-      <div class="section-head"><div><h2 id="service-title">Layanan Informasi</h2><p>Pantau dan akses layanan PPID.</p><div class="rule"></div></div></div>
-      <div class="grid">
-        <a class="card" href="https://ppidapp.bawaslu.go.id/dip?unit=2&amp;provinsi=32&amp;kabkota=3204" target="_blank" rel="noopener noreferrer">
-          <span class="iconbox" aria-hidden="true">▤</span><strong>Daftar Informasi Publik</strong><small>Telusuri informasi publik yang tersedia.</small><span class="go">Buka layanan ↗</span>
-        </a>
-        <a class="card" href="https://ppidapp.bawaslu.go.id/cek" target="_blank" rel="noopener noreferrer">
-          <span class="iconbox" aria-hidden="true">⌕</span><strong>Cek Status Permohonan</strong><small>Pantau status permohonan informasi Anda.</small><span class="go">Buka layanan ↗</span>
-        </a>
-        <a class="card" href="https://wa.me/6281297786606" target="_blank" rel="noopener noreferrer">
-          <span class="iconbox" aria-hidden="true">✆</span><strong>Hubungi Petugas</strong><small>Hubungi petugas layanan melalui WhatsApp.</small><span class="go">Hubungi petugas ↗</span>
-        </a>
-        <a class="card" href="https://ppidapp.bawaslu.go.id/keberatan" target="_blank" rel="noopener noreferrer">
-          <span class="iconbox" aria-hidden="true">▧</span><strong>Ajukan Keberatan</strong><small>Akses layanan keberatan melalui portal PPID.</small><span class="go">Buka layanan ↗</span>
-        </a>
-      </div>
+    <section class="block" aria-labelledby="t-layanan">
+      <div class="head"><h2 id="t-layanan">Layanan informasi</h2><p>Pantau dan akses layanan PPID.</p></div>
+      <div class="grid g4"><a class="card core" href="https://ppidapp.bawaslu.go.id/dip?unit=2&amp;provinsi=32&amp;kabkota=3204" target="_blank" rel="noopener noreferrer"><span class="ico"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-list-details"/></svg></span><strong>Daftar informasi publik</strong><small>Telusuri informasi yang sudah tersedia tanpa perlu mengajukan permohonan.</small><span class="go">Buka daftar<svg class="ic sm" aria-hidden="true" focusable="false"><use href="#i-external-link"/></svg></span></a><a class="card core" href="https://ppidapp.bawaslu.go.id/cek" target="_blank" rel="noopener noreferrer"><span class="ico"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-clipboard-check"/></svg></span><strong>Cek status permohonan</strong><small>Pantau perkembangan permohonan informasi yang telah Anda ajukan.</small><span class="go">Cek status<svg class="ic sm" aria-hidden="true" focusable="false"><use href="#i-external-link"/></svg></span></a><a class="card core" href="https://ppidapp.bawaslu.go.id/keberatan" target="_blank" rel="noopener noreferrer"><span class="ico"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-message-report"/></svg></span><strong>Ajukan keberatan</strong><small>Gunakan jika Anda tidak puas dengan tanggapan atas permohonan.</small><span class="go">Buka formulir<svg class="ic sm" aria-hidden="true" focusable="false"><use href="#i-external-link"/></svg></span></a><a class="card core" href="https://wa.me/6281297786606" target="_blank" rel="noopener noreferrer"><span class="ico"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-brand-whatsapp"/></svg></span><strong>Hubungi petugas</strong><small>Tanyakan kendala layanan langsung kepada petugas PPID.</small><span class="go">Buka WhatsApp<svg class="ic sm" aria-hidden="true" focusable="false"><use href="#i-external-link"/></svg></span></a></div>
+    </section>
+
+    <section class="block" aria-labelledby="t-alur">
+      <div class="head"><h2 id="t-alur">Alur singkat</h2><p>Empat langkah dari SiLani ke layanan resmi.</p></div>
+      <ol class="flow"><li><span class="sn">1</span><span class="st"><strong>Buka SiLani</strong><small>Pindai QR Code atau buka tautan SiLani dari ponsel.</small></span></li><li><span class="sn">2</span><span class="st"><strong>Pilih layanan</strong><small>Tentukan: cari, ajukan, cek status, atau keberatan.</small></span></li><li><span class="sn">3</span><span class="st"><strong>Lanjut ke portal PPID</strong><small>Isi formulir pada kanal resmi PPID Bawaslu.</small></span></li><li><span class="sn">4</span><span class="st"><strong>Pantau hasilnya</strong><small>Periksa status permohonan melalui menu Cek Status.</small></span></li></ol>
+    </section>
+
+    <section class="help" aria-label="Bantuan">
+      <div><svg class="ic lg" aria-hidden="true" focusable="false"><use href="#i-help-circle"/></svg></div>
+      <div><strong>Belum tahu harus mulai dari mana?</strong><span>Baca panduan langkah demi langkah atau lihat pertanyaan yang sering diajukan.</span></div>
+      <div class="help-act"><a class="btn sm" href="panduan.html">Panduan layanan</a><a class="btn sm ghost" href="faq.html">Lihat FAQ</a></div>
     </section>
   </div>
 
-  <section class="lower" aria-labelledby="other-title">
-    <div class="lower-inner">
-      <div class="section-head"><div><h2 id="other-title">Jelajahi Kanal Resmi</h2><p>Informasi kelembagaan, regulasi, dan kanal PPID lintas tingkatan.</p><div class="rule"></div></div></div>
-      <div class="grid">
-        <a class="card" href="https://bandungkab.bawaslu.go.id/" target="_blank" rel="noopener noreferrer">
-          <span class="iconbox" aria-hidden="true">⌂</span><strong>Website Bawaslu Kabupaten Bandung</strong><small>Berita, kegiatan, dan informasi kelembagaan.</small><span class="go">Kunjungi situs ↗</span>
-        </a>
-        <a class="card" href="https://www.instagram.com/bawaslukabbdg/" target="_blank" rel="noopener noreferrer">
-          <span class="iconbox" aria-hidden="true">◎</span><strong>Instagram Bawaslu Kabupaten Bandung</strong><small>Ikuti publikasi dan informasi terbaru.</small><span class="go">Buka Instagram ↗</span>
-        </a>
-        <a class="card" href="https://ppid-bandungkab.bawaslu.go.id" target="_blank" rel="noopener noreferrer">
-          <span class="iconbox" aria-hidden="true">▣</span><strong>PPID Bawaslu Kabupaten Bandung</strong><small>Portal PPID tingkat kabupaten.</small><span class="go">Buka PPID ↗</span>
-        </a>
-        <a class="card" href="https://ppid-jabar.bawaslu.go.id/" target="_blank" rel="noopener noreferrer">
-          <span class="iconbox" aria-hidden="true">▥</span><strong>PPID Bawaslu Provinsi Jawa Barat</strong><small>Akses layanan informasi publik tingkat provinsi.</small><span class="go">Buka PPID ↗</span>
-        </a>
-        <a class="card" href="https://eppid.bawaslu.go.id/" target="_blank" rel="noopener noreferrer">
-          <span class="iconbox" aria-hidden="true">▦</span><strong>PPID Bawaslu RI</strong><small>Layanan informasi publik tingkat nasional.</small><span class="go">Buka PPID ↗</span>
-        </a>
-        <a class="card" href="https://jdih.bawaslu.go.id" target="_blank" rel="noopener noreferrer">
-          <span class="iconbox" aria-hidden="true">§</span><strong>JDIH Bawaslu</strong><small>Telusuri peraturan dan dokumen hukum.</small><span class="go">Buka JDIH ↗</span>
-        </a>
-      </div>
+  <section class="band" aria-labelledby="t-kanal">
+    <div class="wrap">
+      <div class="head"><h2 id="t-kanal">Jelajahi kanal resmi</h2><p>Informasi kelembagaan, regulasi, dan kanal PPID lintas tingkatan.</p></div>
+      <div class="grid g3"><a class="card chan" href="https://bandungkab.bawaslu.go.id/" target="_blank" rel="noopener noreferrer"><span class="ico"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-world"/></svg></span><strong>Website Bawaslu Kab. Bandung</strong><small>Berita, kegiatan, dan informasi kelembagaan.</small><span class="go">Kunjungi<svg class="ic sm" aria-hidden="true" focusable="false"><use href="#i-external-link"/></svg></span></a><a class="card chan" href="https://www.instagram.com/bawaslukabbdg/" target="_blank" rel="noopener noreferrer"><span class="ico"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-brand-instagram"/></svg></span><strong>Instagram</strong><small>Publikasi dan informasi terbaru.</small><span class="go">Buka Instagram<svg class="ic sm" aria-hidden="true" focusable="false"><use href="#i-external-link"/></svg></span></a><a class="card chan" href="https://ppid-bandungkab.bawaslu.go.id" target="_blank" rel="noopener noreferrer"><span class="ico"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-building"/></svg></span><strong>PPID Kabupaten Bandung</strong><small>Portal PPID tingkat kabupaten.</small><span class="go">Buka PPID<svg class="ic sm" aria-hidden="true" focusable="false"><use href="#i-external-link"/></svg></span></a><a class="card chan" href="https://ppid-jabar.bawaslu.go.id/" target="_blank" rel="noopener noreferrer"><span class="ico"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-map-2"/></svg></span><strong>PPID Provinsi Jawa Barat</strong><small>Layanan informasi tingkat provinsi.</small><span class="go">Buka PPID<svg class="ic sm" aria-hidden="true" focusable="false"><use href="#i-external-link"/></svg></span></a><a class="card chan" href="https://eppid.bawaslu.go.id/" target="_blank" rel="noopener noreferrer"><span class="ico"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-building-bank"/></svg></span><strong>PPID Bawaslu RI</strong><small>Layanan informasi tingkat nasional.</small><span class="go">Buka PPID<svg class="ic sm" aria-hidden="true" focusable="false"><use href="#i-external-link"/></svg></span></a><a class="card chan" href="https://jdih.bawaslu.go.id" target="_blank" rel="noopener noreferrer"><span class="ico"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-scale"/></svg></span><strong>JDIH Bawaslu</strong><small>Peraturan dan dokumen hukum.</small><span class="go">Buka JDIH<svg class="ic sm" aria-hidden="true" focusable="false"><use href="#i-external-link"/></svg></span></a></div>
     </div>
   </section>
 </main>
-
-<footer class="footer">
-  <div class="footer-inner"><div><strong>SILANI</strong><br>Sistem Layanan Informasi</div><div>Bawaslu Kabupaten Bandung · Layanan Informasi Publik</div></div>
+<footer class="site-footer">
+  <div class="foot">
+    <div><strong class="foot-brand">SiLani</strong><span>Sistem Layanan Informasi<br>Bawaslu Kabupaten Bandung</span></div>
+    <p>SiLani adalah halaman akses menuju layanan resmi PPID, bukan sistem PPID baru. Permohonan dan keberatan tetap diproses melalui kanal resmi yang ditautkan.</p>
+  </div>
 </footer>
-
-
-
-<audio id="silaniMars" preload="auto" loop>
-  <source src="MARS%20PENGAWAS%20PEMILU%20(1).mp3" type="audio/mpeg">
-</audio>
-<button class="music" id="silaniMusicButton" type="button" aria-pressed="false" aria-label="Putar atau hentikan Mars Pengawas Pemilu">
-  <span class="music-dot"></span><span id="silaniMusicLabel">Putar Mars Pengawas Pemilu</span>
-</button>
-<script>
-(() => {
-  const audio = document.getElementById('silaniMars');
-  const button = document.getElementById('silaniMusicButton');
-  const label = document.getElementById('silaniMusicLabel');
-  const KEY_PLAY = 'silaniMarsPlaying';
-  const KEY_TIME = 'silaniMarsTime';
-
-  try {
-    const saved = Number(sessionStorage.getItem(KEY_TIME) || 0);
-    if (saved > 0 && Number.isFinite(saved)) {
-      audio.addEventListener('loadedmetadata', () => {
-        try { audio.currentTime = Math.min(saved, Math.max(0, audio.duration - 1)); } catch (_) {}
-      }, { once: true });
-    }
-  } catch (_) {}
-
-  function paint(playing) {
-    button.setAttribute('aria-pressed', String(playing));
-    label.textContent = playing ? 'Mars Pengawas Pemilu: aktif' : 'Putar Mars Pengawas Pemilu';
-  }
-  async function play() {
-    try {
-      await audio.play();
-      try { sessionStorage.setItem(KEY_PLAY, '1'); } catch (_) {}
-      paint(true);
-    } catch (_) {
-      paint(false);
-      label.textContent = 'Ketuk untuk putar Mars';
-    }
-  }
-  button.addEventListener('click', async () => {
-    if (audio.paused) {
-      await play();
-    } else {
-      audio.pause();
-      try { sessionStorage.setItem(KEY_PLAY, '0'); } catch (_) {}
-      paint(false);
-    }
-  });
-  audio.addEventListener('play', () => paint(true));
-  audio.addEventListener('pause', () => paint(false));
-  window.addEventListener('pagehide', () => {
-    try {
-      sessionStorage.setItem(KEY_TIME, String(audio.currentTime || 0));
-      sessionStorage.setItem(KEY_PLAY, audio.paused ? '0' : '1');
-    } catch (_) {}
-  });
-  // Resume on another SILANI page after the visitor has started playback once.
-  let shouldResume = false;
-  try { shouldResume = sessionStorage.getItem(KEY_PLAY) === '1'; } catch (_) {}
-  if (shouldResume) {
-    window.addEventListener('load', play, { once: true });
-  }
-})();
-</script>
-
+<audio id="mars" preload="metadata" loop><source src="MARS%20PENGAWAS%20PEMILU%20(1).mp3" type="audio/mpeg"></audio>
+<script src="silani.js"></script>
 </body>
 </html>
