@@ -1,197 +1,177 @@
 <!DOCTYPE html>
-
 <html lang="id">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width,initial-scale=1" name="viewport"/>
-<meta content="#4c151d" name="theme-color"/>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#4c151d">
 <title>SiLani | Sistem Layanan Informasi Bawaslu Kabupaten Bandung</title>
-<meta content="SiLani: satu pintu akses layanan informasi publik Bawaslu Kabupaten Bandung. Ajukan permohonan, telusuri daftar informasi, cek status, dan hubungi petugas." name="description"/>
-<meta content="website" property="og:type"/>
-<meta content="SiLani | Sistem Layanan Informasi Bawaslu Kabupaten Bandung" property="og:title"/>
-<meta content="SiLani: satu pintu akses layanan informasi publik Bawaslu Kabupaten Bandung. Ajukan permohonan, telusuri daftar informasi, cek status, dan hubungi petugas." property="og:description"/>
-<meta content="gedung-bawaslu-bandung.jpeg" property="og:image"/>
-<link href="logo-bawaslu-bandung.png" rel="icon"/>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&amp;display=swap" rel="stylesheet"/>
-<link href="styles.css" rel="stylesheet"/>
+<meta name="description" content="SiLani: satu pintu akses layanan informasi publik Bawaslu Kabupaten Bandung. Ajukan permohonan, telusuri daftar informasi, cek status, dan hubungi petugas.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="SiLani | Sistem Layanan Informasi Bawaslu Kabupaten Bandung">
+<meta property="og:description" content="SiLani: satu pintu akses layanan informasi publik Bawaslu Kabupaten Bandung. Ajukan permohonan, telusuri daftar informasi, cek status, dan hubungi petugas.">
+<meta property="og:image" content="gedung-bawaslu-bandung.jpeg">
+<link rel="icon" href="logo-bawaslu-bandung.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=20261031-survey1">
 </head>
 <body>
-<svg aria-hidden="true" style="display:none" xmlns="http://www.w3.org/2000/svg">
-<symbol fill="none" id="i-file-text" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="M14 3v4a1 1 0 0 0 1 1h4"></path> <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z"></path> <path d="M9 9l1 0"></path> <path d="M9 13l6 0"></path> <path d="M9 17l6 0"></path></symbol>
-<symbol fill="none" id="i-list-details" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="M13 5h8"></path> <path d="M13 9h5"></path> <path d="M13 15h8"></path> <path d="M13 19h5"></path> <path d="M3 4m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z"></path> <path d="M3 14m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z"></path></symbol>
-<symbol fill="none" id="i-clipboard-check" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2"></path> <path d="M9 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"></path> <path d="M9 14l2 2l4 -4"></path></symbol>
-<symbol fill="none" id="i-brand-whatsapp" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9"></path> <path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1"></path></symbol>
-<symbol fill="none" id="i-message-report" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="M18 4a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-5l-5 3v-3h-2a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12z"></path> <path d="M12 8v3"></path> <path d="M12 14v.01"></path></symbol>
-<symbol fill="none" id="i-world" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path> <path d="M3.6 9h16.8"></path> <path d="M3.6 15h16.8"></path> <path d="M11.5 3a17 17 0 0 0 0 18"></path> <path d="M12.5 3a17 17 0 0 1 0 18"></path></symbol>
-<symbol fill="none" id="i-brand-instagram" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="M4 8a4 4 0 0 1 4 -4h8a4 4 0 0 1 4 4v8a4 4 0 0 1 -4 4h-8a4 4 0 0 1 -4 -4z"></path> <path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"></path> <path d="M16.5 7.5v.01"></path></symbol>
-<symbol fill="none" id="i-building" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="M3 21l18 0"></path> <path d="M9 8l1 0"></path> <path d="M9 12l1 0"></path> <path d="M9 16l1 0"></path> <path d="M14 8l1 0"></path> <path d="M14 12l1 0"></path> <path d="M14 16l1 0"></path> <path d="M5 21v-16a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v16"></path></symbol>
-<symbol fill="none" id="i-map-2" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="M12 18.5l-3 -1.5l-6 3v-13l6 -3l6 3l6 -3v7.5"></path> <path d="M9 4v13"></path> <path d="M15 7v5.5"></path> <path d="M21.121 20.121a3 3 0 1 0 -4.242 0c.418 .419 1.125 1.045 2.121 1.879c1.051 -.89 1.759 -1.516 2.121 -1.879z"></path> <path d="M19 18v.01"></path></symbol>
-<symbol fill="none" id="i-building-bank" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="M3 21l18 0"></path> <path d="M3 10l18 0"></path> <path d="M5 6l7 -3l7 3"></path> <path d="M4 10l0 11"></path> <path d="M20 10l0 11"></path> <path d="M8 14l0 3"></path> <path d="M12 14l0 3"></path> <path d="M16 14l0 3"></path></symbol>
-<symbol fill="none" id="i-scale" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="M7 20l10 0"></path> <path d="M6 6l6 -1l6 1"></path> <path d="M12 3l0 17"></path> <path d="M9 12l-3 -6l-3 6a3 3 0 0 0 6 0"></path> <path d="M21 12l-3 -6l-3 6a3 3 0 0 0 6 0"></path></symbol>
-<symbol fill="none" id="i-clock" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path> <path d="M12 7v5l3 3"></path></symbol>
-<symbol fill="none" id="i-cash" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="M7 15h-3a1 1 0 0 1 -1 -1v-8a1 1 0 0 1 1 -1h12a1 1 0 0 1 1 1v3"></path> <path d="M7 9m0 1a1 1 0 0 1 1 -1h12a1 1 0 0 1 1 1v8a1 1 0 0 1 -1 1h-12a1 1 0 0 1 -1 -1z"></path> <path d="M12 14a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path></symbol>
-<symbol fill="none" id="i-map-pin" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"></path> <path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z"></path></symbol>
-<symbol fill="none" id="i-phone" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2"></path></symbol>
-<symbol fill="none" id="i-mail" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z"></path> <path d="M3 7l9 6l9 -6"></path></symbol>
-<symbol fill="none" id="i-home" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="M5 12l-2 0l9 -9l9 9l-2 0"></path> <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7"></path> <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6"></path></symbol>
-<symbol fill="none" id="i-book" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"></path> <path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"></path> <path d="M3 6l0 13"></path> <path d="M12 6l0 13"></path> <path d="M21 6l0 13"></path></symbol>
-<symbol fill="none" id="i-help-circle" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path> <path d="M12 16v.01"></path> <path d="M12 13a2 2 0 0 0 .914 -3.782a1.98 1.98 0 0 0 -2.414 .483"></path></symbol>
-<symbol fill="none" id="i-external-link" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6"></path> <path d="M11 13l9 -9"></path> <path d="M15 4h5v5"></path></symbol>
-<symbol fill="none" id="i-info-circle" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path> <path d="M12 9h.01"></path> <path d="M11 12h1v4h1"></path></symbol>
-<symbol fill="none" id="i-music" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="M3 17a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"></path> <path d="M13 17a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"></path> <path d="M9 17v-13h10v13"></path> <path d="M9 8h10"></path></symbol>
-<symbol fill="none" id="i-layout-grid" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="M4 4m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z"></path> <path d="M14 4m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z"></path> <path d="M4 14m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z"></path> <path d="M14 14m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z"></path></symbol>
-<symbol fill="none" id="i-search" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"></path> <path d="M21 21l-6 -6"></path></symbol>
-<symbol fill="none" id="i-arrow-right" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="M5 12l14 0"></path> <path d="M13 18l6 -6"></path> <path d="M13 6l6 6"></path></symbol>
-<symbol fill="none" id="i-chevron-down" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="M6 9l6 6l6 -6"></path></symbol>
-<symbol fill="none" id="i-qrcode" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="M4 4m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z"></path> <path d="M7 17l0 .01"></path> <path d="M14 4m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z"></path> <path d="M7 7l0 .01"></path> <path d="M4 14m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z"></path> <path d="M17 7l0 .01"></path> <path d="M14 14l3 0"></path> <path d="M20 14l0 .01"></path> <path d="M14 14l0 3"></path> <path d="M14 20l3 0"></path> <path d="M17 17l3 0"></path> <path d="M20 17l0 3"></path></symbol>
-<symbol fill="none" id="i-list-check" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="M3.5 5.5l1.5 1.5l2.5 -2.5"></path> <path d="M3.5 11.5l1.5 1.5l2.5 -2.5"></path> <path d="M3.5 17.5l1.5 1.5l2.5 -2.5"></path> <path d="M11 6l9 0"></path> <path d="M11 12l9 0"></path> <path d="M11 18l9 0"></path></symbol>
-<symbol fill="none" id="i-device-mobile" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="M6 5a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2v-14z"></path> <path d="M11 4h2"></path> <path d="M12 17v.01"></path></symbol>
-<symbol fill="none" id="i-send" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="M10 14l11 -11"></path> <path d="M21 3l-6.5 18a.55 .55 0 0 1 -1 0l-3.5 -7l-7 -3.5a.55 .55 0 0 1 0 -1l18 -6.5"></path></symbol>
-<symbol fill="none" id="i-player-pause" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="M6 5m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v12a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z"></path> <path d="M14 5m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v12a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z"></path></symbol>
-<symbol fill="none" id="i-player-play" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="M7 4v16l13 -8z"></path></symbol>
-<symbol fill="none" id="i-file-upload" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="M14 3v4a1 1 0 0 0 1 1h4"></path> <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z"></path> <path d="M12 11v6"></path> <path d="M9.5 13.5l2.5 -2.5l2.5 2.5"></path></symbol>
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+<symbol id="i-file-text" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4" /> <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" /> <path d="M9 9l1 0" /> <path d="M9 13l6 0" /> <path d="M9 17l6 0" /></symbol>
+<symbol id="i-list-details" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 5h8" /> <path d="M13 9h5" /> <path d="M13 15h8" /> <path d="M13 19h5" /> <path d="M3 4m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" /> <path d="M3 14m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" /></symbol>
+<symbol id="i-clipboard-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2" /> <path d="M9 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" /> <path d="M9 14l2 2l4 -4" /></symbol>
+<symbol id="i-brand-whatsapp" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9" /> <path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1" /></symbol>
+<symbol id="i-message-report" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 4a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-5l-5 3v-3h-2a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12z" /> <path d="M12 8v3" /> <path d="M12 14v.01" /></symbol>
+<symbol id="i-world" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" /> <path d="M3.6 9h16.8" /> <path d="M3.6 15h16.8" /> <path d="M11.5 3a17 17 0 0 0 0 18" /> <path d="M12.5 3a17 17 0 0 1 0 18" /></symbol>
+<symbol id="i-brand-instagram" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8a4 4 0 0 1 4 -4h8a4 4 0 0 1 4 4v8a4 4 0 0 1 -4 4h-8a4 4 0 0 1 -4 -4z" /> <path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" /> <path d="M16.5 7.5v.01" /></symbol>
+<symbol id="i-building" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l18 0" /> <path d="M9 8l1 0" /> <path d="M9 12l1 0" /> <path d="M9 16l1 0" /> <path d="M14 8l1 0" /> <path d="M14 12l1 0" /> <path d="M14 16l1 0" /> <path d="M5 21v-16a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v16" /></symbol>
+<symbol id="i-map-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 18.5l-3 -1.5l-6 3v-13l6 -3l6 3l6 -3v7.5" /> <path d="M9 4v13" /> <path d="M15 7v5.5" /> <path d="M21.121 20.121a3 3 0 1 0 -4.242 0c.418 .419 1.125 1.045 2.121 1.879c1.051 -.89 1.759 -1.516 2.121 -1.879z" /> <path d="M19 18v.01" /></symbol>
+<symbol id="i-building-bank" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l18 0" /> <path d="M3 10l18 0" /> <path d="M5 6l7 -3l7 3" /> <path d="M4 10l0 11" /> <path d="M20 10l0 11" /> <path d="M8 14l0 3" /> <path d="M12 14l0 3" /> <path d="M16 14l0 3" /></symbol>
+<symbol id="i-scale" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 20l10 0" /> <path d="M6 6l6 -1l6 1" /> <path d="M12 3l0 17" /> <path d="M9 12l-3 -6l-3 6a3 3 0 0 0 6 0" /> <path d="M21 12l-3 -6l-3 6a3 3 0 0 0 6 0" /></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" /> <path d="M12 7v5l3 3" /></symbol>
+<symbol id="i-cash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 15h-3a1 1 0 0 1 -1 -1v-8a1 1 0 0 1 1 -1h12a1 1 0 0 1 1 1v3" /> <path d="M7 9m0 1a1 1 0 0 1 1 -1h12a1 1 0 0 1 1 1v8a1 1 0 0 1 -1 1h-12a1 1 0 0 1 -1 -1z" /> <path d="M12 14a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /></symbol>
+<symbol id="i-map-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" /> <path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z" /></symbol>
+<symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2" /></symbol>
+<symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" /> <path d="M3 7l9 6l9 -6" /></symbol>
+<symbol id="i-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l-2 0l9 -9l9 9l-2 0" /> <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" /> <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" /></symbol>
+<symbol id="i-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" /> <path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" /> <path d="M3 6l0 13" /> <path d="M12 6l0 13" /> <path d="M21 6l0 13" /></symbol>
+<symbol id="i-help-circle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" /> <path d="M12 16v.01" /> <path d="M12 13a2 2 0 0 0 .914 -3.782a1.98 1.98 0 0 0 -2.414 .483" /></symbol>
+<symbol id="i-external-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6" /> <path d="M11 13l9 -9" /> <path d="M15 4h5v5" /></symbol>
+<symbol id="i-info-circle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" /> <path d="M12 9h.01" /> <path d="M11 12h1v4h1" /></symbol>
+<symbol id="i-music" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" /> <path d="M13 17a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" /> <path d="M9 17v-13h10v13" /> <path d="M9 8h10" /></symbol>
+<symbol id="i-layout-grid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" /> <path d="M14 4m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" /> <path d="M4 14m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" /> <path d="M14 14m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" /></symbol>
+<symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" /> <path d="M21 21l-6 -6" /></symbol>
+<symbol id="i-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l14 0" /> <path d="M13 18l6 -6" /> <path d="M13 6l6 6" /></symbol>
+<symbol id="i-chevron-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6l6 -6" /></symbol>
+<symbol id="i-qrcode" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" /> <path d="M7 17l0 .01" /> <path d="M14 4m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" /> <path d="M7 7l0 .01" /> <path d="M4 14m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" /> <path d="M17 7l0 .01" /> <path d="M14 14l3 0" /> <path d="M20 14l0 .01" /> <path d="M14 14l0 3" /> <path d="M14 20l3 0" /> <path d="M17 17l3 0" /> <path d="M20 17l0 3" /></symbol>
+<symbol id="i-list-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 5.5l1.5 1.5l2.5 -2.5" /> <path d="M3.5 11.5l1.5 1.5l2.5 -2.5" /> <path d="M3.5 17.5l1.5 1.5l2.5 -2.5" /> <path d="M11 6l9 0" /> <path d="M11 12l9 0" /> <path d="M11 18l9 0" /></symbol>
+<symbol id="i-device-mobile" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 5a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2v-14z" /> <path d="M11 4h2" /> <path d="M12 17v.01" /></symbol>
+<symbol id="i-send" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14l11 -11" /> <path d="M21 3l-6.5 18a.55 .55 0 0 1 -1 0l-3.5 -7l-7 -3.5a.55 .55 0 0 1 0 -1l18 -6.5" /></symbol>
+<symbol id="i-player-pause" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 5m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v12a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" /> <path d="M14 5m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v12a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" /></symbol>
+<symbol id="i-player-play" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4v16l13 -8z" /></symbol>
+<symbol id="i-file-upload" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4" /> <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" /> <path d="M12 11v6" /> <path d="M9.5 13.5l2.5 -2.5l2.5 2.5" /></symbol>
 </svg>
 <a class="skip" href="#isi">Lewati ke isi</a>
 <div class="topline"></div>
 <header class="site-header">
-<div class="bar">
-<a aria-label="SiLani, beranda" class="brand" href="index.html"><img alt="Bawaslu Kabupaten Bandung" src="logo-bawaslu-bandung.png"/></a>
-<nav aria-label="Navigasi utama" class="nav"><a aria-current="page" href="index.html"><svg aria-hidden="true" class="ic" focusable="false"><use href="#i-home"></use></svg><span>Beranda</span></a><a href="panduan.html"><svg aria-hidden="true" class="ic" focusable="false"><use href="#i-book"></use></svg><span>Panduan</span></a><a href="faq.html"><svg aria-hidden="true" class="ic" focusable="false"><use href="#i-help-circle"></use></svg><span>FAQ</span></a></nav>
-<button aria-label="Putar Mars Pengawas Pemilu" aria-pressed="false" class="music" id="musicBtn" type="button">
-<svg aria-hidden="true" class="ic" focusable="false"><use href="#i-music"></use></svg><span class="music-label" id="musicLabel">Putar mars</span>
-<span aria-hidden="true" class="eq"><i></i><i></i><i></i></span>
-</button>
-</div>
+  <div class="bar">
+    <a class="brand" href="index.html" aria-label="SiLani, beranda"><img src="logo-bawaslu-bandung.png" alt="Bawaslu Kabupaten Bandung"></a>
+    <nav class="nav" aria-label="Navigasi utama"><a href="index.html" aria-current="page"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-home"/></svg><span>Beranda</span></a><a href="panduan.html"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-book"/></svg><span>Panduan</span></a><a href="faq.html"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-help-circle"/></svg><span>FAQ</span></a></nav>
+    <button class="music" id="musicBtn" type="button" aria-pressed="false" aria-label="Putar Mars Pengawas Pemilu">
+      <svg class="ic" aria-hidden="true" focusable="false"><use href="#i-music"/></svg><span class="music-label" id="musicLabel">Putar mars</span>
+      <span class="eq" aria-hidden="true"><i></i><i></i><i></i></span>
+    </button>
+  </div>
 </header>
-<section class="hero">
-<div class="hero-in">
-<div class="hero-text">
-<p class="eyebrow">Layanan publik digital</p>
-<h1 aria-label="SiLani" class="wordmark"><span>Si</span><span>Lani</span></h1>
-<p class="hero-sub">Sistem Layanan Informasi</p>
-<p class="hero-copy">Akses informasi publik Bawaslu Kabupaten Bandung dengan lebih mudah, jelas, dan terarah melalui satu pintu layanan.</p>
-</div>
-<img alt="Maskot pengawas pemilu Wasra dan Wasri" class="mascot" src="wasra-wasri-pair.png"/>
-</div>
-</section>
-<main id="isi">
-<div class="wrap">
-<section aria-labelledby="t-utama" class="primary">
-<div class="primary-body">
-<p class="kicker">Mulai dari sini</p>
-<h2 id="t-utama">Ajukan permohonan informasi</h2>
-<p>Sampaikan kebutuhan informasi publik Anda melalui portal resmi PPID.</p>
-<p class="tip"><svg aria-hidden="true" class="ic" focusable="false"><use href="#i-info-circle"></use></svg><span>Pada kolom Kabupaten/Kota di formulir, pilih <strong>Bawaslu Kab. Bandung</strong>.</span></p>
-</div>
-<a class="btn" href="https://ppidapp.bawaslu.go.id" rel="noopener noreferrer" target="_blank">Ajukan informasi <svg aria-hidden="true" class="ic" focusable="false"><use href="#i-arrow-right"></use></svg></a>
-</section>
-<section aria-labelledby="t-layanan" class="block">
-<div class="head"><h2 id="t-layanan">Layanan informasi</h2><p>Pantau dan akses layanan PPID.</p></div>
-<div class="grid g4"><a class="card core" href="https://ppidapp.bawaslu.go.id/dip?unit=2&amp;provinsi=32&amp;kabkota=3204" rel="noopener noreferrer" target="_blank"><span class="ico"><svg aria-hidden="true" class="ic" focusable="false"><use href="#i-list-details"></use></svg></span><strong>Daftar informasi publik</strong><small>Telusuri informasi yang sudah tersedia tanpa perlu mengajukan permohonan.</small><span class="go">Buka daftar<svg aria-hidden="true" class="ic sm" focusable="false"><use href="#i-external-link"></use></svg></span></a><a class="card core" href="https://ppidapp.bawaslu.go.id/cek" rel="noopener noreferrer" target="_blank"><span class="ico"><svg aria-hidden="true" class="ic" focusable="false"><use href="#i-clipboard-check"></use></svg></span><strong>Cek status permohonan</strong><small>Pantau perkembangan permohonan informasi yang telah Anda ajukan.</small><span class="go">Cek status<svg aria-hidden="true" class="ic sm" focusable="false"><use href="#i-external-link"></use></svg></span></a><a class="card core" href="https://ppidapp.bawaslu.go.id/keberatan" rel="noopener noreferrer" target="_blank"><span class="ico"><svg aria-hidden="true" class="ic" focusable="false"><use href="#i-message-report"></use></svg></span><strong>Ajukan keberatan</strong><small>Gunakan jika Anda tidak puas dengan tanggapan atas permohonan.</small><span class="go">Buka formulir<svg aria-hidden="true" class="ic sm" focusable="false"><use href="#i-external-link"></use></svg></span></a><a class="card core" href="https://wa.me/6281297786606" rel="noopener noreferrer" target="_blank"><span class="ico"><svg aria-hidden="true" class="ic" focusable="false"><use href="#i-brand-whatsapp"></use></svg></span><strong>Hubungi petugas</strong><small>Tanyakan kendala layanan langsung kepada petugas PPID.</small><span class="go">Buka WhatsApp<svg aria-hidden="true" class="ic sm" focusable="false"><use href="#i-external-link"></use></svg></span></a></div>
-</section>
-<section aria-labelledby="t-alur" class="block">
-<div class="head"><h2 id="t-alur">Alur singkat</h2><p>Empat langkah dari SiLani ke layanan resmi.</p></div>
-<ol class="flow"><li><span class="sn">1</span><span class="st"><strong>Buka SiLani</strong><small>Pindai QR Code atau buka tautan SiLani dari ponsel.</small></span></li><li><span class="sn">2</span><span class="st"><strong>Pilih layanan</strong><small>Tentukan: cari, ajukan, cek status, atau keberatan.</small></span></li><li><span class="sn">3</span><span class="st"><strong>Lanjut ke portal PPID</strong><small>Isi formulir pada kanal resmi PPID Bawaslu.</small></span></li><li><span class="sn">4</span><span class="st"><strong>Pantau hasilnya</strong><small>Periksa status permohonan melalui menu Cek Status.</small></span></li></ol>
-</section>
-<section aria-label="Bantuan" class="help">
-<div><svg aria-hidden="true" class="ic lg" focusable="false"><use href="#i-help-circle"></use></svg></div>
-<div><strong>Belum tahu harus mulai dari mana?</strong><span>Baca panduan langkah demi langkah atau lihat pertanyaan yang sering diajukan.</span></div>
-<div class="help-act"><a class="btn sm" href="panduan.html">Panduan layanan</a><a class="btn sm ghost" href="faq.html">Lihat FAQ</a></div>
-</section>
-</div>
-<section aria-labelledby="t-kanal" class="band">
-<div class="wrap">
-<div class="head"><h2 id="t-kanal">Jelajahi kanal resmi</h2><p>Informasi kelembagaan, regulasi, dan kanal PPID lintas tingkatan.</p></div>
-<div class="grid g3"><a class="card chan" href="https://bandungkab.bawaslu.go.id/" rel="noopener noreferrer" target="_blank"><span class="ico"><svg aria-hidden="true" class="ic" focusable="false"><use href="#i-world"></use></svg></span><strong>Website Bawaslu Kab. Bandung</strong><small>Berita, kegiatan, dan informasi kelembagaan.</small><span class="go">Kunjungi<svg aria-hidden="true" class="ic sm" focusable="false"><use href="#i-external-link"></use></svg></span></a><a class="card chan" href="https://www.instagram.com/bawaslukabbdg/" rel="noopener noreferrer" target="_blank"><span class="ico"><svg aria-hidden="true" class="ic" focusable="false"><use href="#i-brand-instagram"></use></svg></span><strong>Instagram</strong><small>Publikasi dan informasi terbaru.</small><span class="go">Buka Instagram<svg aria-hidden="true" class="ic sm" focusable="false"><use href="#i-external-link"></use></svg></span></a><a class="card chan" href="https://ppid-bandungkab.bawaslu.go.id" rel="noopener noreferrer" target="_blank"><span class="ico"><svg aria-hidden="true" class="ic" focusable="false"><use href="#i-building"></use></svg></span><strong>PPID Kabupaten Bandung</strong><small>Portal PPID tingkat kabupaten.</small><span class="go">Buka PPID<svg aria-hidden="true" class="ic sm" focusable="false"><use href="#i-external-link"></use></svg></span></a><a class="card chan" href="https://ppid-jabar.bawaslu.go.id/" rel="noopener noreferrer" target="_blank"><span class="ico"><svg aria-hidden="true" class="ic" focusable="false"><use href="#i-map-2"></use></svg></span><strong>PPID Provinsi Jawa Barat</strong><small>Layanan informasi tingkat provinsi.</small><span class="go">Buka PPID<svg aria-hidden="true" class="ic sm" focusable="false"><use href="#i-external-link"></use></svg></span></a><a class="card chan" href="https://eppid.bawaslu.go.id/" rel="noopener noreferrer" target="_blank"><span class="ico"><svg aria-hidden="true" class="ic" focusable="false"><use href="#i-building-bank"></use></svg></span><strong>PPID Bawaslu RI</strong><small>Layanan informasi tingkat nasional.</small><span class="go">Buka PPID<svg aria-hidden="true" class="ic sm" focusable="false"><use href="#i-external-link"></use></svg></span></a><a class="card chan" href="https://jdih.bawaslu.go.id" rel="noopener noreferrer" target="_blank"><span class="ico"><svg aria-hidden="true" class="ic" focusable="false"><use href="#i-scale"></use></svg></span><strong>JDIH Bawaslu</strong><small>Peraturan dan dokumen hukum.</small><span class="go">Buka JDIH<svg aria-hidden="true" class="ic sm" focusable="false"><use href="#i-external-link"></use></svg></span></a></div>
-</div>
-</section>
-</main>
 
-<section class="survey-showcase" aria-labelledby="survey-title">
-  <div class="survey-showcase-inner">
-    <div class="survey-copy">
-      <div class="survey-eyebrow">
-        <span class="survey-eyebrow-line"></span>
-        PARTISIPASI MASYARAKAT
-      </div>
-      <h2 id="survey-title">
-        Suara Anda, Perbaikan
-        <span>Layanan Kami</span>
-      </h2>
-      <p class="survey-description">
-        Bantu kami meningkatkan kualitas pelayanan informasi publik
-        dan mengembangkan SiLani melalui penilaian serta saran Anda.
-        Pengisian singkat dan tidak memerlukan identitas pribadi.
-      </p>
-      <div class="survey-benefits">
-        <div class="survey-benefit">
-          <span class="survey-benefit-icon">◷</span>
-          <div>
-            <small>Estimasi pengisian</small>
-            <strong>3–5 menit</strong>
-          </div>
-        </div>
-        <div class="survey-benefit">
-          <span class="survey-benefit-icon">♢</span>
-          <div>
-            <small>Aman dan anonim</small>
-            <strong>Tanpa identitas pribadi</strong>
-          </div>
-        </div>
-        <div class="survey-benefit">
-          <span class="survey-benefit-icon">▥</span>
-          <div>
-            <small>Masukan Anda</small>
-            <strong>Untuk layanan lebih baik</strong>
-          </div>
-        </div>
-      </div>
-      <a id="surveyLink" class="survey-cta"
-         href="#" aria-disabled="true">
-        <span class="survey-cta-icon">▤</span>
-        <span>Isi Survei Kepuasan</span>
-        <span class="survey-cta-arrow">→</span>
-      </a>
+<section class="hero">
+  <div class="hero-in">
+    <div class="hero-text">
+      <p class="eyebrow">Layanan publik digital</p>
+      <h1 class="wordmark"><span>Si</span><span>Lani</span></h1>
+      <p class="hero-sub">Sistem Layanan Informasi</p>
+      <p class="hero-copy">Akses informasi publik Bawaslu Kabupaten Bandung dengan lebih mudah, jelas, dan terarah melalui satu pintu layanan.</p>
     </div>
-    <div class="survey-visual" aria-hidden="true">
-      <div class="survey-orbit"></div>
-      <div class="survey-dots"></div>
-      <div class="survey-paper">
-        <div class="survey-paper-heading">
-          SURVEI KEPUASAN<br/>SiLani
-        </div>
-        <div class="survey-faces">
-          <span>☹</span>
-          <span>○</span>
-          <span>☺</span>
-          <span class="selected">★</span>
-        </div>
-        <div class="survey-paper-line"></div>
-        <div class="survey-paper-line short"></div>
-        <div class="survey-paper-line"></div>
-        <div class="survey-paper-line short"></div>
-      </div>
-      <img
-        class="survey-mascot"
-        src="wasra-wasri-pair.png"
-        alt=""
-      />
-      <div class="survey-note">
-        <span>♥</span>
-        Masukan Anda<br/>sangat berarti
-      </div>
-    </div>
+    <img class="mascot" src="wasra-wasri-pair.png" alt="Maskot pengawas pemilu Wasra dan Wasri">
   </div>
 </section>
+<main id="isi">
+  <div class="wrap">
+    <section class="primary" aria-labelledby="t-utama">
+      <div class="primary-body">
+        <p class="kicker">Mulai dari sini</p>
+        <h2 id="t-utama">Ajukan permohonan informasi</h2>
+        <p>Sampaikan kebutuhan informasi publik Anda melalui portal resmi PPID.</p>
+        <p class="tip"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-info-circle"/></svg><span>Pada kolom Kabupaten/Kota di formulir, pilih <strong>Bawaslu Kab. Bandung</strong>.</span></p>
+      </div>
+      <a class="btn" href="https://ppidapp.bawaslu.go.id" target="_blank" rel="noopener noreferrer">Ajukan informasi <svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
+    </section>
+
+    <section class="block" aria-labelledby="t-layanan">
+      <div class="head"><h2 id="t-layanan">Layanan informasi</h2><p>Pantau dan akses layanan PPID.</p></div>
+      <div class="grid g4"><a class="card core" href="https://ppidapp.bawaslu.go.id/dip?unit=2&amp;provinsi=32&amp;kabkota=3204" target="_blank" rel="noopener noreferrer"><span class="ico"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-list-details"/></svg></span><strong>Daftar informasi publik</strong><small>Telusuri informasi yang sudah tersedia tanpa perlu mengajukan permohonan.</small><span class="go">Buka daftar<svg class="ic sm" aria-hidden="true" focusable="false"><use href="#i-external-link"/></svg></span></a><a class="card core" href="https://ppidapp.bawaslu.go.id/cek" target="_blank" rel="noopener noreferrer"><span class="ico"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-clipboard-check"/></svg></span><strong>Cek status permohonan</strong><small>Pantau perkembangan permohonan informasi yang telah Anda ajukan.</small><span class="go">Cek status<svg class="ic sm" aria-hidden="true" focusable="false"><use href="#i-external-link"/></svg></span></a><a class="card core" href="https://ppidapp.bawaslu.go.id/keberatan" target="_blank" rel="noopener noreferrer"><span class="ico"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-message-report"/></svg></span><strong>Ajukan keberatan</strong><small>Gunakan jika Anda tidak puas dengan tanggapan atas permohonan.</small><span class="go">Buka formulir<svg class="ic sm" aria-hidden="true" focusable="false"><use href="#i-external-link"/></svg></span></a><a class="card core" href="https://wa.me/6281297786606" target="_blank" rel="noopener noreferrer"><span class="ico"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-brand-whatsapp"/></svg></span><strong>Hubungi petugas</strong><small>Tanyakan kendala layanan langsung kepada petugas PPID.</small><span class="go">Buka WhatsApp<svg class="ic sm" aria-hidden="true" focusable="false"><use href="#i-external-link"/></svg></span></a></div>
+    </section>
+
+    <section class="block" aria-labelledby="t-alur">
+      <div class="head"><h2 id="t-alur">Alur singkat</h2><p>Empat langkah dari SiLani ke layanan resmi.</p></div>
+      <ol class="flow"><li><span class="sn">1</span><span class="st"><strong>Buka SiLani</strong><small>Pindai QR Code atau buka tautan SiLani dari ponsel.</small></span></li><li><span class="sn">2</span><span class="st"><strong>Pilih layanan</strong><small>Tentukan: cari, ajukan, cek status, atau keberatan.</small></span></li><li><span class="sn">3</span><span class="st"><strong>Lanjut ke portal PPID</strong><small>Isi formulir pada kanal resmi PPID Bawaslu.</small></span></li><li><span class="sn">4</span><span class="st"><strong>Pantau hasilnya</strong><small>Periksa status permohonan melalui menu Cek Status.</small></span></li></ol>
+    </section>
+
+    <section class="help" aria-label="Bantuan">
+      <div><svg class="ic lg" aria-hidden="true" focusable="false"><use href="#i-help-circle"/></svg></div>
+      <div><strong>Belum tahu harus mulai dari mana?</strong><span>Baca panduan langkah demi langkah atau lihat pertanyaan yang sering diajukan.</span></div>
+      <div class="help-act"><a class="btn sm" href="panduan.html">Panduan layanan</a><a class="btn sm ghost" href="faq.html">Lihat FAQ</a></div>
+    </section>
+  </div>
+
+  <section class="band" aria-labelledby="t-kanal">
+    <div class="wrap">
+      <div class="head"><h2 id="t-kanal">Jelajahi kanal resmi</h2><p>Informasi kelembagaan, regulasi, dan kanal PPID lintas tingkatan.</p></div>
+      <div class="grid g3"><a class="card chan" href="https://bandungkab.bawaslu.go.id/" target="_blank" rel="noopener noreferrer"><span class="ico"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-world"/></svg></span><strong>Website Bawaslu Kab. Bandung</strong><small>Berita, kegiatan, dan informasi kelembagaan.</small><span class="go">Kunjungi<svg class="ic sm" aria-hidden="true" focusable="false"><use href="#i-external-link"/></svg></span></a><a class="card chan" href="https://www.instagram.com/bawaslukabbdg/" target="_blank" rel="noopener noreferrer"><span class="ico"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-brand-instagram"/></svg></span><strong>Instagram</strong><small>Publikasi dan informasi terbaru.</small><span class="go">Buka Instagram<svg class="ic sm" aria-hidden="true" focusable="false"><use href="#i-external-link"/></svg></span></a><a class="card chan" href="https://ppid-bandungkab.bawaslu.go.id" target="_blank" rel="noopener noreferrer"><span class="ico"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-building"/></svg></span><strong>PPID Kabupaten Bandung</strong><small>Portal PPID tingkat kabupaten.</small><span class="go">Buka PPID<svg class="ic sm" aria-hidden="true" focusable="false"><use href="#i-external-link"/></svg></span></a><a class="card chan" href="https://ppid-jabar.bawaslu.go.id/" target="_blank" rel="noopener noreferrer"><span class="ico"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-map-2"/></svg></span><strong>PPID Provinsi Jawa Barat</strong><small>Layanan informasi tingkat provinsi.</small><span class="go">Buka PPID<svg class="ic sm" aria-hidden="true" focusable="false"><use href="#i-external-link"/></svg></span></a><a class="card chan" href="https://eppid.bawaslu.go.id/" target="_blank" rel="noopener noreferrer"><span class="ico"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-building-bank"/></svg></span><strong>PPID Bawaslu RI</strong><small>Layanan informasi tingkat nasional.</small><span class="go">Buka PPID<svg class="ic sm" aria-hidden="true" focusable="false"><use href="#i-external-link"/></svg></span></a><a class="card chan" href="https://jdih.bawaslu.go.id" target="_blank" rel="noopener noreferrer"><span class="ico"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-scale"/></svg></span><strong>JDIH Bawaslu</strong><small>Peraturan dan dokumen hukum.</small><span class="go">Buka JDIH<svg class="ic sm" aria-hidden="true" focusable="false"><use href="#i-external-link"/></svg></span></a></div>
+    </div>
+  </section>
+</main>
+
+
+  <section class="survey-section" aria-labelledby="survey-title">
+    <div class="survey-panel">
+      <div class="survey-copy">
+        <div class="survey-eyebrow"><span class="survey-eyebrow-line"></span> PARTISIPASI MASYARAKAT</div>
+        <h2 id="survey-title">Suara Anda, Perbaikan <span>Layanan Kami</span></h2>
+        <p class="survey-description">
+          Bantu kami meningkatkan kualitas pelayanan informasi publik dan mengembangkan SiLani
+          melalui penilaian serta saran Anda. Pengisian singkat dan tidak memerlukan identitas pribadi.
+        </p>
+
+        <div class="survey-benefits" aria-label="Informasi survei">
+          <div class="survey-benefit">
+            <span class="survey-benefit-icon" aria-hidden="true">◷</span>
+            <span><small>Estimasi pengisian</small><strong>3–5 menit</strong></span>
+          </div>
+          <div class="survey-benefit">
+            <span class="survey-benefit-icon" aria-hidden="true">✓</span>
+            <span><small>Privasi responden</small><strong>Tanpa identitas pribadi</strong></span>
+          </div>
+          <div class="survey-benefit">
+            <span class="survey-benefit-icon" aria-hidden="true">▥</span>
+            <span><small>Tujuan</small><strong>Layanan lebih baik</strong></span>
+          </div>
+        </div>
+
+        <a class="btn survey-button" id="surveyLink"
+           href="https://docs.google.com/forms/d/e/1FAIpQLSeKS85GCZxb2eptfXGz6tHEKmWDMq-11Tqvwq94D08Kd5IoQ/viewform"
+           target="_blank" rel="noopener noreferrer">
+          <span class="survey-button-icon" aria-hidden="true">▤</span>
+          <span>Isi Survei Kepuasan</span>
+          <span class="survey-arrow" aria-hidden="true">→</span>
+        </a>
+        <p class="survey-note">Masukan Anda menjadi bahan evaluasi dan peningkatan layanan SiLani.</p>
+      </div>
+
+      <div class="survey-visual" aria-hidden="true">
+        <div class="survey-visual-orbit"></div>
+        <div class="survey-dot-pattern"></div>
+        <img src="maskot-survei-silani.png"
+             alt=""
+             class="survey-mascot"
+             loading="lazy">
+        <div class="survey-sticker">
+          <span class="survey-sticker-stars">★★★★★</span>
+          <strong>Masukan Anda<br> sangat berarti</strong>
+          <span class="survey-heart">♥</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
 <footer class="site-footer">
-<div class="foot">
-<div><strong class="foot-brand">SiLani</strong><span>Sistem Layanan Informasi<br/>Bawaslu Kabupaten Bandung</span></div>
-<p>SiLani adalah halaman akses menuju layanan resmi PPID, bukan sistem PPID baru. Permohonan dan keberatan tetap diproses melalui kanal resmi yang ditautkan.</p>
-</div>
+  <div class="foot">
+    <div><strong class="foot-brand">SiLani</strong><span>Sistem Layanan Informasi<br>Bawaslu Kabupaten Bandung</span></div>
+    <p>SiLani adalah halaman akses menuju layanan resmi PPID, bukan sistem PPID baru. Permohonan dan keberatan tetap diproses melalui kanal resmi yang ditautkan.</p>
+  </div>
 </footer>
-<audio id="mars" loop="" preload="metadata"><source src="MARS%20PENGAWAS%20PEMILU%20(1).mp3" type="audio/mpeg"/></audio>
+<audio id="mars" preload="metadata" loop><source src="MARS%20PENGAWAS%20PEMILU%20(1).mp3" type="audio/mpeg"></audio>
 <script src="silani.js"></script>
 </body>
 </html>
