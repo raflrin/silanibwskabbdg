@@ -272,11 +272,10 @@ function configureSurveyLink() {
 
     var page = url.pathname.split('/').pop().toLowerCase();
 
-    if (
-      !['index.html', 'panduan.html', 'faq.html'].includes(page)
-    ) {
-      return;
-    }
+    // FAQ harus dimuat secara normal agar CSS halaman diterapkan sejak awal.
+    if (page === 'faq.html') return;
+
+    if (!['index.html', 'panduan.html'].includes(page)) return;
 
     event.preventDefault();
 
