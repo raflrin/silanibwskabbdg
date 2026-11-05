@@ -1,3 +1,4 @@
+
 var SURVEY_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSeKS85GCZxb2eptfXGz6tHEKmWDMq-11Tqvwq94D08Kd5Io9Q/viewform';
 
 function configureSurveyLink() {
@@ -105,11 +106,10 @@ function configureSurveyLink() {
     apply();
   }
 
-  // Sinkronisasi CSS dari halaman yang akan dibuka.
+  // Sinkronisasi CSS halaman tujuan.
   function syncPageStyles(parsed, pageUrl) {
     var currentHead = document.head;
 
-    // Sinkronisasi file CSS eksternal.
     var targetLinks = Array.from(
       parsed.head.querySelectorAll('link[rel~="stylesheet"]')
     );
@@ -140,7 +140,6 @@ function configureSurveyLink() {
       }
     });
 
-    // Sinkronisasi style inline, termasuk CSS khusus FAQ.
     Array.from(parsed.head.querySelectorAll('style')).forEach(
       function (targetStyle) {
         var styleId = targetStyle.id;
@@ -177,7 +176,7 @@ function configureSurveyLink() {
     paint(audio && !audio.paused);
   }
 
-  // Navigasi antarhalaman tanpa reload browser.
+  // Navigasi tanpa memuat ulang browser.
   async function navigate(url, push) {
     try {
       var response = await fetch(url);
@@ -197,21 +196,18 @@ function configureSurveyLink() {
         throw new Error('Elemen audio tidak ditemukan');
       }
 
-      // Bagian perbaikan utama:
-      // CSS halaman tujuan dimuat sebelum body diganti.
+      // Muat CSS halaman tujuan sebelum mengganti konten.
       syncPageStyles(parsed, url);
 
-      // Pertahankan elemen audio yang sedang berjalan.
+      // Pertahankan audio yang sedang berjalan.
       var savedAudio = audio;
 
-      // Hapus konten halaman lama kecuali elemen audio.
       Array.from(document.body.childNodes).forEach(function (node) {
         if (node !== savedAudio) {
           document.body.removeChild(node);
         }
       });
 
-      // Masukkan konten halaman tujuan.
       Array.from(parsed.body.childNodes).forEach(function (node) {
         if (node.nodeType === 8) return;
 
@@ -244,13 +240,11 @@ function configureSurveyLink() {
 
     } catch (error) {
       console.error('Navigasi SiLani:', error);
-
-      // Jika navigasi dinamis gagal, gunakan navigasi normal.
       location.href = url;
     }
   }
 
-  // Menangani klik menu navigasi.
+  // Navigasi menu Beranda, Panduan, dan FAQ.
   document.addEventListener('click', function (event) {
     var link = event.target.closest('a[href]');
 
@@ -272,22 +266,20 @@ function configureSurveyLink() {
 
     var page = url.pathname.split('/').pop().toLowerCase();
 
-    // FAQ harus dimuat secara normal agar CSS halaman diterapkan sejak awal.
-    if (page === 'faq.html') return;
-
-    if (!['index.html', 'panduan.html'].includes(page)) return;
+    // Ketiga halaman menggunakan navigasi internal.
+    if (!['index.html', 'panduan.html', 'faq.html'].includes(page)) return;
 
     event.preventDefault();
 
     navigate(url.href, true);
   });
 
-  // Menangani tombol Back dan Forward browser.
+  // Tombol Back dan Forward.
   window.addEventListener('popstate', function () {
     navigate(location.href, false);
   });
 
-  // Event audio dipasang satu kali.
+  // Pantau status audio.
   if (audio) {
     audio.addEventListener('play', function () {
       paint(true);
@@ -298,7 +290,6 @@ function configureSurveyLink() {
     });
   }
 
-  // Inisialisasi halaman pertama.
   initPage();
 
 })();
