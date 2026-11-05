@@ -6,7 +6,7 @@
     root.dataset.initialized='1';
     const ctx=root.getContext('2d'); if(!ctx) return;
     const $=id=>document.getElementById(id);
-    const ui={score:$('wwr-score'),distance:$('wwr-distance'),coins:$('wwr-coins'),speed:$('wwr-speed'),best:$('wwr-best'),bestDistance:$('wwr-best-distance'),record:$('wwr-record'),overlay:$('wwr-overlay'),title:$('wwr-overlay-title'),copy:$('wwr-overlay-copy'),start:$('wwr-start'),pause:$('wwr-pause'),jump:$('wwr-jump'),slide:$('wwr-slide')};
+    const ui={score:$('wwr-score'),distance:$('wwr-distance'),coins:$('wwr-coins'),speed:$('wwr-speed'),best:$('wwr-best'),bestDistance:$('wwr-best-distance'),record:$('wwr-record'),overlay:$('wwr-overlay'),title:$('wwr-overlay-title'),copy:$('wwr-overlay-copy'),start:$('wwr-start'),pause:$('wwr-pause'),jump:$('wwr-jump'),slide:$('wwr-slide'),fullscreen:$('wwr-fullscreen'),fullscreenLabel:$('wwr-fullscreen-label'),card:document.querySelector('.wwr-game-card')};
     const BEST_KEY='silani_wwr_best_v1', DIST_KEY='silani_wwr_distance_v1';
     let best=Number(localStorage.getItem(BEST_KEY)||0),bestDistance=Number(localStorage.getItem(DIST_KEY)||0);
     ui.best.textContent=best.toLocaleString('id-ID');ui.record.textContent=best.toLocaleString('id-ID');ui.bestDistance.textContent=bestDistance+' m';
@@ -20,8 +20,17 @@
     function pause(){if(mode==='running'){mode='paused';cancelAnimationFrame(raf);ui.title.textContent='Permainan dijeda';ui.copy.textContent='Istirahat sebentar. Lanjutkan saat siap.';ui.start.textContent='Lanjutkan';ui.overlay.hidden=false;ui.pause.textContent='Lanjut';}else if(mode==='paused'){mode='running';ui.overlay.hidden=true;ui.pause.textContent='Jeda';last=performance.now();raf=requestAnimationFrame(loop);}}
     function jump(){if(mode!=='running')return;if(!player.jumping&&!player.sliding){player.vy=-720;player.jumping=true;}}
     function slide(){if(mode!=='running')return;if(player.jumping){player.vy=Math.max(player.vy,80);return;}player.sliding=true;player.slideUntil=elapsed+.62;}
-    function key(e){if(['Space','ArrowUp','ArrowDown','KeyW','KeyS','KeyP'].includes(e.code))e.preventDefault();if(e.code==='Space'||e.code==='ArrowUp'||e.code==='KeyW')jump();if(e.code==='ArrowDown'||e.code==='KeyS')slide();if(e.code==='KeyP'||e.code==='Escape')pause();}
+    function key(e){if(['Space','ArrowUp','ArrowDown','KeyW','KeyS','KeyP'].includes(e.code))e.preventDefault();if(e.code==='Space'||e.code==='ArrowUp'||e.code==='KeyW')jump();if(e.code==='ArrowDown'||e.code==='KeyS')slide();if(e.code==='KeyP')pause();}
     window.addEventListener('keydown',key);ui.start.addEventListener('click',()=>{if(mode==='paused'){pause();return;}start();});ui.pause.addEventListener('click',pause);ui.jump.addEventListener('pointerdown',e=>{e.preventDefault();jump();});ui.slide.addEventListener('pointerdown',e=>{e.preventDefault();slide();});
+    function syncFullscreenButton(){const active=!!(document.fullscreenElement||document.webkitFullscreenElement);if(ui.fullscreen){ui.fullscreenLabel.textContent=active?'Keluar layar penuh':'Layar penuh';ui.fullscreen.setAttribute('aria-label',active?'Keluar dari layar penuh':'Aktifkan layar penuh');ui.fullscreen.title=active?'Keluar layar penuh':'Layar penuh';}}
+    async function toggleFullscreen(){const target=ui.card;if(!target)return;try{if(document.fullscreenElement||document.webkitFullscreenElement){if(document.exitFullscreen)await document.exitFullscreen();else if(document.webkitExitFullscreen)document.webkitExitFullscreen();}
+      else if(target.requestFullscreen){await target.requestFullscreen();}
+      else if(target.webkitRequestFullscreen){target.webkitRequestFullscreen();}
+      else {ui.copy.textContent='Browser ini belum mendukung mode layar penuh. Permainan tetap dapat dimainkan pada tampilan normal.';ui.overlay.hidden=false;return;}
+      if(window.matchMedia('(max-width: 760px)').matches&&screen.orientation&&screen.orientation.lock){try{await screen.orientation.lock('landscape');}catch(_){/* Lock orientation is optional and browser-dependent. */}}
+    }catch(err){ui.copy.textContent='Mode layar penuh tidak dapat diaktifkan. Coba gunakan tombol fullscreen pada browser atau lanjutkan dalam tampilan normal.';ui.overlay.hidden=false;}syncFullscreenButton();}
+    if(ui.fullscreen)ui.fullscreen.addEventListener('click',toggleFullscreen);
+    document.addEventListener('fullscreenchange',syncFullscreenButton);document.addEventListener('webkitfullscreenchange',syncFullscreenButton);
     function rounded(x,y,w,h,r,color){ctx.fillStyle=color;ctx.beginPath();ctx.roundRect(x,y,w,h,r);ctx.fill();}
     function drawBackground(dt){const sky=ctx.createLinearGradient(0,0,0,H);sky.addColorStop(0,'#9de0ef');sky.addColorStop(1,'#e6f7dc');ctx.fillStyle=sky;ctx.fillRect(0,0,W,H);
       ctx.fillStyle='#fff7c8';ctx.beginPath();ctx.arc(800,76,38,0,Math.PI*2);ctx.fill();
@@ -58,7 +67,7 @@
     // Render a still scene while waiting for the first run.
     function preview(){ctx.clearRect(0,0,W,H);drawBackground(0);drawCharacter(wasra,player.x,ground-91,68,94,0,false);drawCharacter(wasri,player.x+48,ground-86,64,89,1,false);drawObstacle({x:610,y:ground,type:'crate'});drawObstacle({x:790,y:ground,type:'cone'});}
     preview();
-    window.destroyWasraWasriRun=function(){cancelAnimationFrame(raf);window.removeEventListener('keydown',key);root.dataset.initialized='0';};
+    window.destroyWasraWasriRun=function(){cancelAnimationFrame(raf);window.removeEventListener('keydown',key);document.removeEventListener('fullscreenchange',syncFullscreenButton);document.removeEventListener('webkitfullscreenchange',syncFullscreenButton);root.dataset.initialized='0';};
   }
   window.initWasraWasriRun=initWasraWasriRun;
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initWasraWasriRun,{once:true});else initWasraWasriRun();
