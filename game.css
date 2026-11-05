@@ -279,3 +279,15 @@ body.wwr-lock-scroll{overflow:hidden!important;overscroll-behavior:none}
   .wwr-game-card:not(.wwr-mobile-fullscreen) .wwr-overlay-panel p { margin-bottom: 4px !important; font-size: .72rem !important; }
   .wwr-game-card:not(.wwr-mobile-fullscreen) .wwr-overlay-panel .wwr-primary { min-height: 42px !important; padding: 9px 12px !important; }
 }
+
+
+/* FINAL FIX: a hidden overlay must stay hidden even when mobile layout rules use !important. */
+.wwr-game-card:not(.wwr-mobile-fullscreen) .wwr-overlay[hidden],
+.wwr-game-card:not(.wwr-mobile-fullscreen) .wwr-overlay.is-hidden,
+.wwr-game-card.wwr-mobile-fullscreen .wwr-overlay[hidden],
+.wwr-game-card.wwr-mobile-fullscreen .wwr-overlay.is-hidden {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
