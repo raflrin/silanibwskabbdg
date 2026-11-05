@@ -15,13 +15,35 @@
 <div class="chess-layout"><section class="chess-board-card">
 <div class="board-top"><div><span class="board-kicker">PAPAN CATUR</span><h2>Putih melawan komputer</h2></div><span class="turn-indicator" id="turn-indicator">Giliran Putih</span></div>
 <div class="board-wrap"><div class="rank-labels" aria-hidden="true"><span>8</span><span>7</span><span>6</span><span>5</span><span>4</span><span>3</span><span>2</span><span>1</span></div><div class="chess-board" id="chess-board" role="grid" aria-label="Papan catur"></div><div class="file-labels" aria-hidden="true"><span>a</span><span>b</span><span>c</span><span>d</span><span>e</span><span>f</span><span>g</span><span>h</span></div></div>
-<div class="board-actions"><button type="button" id="new-game" class="chess-primary">Permainan baru</button><button type="button" id="undo-move" class="chess-secondary">Urungkan</button><button type="button" id="flip-board" class="chess-secondary">Putar papan</button><button type="button" id="chess-fullscreen" class="chess-secondary chess-fullscreen-btn">⛶ Layar penuh</button></div>
+<div class="board-actions"><button type="button" id="new-game" class="chess-primary">Permainan baru</button><button type="button" id="undo-move" class="chess-secondary">Urungkan</button><button type="button" id="flip-board" class="chess-secondary">Putar papan</button></div>
 <p class="board-help">Pilih bidak putih, lalu pilih kotak tujuan yang ditandai. Promosi pion otomatis menjadi ratu.</p>
 </section>
 <aside class="chess-side"><section class="chess-panel"><span class="board-kicker">PENGATURAN</span><label for="difficulty">Tingkat kesulitan</label><select id="difficulty"><option value="1">Mudah</option><option value="2" selected>Menengah</option><option value="3">Sulit</option></select><div class="status-box" aria-live="polite"><span>Status permainan</span><strong id="game-status">Giliran Anda. Silakan melangkah.</strong></div><div class="captured"><div><span>Bidak hitam tertangkap</span><strong id="captured-black">—</strong></div><div><span>Bidak putih tertangkap</span><strong id="captured-white">—</strong></div></div></section>
 <section class="chess-panel chess-tips"><h3>Petunjuk bermain</h3><ul><li>Anda bermain sebagai bidak putih dan selalu melangkah lebih dahulu.</li><li>Komputer akan merespons setelah Anda bergerak.</li><li>Gunakan tombol <b>Urungkan</b> untuk membatalkan satu giliran Anda beserta respons komputer.</li><li>Jika raja terancam, permainan akan menampilkan status skak.</li></ul></section></aside></div>
 </div></main>
-<footer class="site-footer"><div class="foot"><div><img class="foot-brand-img" src="silani-logo-clean.png" alt="SiLani"><span>Bawaslu Kabupaten Bandung</span></div><p>SiLani adalah halaman akses menuju layanan resmi PPID, bukan sistem PPID baru.</p></div></footer>
+<footer class="site-footer silani-footer">
+  <div class="footer-main">
+    <section class="footer-brand-block" aria-label="Tentang SiLani">
+      <a class="footer-logo-link" href="index.html" aria-label="SiLani - Beranda"><img src="silani-logo-clean.png" alt="SiLani — Sistem Layanan Informasi"></a>
+      <p class="footer-tagline">Akses informasi publik yang lebih mudah, jelas, dan terarah.</p>
+      <span class="footer-unit">Bawaslu Kabupaten Bandung</span>
+    </section>
+    <nav class="footer-links" aria-label="Tautan cepat"><h2>Tautan cepat</h2>
+      <a href="index.html">Beranda</a><a href="panduan.html">Panduan layanan</a><a href="faq.html">Pertanyaan umum (FAQ)</a><a href="game.html">Ruang bermain SiLani</a>
+    </nav>
+    <section class="footer-contact"><h2>Hubungi PPID</h2>
+      <a href="https://wa.me/6281297786606" target="_blank" rel="noopener noreferrer">WhatsApp: 0812-9778-6606</a>
+      <a href="mailto:ppid.bawaslukabbdg@gmail.com">ppid.bawaslukabbdg@gmail.com</a>
+      <p>Senin–Jumat, 09.00–15.00 WIB</p>
+      <a href="https://ppid-bandungkab.bawaslu.go.id" target="_blank" rel="noopener noreferrer">Portal resmi PPID ↗</a>
+    </section>
+    <section class="footer-address"><h2>Alamat kantor</h2>
+      <p>Jl. Gading Tutuka No. 1, Desa Cingcin, Kecamatan Soreang, Kabupaten Bandung.</p>
+      <a href="https://www.bawaslu.go.id" target="_blank" rel="noopener noreferrer">Situs resmi Bawaslu ↗</a>
+    </section>
+  </div>
+  <div class="footer-bottom"><p>© 2026 Bawaslu Kabupaten Bandung · SiLani</p><p>SiLani merupakan halaman akses menuju layanan resmi PPID, bukan sistem PPID baru. Permohonan dan keberatan tetap diproses melalui kanal resmi yang ditautkan.</p></div>
+</footer>
 <audio id="mars" preload="metadata" loop><source src="MARS%20PENGAWAS%20PEMILU%20(1).mp3" type="audio/mpeg"></audio>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js" defer></script><script id="silani-chess-script" src="chess.js?v=20261106-fullscreen" defer></script><script src="silani.js?v=20261106-audio-fullscreen" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js" defer></script><script src="chess.js?v=1.0.0" defer></script><script src="silani.js?v=20261106-games-menu" defer></script>
 </body></html>

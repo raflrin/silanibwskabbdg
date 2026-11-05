@@ -692,3 +692,22 @@ details[open]>summary .chev{transform:rotate(180deg)}
     max-width:255px !important;
   }
 }
+
+
+/* SiLani richer responsive footer */
+.silani-footer{margin-top:52px;background:linear-gradient(135deg,#351017 0%,#4c151d 58%,#271017 100%);color:#f8eeea;border-top:4px solid #d4ad62}
+.footer-main{max-width:1380px;margin:0 auto;padding:42px clamp(18px,5vw,72px) 34px;display:grid;grid-template-columns:1.35fr 1fr 1.25fr 1.25fr;gap:34px}
+.footer-brand-block{display:flex;flex-direction:column;align-items:flex-start;gap:13px}
+.footer-logo-link{display:inline-flex;max-width:210px;align-items:center}
+.footer-logo-link img{display:block;width:100%;height:auto;max-height:100px;object-fit:contain;object-position:left center}
+.footer-tagline{max-width:260px;margin:0;color:#e7d3cf;font-size:14px;line-height:1.65}
+.footer-unit{color:#e7c77e;font-size:13px;font-weight:800;letter-spacing:.04em}
+.footer-main h2{margin:4px 0 15px;color:#f2ce83;font:800 14px/1.3 var(--sans);letter-spacing:.09em;text-transform:uppercase}
+.footer-links,.footer-contact,.footer-address{display:flex;flex-direction:column;align-items:flex-start;gap:10px;font-size:14px;line-height:1.6}
+.footer-links a,.footer-contact a,.footer-address a{color:#f7e9e5;text-decoration:none;text-underline-offset:4px;overflow-wrap:anywhere}
+.footer-links a:hover,.footer-contact a:hover,.footer-address a:hover{text-decoration:underline;color:#f2ce83}
+.footer-contact p,.footer-address p{margin:0;color:#e4d0cc;line-height:1.65}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.16);max-width:1380px;margin:0 auto;padding:16px clamp(18px,5vw,72px) 22px;display:flex;justify-content:space-between;gap:22px;color:#d9c4c1;font-size:12px;line-height:1.6}
+.footer-bottom p{margin:0}.footer-bottom p:last-child{max-width:660px;text-align:right}
+@media(max-width:900px){.footer-main{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}.footer-bottom{flex-direction:column}.footer-bottom p:last-child{text-align:left}}
+@media(max-width:560px){.silani-footer{margin-top:34px}.footer-main{grid-template-columns:1fr;gap:24px;padding-top:30px;padding-bottom:26px}.footer-logo-link{max-width:185px}.footer-main h2{margin-bottom:8px}.footer-links,.footer-contact,.footer-address{gap:8px}.footer-bottom{padding-top:14px;padding-bottom:20px}}

@@ -1,8 +1,7 @@
 (function(){
 'use strict';
 const boardEl=document.getElementById('chess-board');
-if(!boardEl || boardEl.dataset.chessInitialized==='1')return;
-boardEl.dataset.chessInitialized='1';
+if(!boardEl)return;
 const $=id=>document.getElementById(id);
 const glyph={wk:'♔',wq:'♕',wr:'♖',wb:'♗',wn:'♘',wp:'♙',bk:'♚',bq:'♛',br:'♜',bb:'♝',bn:'♞',bp:'♟'};
 const value={p:100,n:320,b:335,r:500,q:900,k:20000};
@@ -98,28 +97,4 @@ $('undo-move').addEventListener('click',()=>{if(busy)return;if(game.history().le
 $('flip-board').addEventListener('click',()=>{flipped=!flipped;render();});
 $('difficulty').addEventListener('change',()=>{});
 init();
-
-// Immersive full-screen mode: native Fullscreen API on supported browsers,
-// CSS fixed-viewport fallback for iOS Safari and browsers without Fullscreen API.
-(function bindChessFullscreen(){
- const btn=document.getElementById('chess-fullscreen');
- const target=document.querySelector('.chess-layout');
- if(!btn||!target)return;
- const active=()=>!!(document.fullscreenElement===target || document.webkitFullscreenElement===target || target.classList.contains('chess-mobile-fullscreen'));
- const paint=()=>{btn.textContent=active()?'⛶ Keluar layar penuh':'⛶ Layar penuh';};
- async function toggle(){
-  if(target.classList.contains('chess-mobile-fullscreen')){target.classList.remove('chess-mobile-fullscreen');document.body.classList.remove('chess-lock-scroll');paint();return;}
-  if(document.fullscreenElement||document.webkitFullscreenElement){try{if(document.exitFullscreen)await document.exitFullscreen();else if(document.webkitExitFullscreen)document.webkitExitFullscreen();}catch(e){}paint();return;}
-  try{
-   if(target.requestFullscreen)await target.requestFullscreen();
-   else if(target.webkitRequestFullscreen)target.webkitRequestFullscreen();
-   else throw new Error('fallback');
-  }catch(e){target.classList.add('chess-mobile-fullscreen');document.body.classList.add('chess-lock-scroll');}
-  paint();
- }
- btn.addEventListener('click',toggle);
- document.addEventListener('fullscreenchange',paint);document.addEventListener('webkitfullscreenchange',paint);
- document.addEventListener('keydown',e=>{if(e.key==='Escape'&&target.classList.contains('chess-mobile-fullscreen')){target.classList.remove('chess-mobile-fullscreen');document.body.classList.remove('chess-lock-scroll');paint();}});
- paint();
-})();
 })();
