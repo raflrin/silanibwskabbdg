@@ -58,7 +58,14 @@
     function drawFallback(x,y,w,h,p){ctx.fillStyle='#26252a';ctx.beginPath();ctx.ellipse(x+w/2,y+h*.38,w*.35,h*.36,0,0,7);ctx.fill();ctx.fillStyle='#f0d9a0';ctx.beginPath();ctx.arc(x+w/2,y+h*.24,w*.27,0,7);ctx.fill();ctx.fillStyle='#ed8b22';ctx.beginPath();ctx.ellipse(x+w/2,y+h*.34,w*.13,h*.07,0,0,7);ctx.fill();ctx.fillStyle='#17243a';ctx.fillRect(x+w*.22,y+h*.68,w*.22,h*.25);ctx.fillRect(x+w*.55,y+h*.68,w*.22,h*.25);}
     function drawObstacle(o){if(o.type==='crate'){rounded(o.x,o.y-42,42,42,7,'#9b542d');ctx.strokeStyle='#f4c17a';ctx.lineWidth=4;ctx.strokeRect(o.x+7,o.y-35,28,28);ctx.beginPath();ctx.moveTo(o.x+7,o.y-35);ctx.lineTo(o.x+35,o.y-7);ctx.moveTo(o.x+35,o.y-35);ctx.lineTo(o.x+7,o.y-7);ctx.stroke();}else if(o.type==='cone'){ctx.fillStyle='#f27632';ctx.beginPath();ctx.moveTo(o.x+20,o.y-48);ctx.lineTo(o.x+42,o.y);ctx.lineTo(o.x-2,o.y);ctx.closePath();ctx.fill();ctx.fillStyle='#fff';ctx.fillRect(o.x+7,o.y-18,26,7);ctx.fillStyle='#fff';ctx.fillRect(o.x-5,o.y-2,50,7);}else{rounded(o.x,o.y-30,68,18,9,'#263b50');ctx.fillStyle='#f8d46b';ctx.fillRect(o.x+8,o.y-27,10,12);ctx.fillRect(o.x+48,o.y-27,10,12);}}
     function spawnObstacle(){let type=Math.random()<.42?'crate':Math.random()<.72?'cone':'bar';obstacles.push({x:W+30,y:ground,type,w:type==='bar'?68:42,h:50});}
-    function spawnCoins(){let n=3+Math.floor(Math.random()*3),y=ground-110-Math.random()*70;for(let i=0;i<n;i++)tokens.push({x:W+20+i*34,y:y-Math.sin(i/(n-1||1)*Math.PI)*20,r:10,taken:false});}
+    function spawnCoins(){
+      // Keep coin groups inside the normal jump arc so they are reachable.
+      let n=4+Math.floor(Math.random()*2),y=ground-145-Math.random()*24;
+      for(let i=0;i<n;i++){
+        const arc=Math.sin(i/(n-1||1)*Math.PI)*12;
+        tokens.push({x:W+20+i*34,y:y-arc,r:11,taken:false});
+      }
+    }
     function collide(a,b){return a.x<b.x+b.w&&a.x+a.w>b.x&&a.y<b.y+b.h&&a.y+a.h>b.y;}
     function loop(now){if(mode!=='running')return;let dt=Math.min((now-last)/1000,.035);last=now;elapsed+=dt;speed=Math.min(650,300+elapsed*7.4+distance*.07);distance+=speed*dt/13;score+=dt*(10+speed/90);groundOffset+=speed*dt;spawn-=dt;coinSpawn-=dt;if(spawn<=0){spawnObstacle();spawn=Math.max(.72,1.55-Math.min(.7,elapsed*.006))+Math.random()*.55;}if(coinSpawn<=0){spawnCoins();coinSpawn=2.5+Math.random()*2.1;}
       if(player.jumping){player.y+=player.vy*dt;player.vy+=1900*dt;if(player.y>=ground-91){player.y=ground-91;player.vy=0;player.jumping=false;}}
@@ -67,9 +74,26 @@
       const pbox={x:player.x+14,y:player.sliding?ground-48:player.y+18,w:player.sliding?102:75,h:player.sliding?38:70};
       for(const o of obstacles){let box={x:o.x+4,y:o.type==='bar'?ground-31:ground-45,w:o.type==='bar'?60:34,h:o.type==='bar'?20:42};if(collide(pbox,box)){end();break;}}
       if(mode!=='running')return;
-      for(const t of tokens){if(!t.taken&&Math.hypot((pbox.x+pbox.w/2)-t.x,(pbox.y+pbox.h/2)-t.y)<42){t.taken=true;coins++;score+=50;}}
+      // Coin pickup: use circle-vs-expanded-player-box instead of a single
+      // center-distance threshold. While airborne, add a modest magnet assist
+      // so adjacent coins in one jump sequence are not skipped by frame timing.
+      for(const t of tokens){
+        if(t.taken) continue;
+        const nearestX=Math.max(pbox.x,Math.min(t.x,pbox.x+pbox.w));
+        const nearestY=Math.max(pbox.y,Math.min(t.y,pbox.y+pbox.h));
+        const dx=t.x-nearestX, dy=t.y-nearestY;
+        const boxPickup=(dx*dx+dy*dy)<=((t.r+13)*(t.r+13));
+        const jumpMagnet=player.jumping && Math.abs(t.x-(pbox.x+pbox.w/2))<104 && Math.abs(t.y-(pbox.y+pbox.h/2))<96;
+        if(boxPickup||jumpMagnet){t.taken=true;coins++;score+=50;
+          for(let i=0;i<5;i++)particles.push({x:t.x,y:t.y,vx:(Math.random()-.5)*95,vy:(Math.random()-.8)*95,life:.32,maxLife:.32});
+        }
+      }
+      // Update short-lived pickup sparkles.
+      particles.forEach(p=>{p.x+=p.vx*dt;p.y+=p.vy*dt;p.vy+=180*dt;p.life-=dt;});
+      particles=particles.filter(p=>p.life>0);
       ctx.clearRect(0,0,W,H);drawBackground(dt);obstacles.forEach(drawObstacle);
       tokens.forEach(t=>{ctx.save();ctx.translate(t.x,t.y);ctx.fillStyle='#ffd54f';ctx.strokeStyle='#b97b1b';ctx.lineWidth=3;ctx.beginPath();ctx.arc(0,0,t.r,0,7);ctx.fill();ctx.stroke();ctx.fillStyle='#fff4bd';ctx.font='bold 13px sans-serif';ctx.textAlign='center';ctx.fillText('★',0,5);ctx.restore();});
+      particles.forEach(p=>{ctx.save();ctx.globalAlpha=Math.max(0,p.life/p.maxLife);ctx.fillStyle='#fff3a6';ctx.beginPath();ctx.arc(p.x,p.y,3,0,Math.PI*2);ctx.fill();ctx.restore();});
       let phase=elapsed*13;let y=player.y;drawCharacter(wasra,player.x,y-12,112,112,phase,player.sliding);drawCharacter(wasri,player.x+72,y-8,108,108,phase+1.2,player.sliding);
       // little trail sparkle
       ctx.fillStyle='#fff';for(let i=0;i<3;i++){let xx=player.x-12-((elapsed*80+i*17)%34);ctx.globalAlpha=.65-i*.16;ctx.beginPath();ctx.arc(xx,ground-18-i*9,3,0,7);ctx.fill();}ctx.globalAlpha=1;
