@@ -169,18 +169,41 @@ function configureSurveyLink() {
     );
   }
 
-  function initPage() {
-    bindMusic();
-    bindFaq();
-    configureSurveyLink();
-    if (document.getElementById('wwr-canvas')) {
-      if (typeof window.initWasraWasriRun === 'function') { window.initWasraWasriRun(); }
-      else if (!document.getElementById('wwr-game-script')) {
-        var gameScript = document.createElement('script');
-        gameScript.id = 'wwr-game-script';
-        gameScript.src = 'game.js?v=1.0.0';
-        document.body.appendChild(gameScript);
+  function loadScript(id, src) {
+    return new Promise(function (resolve, reject) {
+      var existing = document.getElementById(id);
+      if (existing && existing.dataset.loaded === '1') { resolve(); return; }
+      if (existing && existing.dataset.loading === '1') {
+        existing.addEventListener('load', resolve, { once: true });
+        existing.addEventListener('error', reject, { once: true });
+        return;
       }
+      var script = existing || document.createElement('script');
+      script.id = id; script.src = src; script.async = true; script.dataset.loading = '1';
+      script.onload = function () { script.dataset.loaded = '1'; script.dataset.loading = '0'; resolve(); };
+      script.onerror = function () { script.dataset.loading = '0'; reject(new Error('Gagal memuat ' + src)); };
+      if (!existing) document.body.appendChild(script);
+    });
+  }
+
+  function initPage() {
+    bindMusic(); bindFaq(); configureSurveyLink();
+    if (document.getElementById('wwr-canvas')) {
+      loadScript('wwr-game-script', 'game.js?v=20261106-audio-fullscreen')
+        .then(function () { if (typeof window.initWasraWasriRun === 'function') window.initWasraWasriRun(); })
+        .catch(function (err) { console.error(err); });
+    }
+    if (document.getElementById('chess-board')) {
+      var runChess = function () {
+        var script = document.createElement('script');
+        script.src = 'chess.js?v=20261106-fullscreen&instance=' + Date.now();
+        script.async = true;
+        document.body.appendChild(script);
+      };
+      if (typeof window.Chess !== 'undefined') runChess();
+      else loadScript('chess-library-script', 'https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js')
+        .then(runChess)
+        .catch(function (err) { var status = document.getElementById('game-status'); if (status) status.textContent = 'Catur gagal dimuat. Periksa koneksi internet lalu muat ulang halaman.'; console.error(err); });
     }
     paint(audio && !audio.paused);
   }
@@ -280,7 +303,7 @@ function configureSurveyLink() {
     var page = url.pathname.split('/').pop().toLowerCase();
 
     // Ketiga halaman menggunakan navigasi internal.
-    if (!['index.html', 'panduan.html', 'faq.html', 'game.html'].includes(page)) return;
+    if (!['index.html', 'panduan.html', 'faq.html', 'game.html', 'run.html', 'catur.html'].includes(page)) return;
 
     event.preventDefault();
 

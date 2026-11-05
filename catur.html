@@ -15,7 +15,7 @@
 <div class="chess-layout"><section class="chess-board-card">
 <div class="board-top"><div><span class="board-kicker">PAPAN CATUR</span><h2>Putih melawan komputer</h2></div><span class="turn-indicator" id="turn-indicator">Giliran Putih</span></div>
 <div class="board-wrap"><div class="rank-labels" aria-hidden="true"><span>8</span><span>7</span><span>6</span><span>5</span><span>4</span><span>3</span><span>2</span><span>1</span></div><div class="chess-board" id="chess-board" role="grid" aria-label="Papan catur"></div><div class="file-labels" aria-hidden="true"><span>a</span><span>b</span><span>c</span><span>d</span><span>e</span><span>f</span><span>g</span><span>h</span></div></div>
-<div class="board-actions"><button type="button" id="new-game" class="chess-primary">Permainan baru</button><button type="button" id="undo-move" class="chess-secondary">Urungkan</button><button type="button" id="flip-board" class="chess-secondary">Putar papan</button></div>
+<div class="board-actions"><button type="button" id="new-game" class="chess-primary">Permainan baru</button><button type="button" id="undo-move" class="chess-secondary">Urungkan</button><button type="button" id="flip-board" class="chess-secondary">Putar papan</button><button type="button" id="chess-fullscreen" class="chess-secondary chess-fullscreen-btn">⛶ Layar penuh</button></div>
 <p class="board-help">Pilih bidak putih, lalu pilih kotak tujuan yang ditandai. Promosi pion otomatis menjadi ratu.</p>
 </section>
 <aside class="chess-side"><section class="chess-panel"><span class="board-kicker">PENGATURAN</span><label for="difficulty">Tingkat kesulitan</label><select id="difficulty"><option value="1">Mudah</option><option value="2" selected>Menengah</option><option value="3">Sulit</option></select><div class="status-box" aria-live="polite"><span>Status permainan</span><strong id="game-status">Giliran Anda. Silakan melangkah.</strong></div><div class="captured"><div><span>Bidak hitam tertangkap</span><strong id="captured-black">—</strong></div><div><span>Bidak putih tertangkap</span><strong id="captured-white">—</strong></div></div></section>
@@ -23,5 +23,5 @@
 </div></main>
 <footer class="site-footer"><div class="foot"><div><img class="foot-brand-img" src="silani-logo-clean.png" alt="SiLani"><span>Bawaslu Kabupaten Bandung</span></div><p>SiLani adalah halaman akses menuju layanan resmi PPID, bukan sistem PPID baru.</p></div></footer>
 <audio id="mars" preload="metadata" loop><source src="MARS%20PENGAWAS%20PEMILU%20(1).mp3" type="audio/mpeg"></audio>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js" defer></script><script src="chess.js?v=1.0.0" defer></script><script src="silani.js?v=20261106-games-menu" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js" defer></script><script id="silani-chess-script" src="chess.js?v=20261106-fullscreen" defer></script><script src="silani.js?v=20261106-audio-fullscreen" defer></script>
 </body></html>
