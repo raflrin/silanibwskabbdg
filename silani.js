@@ -1,4 +1,5 @@
 var SURVEY_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSeKS85GCZxb2eptfXGz6tHEKmWDMq-11Tqvwq94D08Kd5Io9Q/viewform';
+
 function configureSurveyLink() {
   var link = document.getElementById('surveyLink');
   if (!link) return;
@@ -16,12 +17,14 @@ function configureSurveyLink() {
     link.textContent = 'Formulir segera tersedia';
   }
 }
+
 (function () {
   var audio = document.getElementById('mars');
 
   function paint(on) {
     var btn = document.getElementById('musicBtn');
     if (!btn) return;
+
     btn.setAttribute('aria-pressed', String(on));
     btn.setAttribute(
       'aria-label',
@@ -34,6 +37,7 @@ function configureSurveyLink() {
     if (!btn || !audio || btn.dataset.bound === '1') return;
 
     btn.dataset.bound = '1';
+
     btn.addEventListener('click', function () {
       if (audio.paused) {
         audio.play().catch(function () {
@@ -52,6 +56,7 @@ function configureSurveyLink() {
     if (!list || list.dataset.bound === '1') return;
 
     list.dataset.bound = '1';
+
     var items = Array.from(list.querySelectorAll('.q'));
     var chips = Array.from(document.querySelectorAll('.chip'));
     var input = document.getElementById('faqSearch');
@@ -66,10 +71,12 @@ function configureSurveyLink() {
         var matchCategory =
           category === 'all' ||
           item.getAttribute('data-cat') === category;
+
         var matchText =
           !term || item.textContent.toLowerCase().includes(term);
 
         item.hidden = !(matchCategory && matchText);
+
         if (!item.hidden) shown++;
       });
 
@@ -82,6 +89,7 @@ function configureSurveyLink() {
 
         chips.forEach(function (item) {
           var active = item === chip;
+
           item.classList.toggle('on', active);
           item.setAttribute('aria-pressed', String(active));
         });
@@ -90,44 +98,129 @@ function configureSurveyLink() {
       });
     });
 
-    if (input) input.addEventListener('input', apply);
+    if (input) {
+      input.addEventListener('input', apply);
+    }
+
     apply();
+  }
+
+  // Sinkronisasi CSS dari halaman yang akan dibuka.
+  function syncPageStyles(parsed, pageUrl) {
+    var currentHead = document.head;
+
+    // Sinkronisasi file CSS eksternal.
+    var targetLinks = Array.from(
+      parsed.head.querySelectorAll('link[rel~="stylesheet"]')
+    );
+
+    targetLinks.forEach(function (targetLink) {
+      var rawHref = targetLink.getAttribute('href');
+      if (!rawHref) return;
+
+      var absoluteHref = new URL(rawHref, pageUrl).href;
+
+      var exists = Array.from(
+        currentHead.querySelectorAll('link[rel~="stylesheet"]')
+      ).some(function (link) {
+        return link.href === absoluteHref;
+      });
+
+      if (!exists) {
+        var newLink = document.createElement('link');
+
+        Array.from(targetLink.attributes).forEach(function (attr) {
+          if (attr.name !== 'href') {
+            newLink.setAttribute(attr.name, attr.value);
+          }
+        });
+
+        newLink.href = absoluteHref;
+        currentHead.appendChild(newLink);
+      }
+    });
+
+    // Sinkronisasi style inline, termasuk CSS khusus FAQ.
+    Array.from(parsed.head.querySelectorAll('style')).forEach(
+      function (targetStyle) {
+        var styleId = targetStyle.id;
+
+        if (styleId) {
+          var existingStyle = document.getElementById(styleId);
+
+          if (existingStyle) {
+            existingStyle.textContent = targetStyle.textContent;
+          } else {
+            currentHead.appendChild(targetStyle.cloneNode(true));
+          }
+        } else {
+          var styleText = targetStyle.textContent;
+
+          var alreadyPresent = Array.from(
+            currentHead.querySelectorAll('style')
+          ).some(function (style) {
+            return !style.id && style.textContent === styleText;
+          });
+
+          if (!alreadyPresent) {
+            currentHead.appendChild(targetStyle.cloneNode(true));
+          }
+        }
+      }
+    );
   }
 
   function initPage() {
     bindMusic();
     bindFaq();
+    configureSurveyLink();
     paint(audio && !audio.paused);
   }
 
+  // Navigasi antarhalaman tanpa reload browser.
   async function navigate(url, push) {
     try {
       var response = await fetch(url);
-      if (!response.ok) throw new Error('Gagal memuat halaman');
+
+      if (!response.ok) {
+        throw new Error('Gagal memuat halaman');
+      }
 
       var html = await response.text();
-      var parsed = new DOMParser().parseFromString(html, 'text/html');
+
+      var parsed = new DOMParser().parseFromString(
+        html,
+        'text/html'
+      );
 
       if (!parsed.getElementById('mars')) {
         throw new Error('Elemen audio tidak ditemukan');
       }
 
-      // Simpan elemen audio yang sedang berjalan.
-      // Jangan menghapus atau memindahkan elemen ini.
+      // Bagian perbaikan utama:
+      // CSS halaman tujuan dimuat sebelum body diganti.
+      syncPageStyles(parsed, url);
+
+      // Pertahankan elemen audio yang sedang berjalan.
       var savedAudio = audio;
 
-      // Hapus konten lama selain audio.
+      // Hapus konten halaman lama kecuali elemen audio.
       Array.from(document.body.childNodes).forEach(function (node) {
         if (node !== savedAudio) {
           document.body.removeChild(node);
         }
       });
 
-      // Masukkan konten halaman baru sebelum audio.
+      // Masukkan konten halaman tujuan.
       Array.from(parsed.body.childNodes).forEach(function (node) {
         if (node.nodeType === 8) return;
-        if (node.nodeType === 1 &&
-            (node.id === 'mars' || node.tagName === 'SCRIPT')) return;
+
+        if (
+          node.nodeType === 1 &&
+          (node.id === 'mars' || node.tagName === 'SCRIPT')
+        ) {
+          return;
+        }
 
         document.body.insertBefore(
           document.importNode(node, true),
@@ -138,52 +231,75 @@ function configureSurveyLink() {
       document.title = parsed.title;
 
       if (push) {
-        history.pushState({ silani: true }, '', url);
+        history.pushState(
+          { silani: true },
+          '',
+          url
+        );
       }
 
       window.scrollTo(0, 0);
+
       initPage();
 
     } catch (error) {
       console.error('Navigasi SiLani:', error);
+
+      // Jika navigasi dinamis gagal, gunakan navigasi normal.
       location.href = url;
     }
   }
 
+  // Menangani klik menu navigasi.
   document.addEventListener('click', function (event) {
     var link = event.target.closest('a[href]');
-    if (!link || event.defaultPrevented ||
-        event.metaKey || event.ctrlKey ||
-        event.shiftKey || event.altKey ||
-        event.button !== 0) return;
+
+    if (
+      !link ||
+      event.defaultPrevented ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey ||
+      event.button !== 0
+    ) {
+      return;
+    }
 
     var url = new URL(link.href, location.href);
+
     if (url.origin !== location.origin) return;
 
     var page = url.pathname.split('/').pop().toLowerCase();
-    if (!['index.html', 'panduan.html', 'faq.html'].includes(page)) return;
+
+    if (
+      !['index.html', 'panduan.html', 'faq.html'].includes(page)
+    ) {
+      return;
+    }
 
     event.preventDefault();
+
     navigate(url.href, true);
   });
 
+  // Menangani tombol Back dan Forward browser.
   window.addEventListener('popstate', function () {
     navigate(location.href, false);
   });
 
+  // Event audio dipasang satu kali.
   if (audio) {
     audio.addEventListener('play', function () {
       paint(true);
     });
+
     audio.addEventListener('pause', function () {
       paint(false);
     });
   }
-function initPage() {
-  bindMusic();
-  bindFaq();
-  configureSurveyLink();
-  paint(audio && !audio.paused);
-}
-    initPage();
+
+  // Inisialisasi halaman pertama.
+  initPage();
+
 })();
