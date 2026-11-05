@@ -1,0 +1,16 @@
+/* Pilihan permainan SiLani */
+.games-main{padding-top:38px}.games-heading{text-align:center;margin:0 auto 28px;max-width:700px}.games-heading h2{font-family:Georgia,serif;color:#4c151d;font-size:clamp(1.8rem,4vw,2.6rem);margin:.3rem 0 .55rem}.games-heading p:last-child{color:#68717c;margin:0}
+.games-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+.game-choice{display:flex;flex-direction:column;overflow:hidden;text-decoration:none;color:inherit;background:#fff;border:1px solid #eadfe0;border-radius:22px;box-shadow:0 16px 40px #36101810;transition:transform .2s,box-shadow .2s}
+.game-choice:hover{transform:translateY(-4px);box-shadow:0 22px 50px #36101818}
+.choice-art{height:230px;display:grid;place-items:center;overflow:hidden;background:linear-gradient(135deg,#501b27,#9d6570 58%,#9eb4bc)}
+.run-choice .choice-art img{width:94%;height:94%;object-fit:contain;filter:drop-shadow(0 14px 14px #27101835)}
+.choice-content{padding:22px 24px 24px}.choice-tag{display:inline-block;padding:6px 10px;border-radius:99px;background:#f8eeeb;color:#922331;font-size:.68rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase}
+.choice-content h3{font-family:Georgia,serif;color:#4c151d;font-size:1.65rem;margin:12px 0 8px}.choice-content p{color:#65707b;line-height:1.65;margin:0 0 18px;min-height:78px}
+.choice-cta{display:flex;justify-content:space-between;align-items:center;border-top:1px solid #eee4e1;padding-top:15px;color:#9d1f2d;font-weight:900}.choice-cta b{font-size:1.4rem}
+.chess-art{position:relative;background:radial-gradient(circle at 50% 40%,#c69c5b,#79513c 48%,#382b2b);padding:25px}
+.chess-preview{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;width:min(78%,280px);transform:rotate(-8deg);filter:drop-shadow(0 15px 12px #160e0e55)}
+.chess-preview span{aspect-ratio:1;display:grid;place-items:center;background:#f3dfb9;color:#352c2c;font-size:clamp(2rem,5vw,3.5rem);border-radius:8px}.chess-preview span:nth-child(2n){background:#926b4e;color:#fff3df}
+.chess-glow{position:absolute;right:13%;bottom:6%;font-size:7rem;color:#fff0c8;text-shadow:0 8px 22px #21131180}
+.games-note{display:flex;gap:12px;align-items:center;margin-top:24px;padding:15px 18px;border-radius:12px;background:#fff9ef;border:1px solid #eadbc4;color:#685b4d}.games-note strong{color:#6e2028;white-space:nowrap}
+@media(max-width:760px){.games-grid{grid-template-columns:1fr}.choice-art{height:200px}.choice-content p{min-height:0}.games-note{align-items:flex-start;flex-direction:column;gap:4px}.games-main{padding-top:28px}}

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="id"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#4c151d"><title>Catur SiLani | Bawaslu Kabupaten Bandung</title>
+<link rel="icon" href="logo-bawaslu-bandung.png"><link rel="stylesheet" href="styles.css?v=20261101-logo-clean">
+<link rel="stylesheet" href="chess.css?v=1.0.0">
+</head><body>
+<a class="skip" href="#isi">Lewati ke isi</a><div class="topline"></div>
+<header class="site-header"><div class="bar"><a class="brand" href="index.html"><img src="logo-bawaslu-bandung.png" alt="Bawaslu Kabupaten Bandung"></a>
+<nav class="nav" aria-label="Navigasi utama"><a href="index.html"><span>Beranda</span></a><a href="panduan.html"><span>Panduan</span></a><a href="faq.html"><span>FAQ</span></a><a href="game.html" aria-current="page"><span>Game</span></a></nav>
+<button class="music" id="musicBtn" type="button" aria-pressed="false"><span class="music-label" id="musicLabel">Putar mars</span></button></div></header>
+<section class="page-hero chess-hero"><div class="hero-in"><div class="hero-text"><p class="eyebrow">SiLani · Tantangan strategi</p><h1>Catur SiLani</h1><p class="hero-copy">Susun strategi, baca langkah lawan, dan raih skakmat. Mainkan catur melawan komputer.</p></div><div class="chess-hero-piece" aria-hidden="true">♞</div></div></section>
+<main id="isi" class="chess-main"><div class="wrap">
+<p class="chess-back"><a href="game.html">← Kembali ke pilihan permainan</a></p>
+<div class="chess-layout"><section class="chess-board-card">
+<div class="board-top"><div><span class="board-kicker">PAPAN CATUR</span><h2>Putih melawan komputer</h2></div><span class="turn-indicator" id="turn-indicator">Giliran Putih</span></div>
+<div class="board-wrap"><div class="rank-labels" aria-hidden="true"><span>8</span><span>7</span><span>6</span><span>5</span><span>4</span><span>3</span><span>2</span><span>1</span></div><div class="chess-board" id="chess-board" role="grid" aria-label="Papan catur"></div><div class="file-labels" aria-hidden="true"><span>a</span><span>b</span><span>c</span><span>d</span><span>e</span><span>f</span><span>g</span><span>h</span></div></div>
+<div class="board-actions"><button type="button" id="new-game" class="chess-primary">Permainan baru</button><button type="button" id="undo-move" class="chess-secondary">Urungkan</button><button type="button" id="flip-board" class="chess-secondary">Putar papan</button></div>
+<p class="board-help">Pilih bidak putih, lalu pilih kotak tujuan yang ditandai. Promosi pion otomatis menjadi ratu.</p>
+</section>
+<aside class="chess-side"><section class="chess-panel"><span class="board-kicker">PENGATURAN</span><label for="difficulty">Tingkat kesulitan</label><select id="difficulty"><option value="1">Mudah</option><option value="2" selected>Menengah</option><option value="3">Sulit</option></select><div class="status-box" aria-live="polite"><span>Status permainan</span><strong id="game-status">Giliran Anda. Silakan melangkah.</strong></div><div class="captured"><div><span>Bidak hitam tertangkap</span><strong id="captured-black">—</strong></div><div><span>Bidak putih tertangkap</span><strong id="captured-white">—</strong></div></div></section>
+<section class="chess-panel chess-tips"><h3>Petunjuk bermain</h3><ul><li>Anda bermain sebagai bidak putih dan selalu melangkah lebih dahulu.</li><li>Komputer akan merespons setelah Anda bergerak.</li><li>Gunakan tombol <b>Urungkan</b> untuk membatalkan satu giliran Anda beserta respons komputer.</li><li>Jika raja terancam, permainan akan menampilkan status skak.</li></ul></section></aside></div>
+</div></main>
+<footer class="site-footer"><div class="foot"><div><img class="foot-brand-img" src="silani-logo-clean.png" alt="SiLani"><span>Bawaslu Kabupaten Bandung</span></div><p>SiLani adalah halaman akses menuju layanan resmi PPID, bukan sistem PPID baru.</p></div></footer>
+<audio id="mars" preload="metadata" loop><source src="MARS%20PENGAWAS%20PEMILU%20(1).mp3" type="audio/mpeg"></audio>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js" defer></script><script src="chess.js?v=1.0.0" defer></script><script src="silani.js?v=20261106-games-menu" defer></script>
+</body></html>

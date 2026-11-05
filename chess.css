@@ -1,0 +1,30 @@
+/* Catur SiLani */
+.chess-hero .hero-in{align-items:center}.chess-hero h1{font-size:clamp(2.4rem,5vw,4rem);color:#fff;margin:.3rem 0 .7rem;text-shadow:0 2px 18px #250b12a8}.chess-hero-piece{font-size:clamp(8rem,18vw,14rem);line-height:.8;color:#f7d88d;text-shadow:0 15px 30px #210b1260;padding-right:6vw}
+.chess-main{padding:28px 0 64px}.chess-back{margin:0 0 16px}.chess-back a{color:#8e1e2a;font-weight:800;text-decoration:none}
+.chess-layout{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(260px,.75fr);gap:20px;align-items:start}
+.chess-board-card,.chess-panel{background:#fff;border:1px solid #eadfe0;border-radius:22px;padding:20px;box-shadow:0 15px 40px #3610180d}
+.board-top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}.board-kicker{font-size:.68rem;font-weight:900;letter-spacing:.13em;color:#a27b45}.board-top h2{font-family:Georgia,serif;color:#4c151d;font-size:1.45rem;margin:5px 0 0}
+.turn-indicator{background:#f8eeeb;color:#8f1e2b;padding:8px 12px;border-radius:99px;font-size:.78rem;font-weight:800;white-space:nowrap}
+.board-wrap{width:min(100%,620px);margin:auto;display:grid;grid-template-columns:22px 1fr;grid-template-rows:1fr 22px;gap:4px}
+.rank-labels{display:flex;flex-direction:column;justify-content:space-around;text-align:center;color:#7b6b62;font-weight:700;font-size:.75rem}
+.file-labels{grid-column:2;display:grid;grid-template-columns:repeat(8,1fr);text-align:center;color:#7b6b62;font-weight:700;font-size:.75rem}
+.chess-board{width:100%;aspect-ratio:1;display:grid;grid-template-columns:repeat(8,1fr);grid-template-rows:repeat(8,1fr);border:5px solid #503b31;border-radius:5px;overflow:hidden;box-shadow:0 8px 22px #271a1720}
+.square{border:0;border-radius:0;display:grid;place-items:center;position:relative;cursor:pointer;padding:0;min-width:0;min-height:0}
+.square.light{background:#f1dfbd}.square.dark{background:#9b704f}
+.square .piece{font-family:"Arial Unicode MS", "DejaVu Sans",serif;font-size:clamp(1.55rem,4.4vw,3.2rem);line-height:1;z-index:2;user-select:none}
+.white-piece{color:#fffdf4;text-shadow:0 1px 1px #47352b,1px 2px 2px #47352b,-1px -1px 0 #47352b}
+.black-piece{color:#29252a;text-shadow:0 1px 1px #fff5e2}
+.square.selected{box-shadow:inset 0 0 0 4px #e3b84e}
+.square.last-move:after{content:"";position:absolute;inset:0;background:#e9cf5680}
+.square.move-target:before{content:"";width:23%;height:23%;border-radius:50%;background:#3c6e4b99;position:absolute}
+.square.capture-target:before{content:"";position:absolute;inset:4%;border:5px solid #9d2533a8;border-radius:50%}
+.board-actions{display:flex;gap:9px;flex-wrap:wrap;margin:18px 0 8px}.board-actions button{border:0;border-radius:11px;padding:11px 15px;font:inherit;font-size:.88rem;font-weight:800;cursor:pointer}
+.chess-primary{background:#a51e2c;color:white}.chess-secondary{background:#f4e9e6;color:#67202a}
+.board-help{font-size:.83rem;color:#68717c;line-height:1.5;margin:10px 0 0}
+.chess-side{display:grid;gap:14px}.chess-panel label{display:block;margin:16px 0 7px;font-weight:800;color:#4d3032}.chess-panel select{width:100%;border:1px solid #e3d6d2;border-radius:10px;padding:12px;background:#fff;font:inherit;color:#392b2b}
+.status-box{margin-top:16px;background:#faf4f0;border-left:4px solid #d4a84d;border-radius:10px;padding:13px}.status-box span,.captured span{display:block;color:#777;font-size:.75rem;font-weight:700;margin-bottom:5px}.status-box strong{color:#4c151d;line-height:1.4}
+.captured{display:grid;gap:12px;margin-top:16px}.captured>div{background:#faf8f5;border-radius:10px;padding:10px}.captured strong{font-size:1.2rem;letter-spacing:2px;overflow-wrap:anywhere}
+.chess-tips h3{margin:0 0 10px;color:#4c151d;font-family:Georgia,serif}.chess-tips ul{padding-left:19px;margin:0;color:#646b75;font-size:.88rem;line-height:1.7}
+.game-back{margin:0 0 16px}.game-back a{color:#8e1e2a;font-weight:800;text-decoration:none}
+@media(max-width:800px){.chess-layout{grid-template-columns:1fr}.chess-board-card{padding:12px}.board-wrap{width:min(100%,560px)}.chess-hero-piece{padding-right:0}.board-top h2{font-size:1.15rem}}
+@media(max-width:420px){.chess-hero .hero-in{min-height:260px}.chess-hero-piece{font-size:6rem}.board-wrap{grid-template-columns:17px 1fr}.chess-board{border-width:3px}.square .piece{font-size:clamp(1.3rem,8vw,2rem)}.square.capture-target:before{border-width:3px}.chess-board-card{padding:9px}.board-actions button{flex:1;padding:10px 8px;font-size:.8rem}}

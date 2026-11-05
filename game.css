@@ -59,3 +59,5 @@ body.wwr-lock-scroll{overflow:hidden!important;overscroll-behavior:none}
 @media(max-width:760px) and (orientation:portrait){
   .wwr-game-card.wwr-mobile-fullscreen .wwr-stage canvas{object-fit:contain}
 }
+
+.game-back{margin:0 0 16px}.game-back a{color:#8e1e2a;font-weight:800;text-decoration:none}

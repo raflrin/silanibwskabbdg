@@ -4,20 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#4c151d">
-<title>SiLani | Sistem Layanan Informasi Bawaslu Kabupaten Bandung</title>
-<meta name="description" content="SiLani: satu pintu akses layanan informasi publik Bawaslu Kabupaten Bandung. Ajukan permohonan, telusuri daftar informasi, cek status, dan hubungi petugas.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="SiLani | Sistem Layanan Informasi Bawaslu Kabupaten Bandung">
-<meta property="og:description" content="SiLani: satu pintu akses layanan informasi publik Bawaslu Kabupaten Bandung. Ajukan permohonan, telusuri daftar informasi, cek status, dan hubungi petugas.">
-<meta property="og:image" content="gedung-bawaslu-bandung.jpeg">
+<title>Ruang Bermain SiLani | Bawaslu Kabupaten Bandung</title>
+<meta name="description" content="Pilih permainan edukatif SiLani: WASRA & WASRI RUN atau Catur SiLani.">
 <link rel="icon" href="logo-bawaslu-bandung.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css?v=20261101-logo-clean">
-<link rel="stylesheet" href="game.css?v=1.4.0">
+<link rel="stylesheet" href="game.css?v=20261106-games-menu">
+<link rel="stylesheet" href="games-menu.css?v=1.0.0">
 </head>
-<body>
 <body>
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
 <symbol id="i-file-text" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4" /> <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" /> <path d="M9 9l1 0" /> <path d="M9 13l6 0" /> <path d="M9 17l6 0" /></symbol>
@@ -55,37 +51,32 @@
 <symbol id="i-file-upload" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4" /> <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" /> <path d="M12 11v6" /> <path d="M9.5 13.5l2.5 -2.5l2.5 2.5" /></symbol>
 </svg>
 <a class="skip" href="#isi">Lewati ke isi</a><div class="topline"></div>
-<header class="site-header">
-  <div class="bar">
-    <a class="brand" href="index.html" aria-label="SiLani, beranda"><img src="logo-bawaslu-bandung.png" alt="Bawaslu Kabupaten Bandung"></a>
-    <nav class="nav" aria-label="Navigasi utama"><a href="index.html" aria-current="page"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-home"/></svg><span>Beranda</span></a><a href="panduan.html"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-book"/></svg><span>Panduan</span></a><a href="faq.html"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-help-circle"/></svg><span>FAQ</span></a><a href="game.html" aria-current="page"><svg class="ic" aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9h12a3 3 0 0 1 2.8 4l-1 3a2 2 0 0 1-3.4.7L14.8 15H9.2l-1.6 1.7a2 2 0 0 1-3.4-.7l-1-3A3 3 0 0 1 6 9Z"/><path d="M8 11v4M6 13h4M16 12h.01M18 14h.01"/></svg><span>Game</span></a></nav>
-    <button class="music" id="musicBtn" type="button" aria-pressed="false" aria-label="Putar Mars Pengawas Pemilu">
-      <svg class="ic" aria-hidden="true" focusable="false"><use href="#i-music"/></svg><span class="music-label" id="musicLabel">Putar mars</span>
-      <span class="eq" aria-hidden="true"><i></i><i></i><i></i></span>
-    </button>
-  </div>
-</header>
-<section class="page-hero game-hero"><div class="hero-in"><div class="hero-text"><p class="eyebrow">SiLani · Ruang bermain edukatif</p><h1>WASRA &amp; WASRI RUN</h1><p class="hero-copy">Berlari bersama, hindari rintangan, kumpulkan poin, dan pecahkan rekor perjalanan.</p></div><div class="hero-mascots page-mascots"><img class="hero-pair" src="wasra-wasri-game-hero.png?v=20261105-v15" alt="Maskot SiLani Wasra dan Wasri"></div></div></section>
-
-<main id="isi" class="game-main"><div class="wrap">
-<section class="wwr-intro"><div><p class="kicker">Tantangan refleks</p><h2>Siap berpetualang?</h2><p>Wasra dan Wasri berlari bersama. Lompat melewati penghalang, geser untuk menghindari rintangan rendah, dan kumpulkan lencana pengawasan.</p></div><div class="wwr-bests"><div><span>Rekor terbaik</span><strong id="wwr-best">0</strong></div><div><span>Jarak terbaik</span><strong id="wwr-best-distance">0 m</strong></div></div></section>
-<section class="wwr-game-card" aria-label="Permainan Wasra dan Wasri Run">
- <div class="wwr-hud"><div><span class="wwr-label">SKOR</span><strong id="wwr-score">0</strong></div><div><span class="wwr-label">JARAK</span><strong id="wwr-distance">0 m</strong></div><div><span class="wwr-label">KOIN</span><strong id="wwr-coins">0</strong></div><div class="wwr-speed"><span class="wwr-label">KECEPATAN</span><strong id="wwr-speed">1.0×</strong></div></div>
- <div class="wwr-stage"><canvas id="wwr-canvas" width="960" height="420" aria-label="Permainan lari Wasra dan Wasri"></canvas>
-  <div class="wwr-overlay" id="wwr-overlay"><div class="wwr-overlay-panel"><span class="wwr-pill">SIAPKAN DIRI</span><h2 id="wwr-overlay-title">Petualangan dimulai!</h2><p id="wwr-overlay-copy">Tekan MULAI. Lompat dengan Space atau ↑, geser dengan ↓.</p><button class="wwr-primary" id="wwr-start" type="button">Mulai bermain</button></div></div>
- </div>
- <div class="wwr-controls"><div class="wwr-hint"><span><kbd>SPACE</kbd> / <kbd>↑</kbd> Lompat</span><span><kbd>↓</kbd> Geser</span><span><kbd>P</kbd> Jeda</span></div><div class="wwr-touch"><button type="button" id="wwr-jump" aria-label="Lompat">↑ Lompat</button><button type="button" id="wwr-slide" aria-label="Geser">↓ Geser</button></div><div class="wwr-action-buttons"><button type="button" class="wwr-fullscreen" id="wwr-fullscreen" aria-label="Aktifkan layar penuh" title="Layar penuh">⛶ <span id="wwr-fullscreen-label">Layar penuh</span></button><button type="button" class="wwr-pause" id="wwr-pause">Jeda</button></div></div>
-</section>
-<section class="wwr-bottom"><div class="wwr-tip"><strong>Tips bermain</strong><p>Lompati penghalang tinggi. Tahan tombol geser saat melewati rintangan rendah. Kecepatan meningkat seiring jarak.</p></div><div class="wwr-leaderboard"><div><strong>Rekor perangkat ini</strong><span>Skor tersimpan otomatis di browser yang sama.</span></div><strong id="wwr-record">0</strong></div></section>
+<header class="site-header"><div class="bar">
+<a class="brand" href="index.html" aria-label="SiLani, beranda"><img src="logo-bawaslu-bandung.png" alt="Bawaslu Kabupaten Bandung"></a>
+<nav class="nav" aria-label="Navigasi utama">
+<a href="index.html"><svg class="ic"><use href="#i-home"/></svg><span>Beranda</span></a>
+<a href="panduan.html"><svg class="ic"><use href="#i-book"/></svg><span>Panduan</span></a>
+<a href="faq.html"><svg class="ic"><use href="#i-help-circle"/></svg><span>FAQ</span></a>
+<a href="game.html" aria-current="page"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 9h12a3 3 0 0 1 2.8 4l-1 3a2 2 0 0 1-3.4.7L14.8 15H9.2l-1.6 1.7a2 2 0 0 1-3.4-.7l-1-3A3 3 0 0 1 6 9Z"/><path d="M8 11v4M6 13h4M16 12h.01M18 14h.01"/></svg><span>Game</span></a>
+</nav>
+<button class="music" id="musicBtn" type="button" aria-pressed="false" aria-label="Putar Mars Pengawas Pemilu"><svg class="ic"><use href="#i-music"/></svg><span class="music-label" id="musicLabel">Putar mars</span><span class="eq" aria-hidden="true"><i></i><i></i><i></i></span></button>
+</div></header>
+<section class="page-hero game-hero"><div class="hero-in"><div class="hero-text"><p class="eyebrow">SiLani · Ruang bermain edukatif</p><h1>Ruang Bermain SiLani</h1><p class="hero-copy">Pilih tantanganmu. Asah refleks, strategi, dan konsentrasi bersama Wasra dan Wasri.</p></div><div class="hero-mascots page-mascots"><img class="hero-pair" src="wasra-wasri-game-hero.png?v=20261105-v15" alt="Maskot SiLani Wasra dan Wasri"></div></div></section>
+<main id="isi" class="game-main games-main"><div class="wrap">
+<div class="games-heading"><p class="kicker">Pilih permainan</p><h2>Mau bermain apa hari ini?</h2><p>Dua permainan edukatif tersedia. Pilih salah satu untuk memulai.</p></div>
+<div class="games-grid">
+<a class="game-choice run-choice" href="run.html">
+<div class="choice-art"><img src="wasra-wasri-game-hero.png?v=20261105-v15" alt="Wasra dan Wasri sedang berlari"></div>
+<div class="choice-content"><span class="choice-tag">Aksi · Refleks</span><h3>WASRA &amp; WASRI RUN</h3><p>Berlari tanpa akhir, lompat melewati rintangan, geser menghindar, dan kumpulkan lencana sebanyak mungkin.</p><span class="choice-cta">Mainkan RUN <b>→</b></span></div>
+</a>
+<a class="game-choice chess-choice" href="catur.html">
+<div class="choice-art chess-art" aria-hidden="true"><div class="chess-preview"><span>♜</span><span>♞</span><span>♝</span><span>♛</span><span>♚</span><span>♝</span><span>♞</span><span>♜</span></div><div class="chess-glow">♟</div></div>
+<div class="choice-content"><span class="choice-tag">Strategi · Konsentrasi</span><h3>CATUR SiLani</h3><p>Uji strategi melawan komputer. Pilih tingkat kesulitan, susun taktik, dan raih skakmat.</p><span class="choice-cta">Mainkan Catur <b>→</b></span></div>
+</a>
+</div>
+<div class="games-note"><strong>Ruang bermain edukatif</strong><span>Permainan ini disediakan sebagai sarana hiburan ringan dan latihan konsentrasi.</span></div>
 </div></main>
-<footer class="site-footer">
-  <div class="foot">
-    <div><img class="foot-brand-img" src="silani-logo-clean.png" alt="SiLani — Sistem Layanan Informasi"><span>Bawaslu Kabupaten Bandung</span></div>
-    <p>SiLani adalah halaman akses menuju layanan resmi PPID, bukan sistem PPID baru. Permohonan dan keberatan tetap diproses melalui kanal resmi yang ditautkan.</p>
-  </div>
-</footer>
+<footer class="site-footer"><div class="foot"><div><img class="foot-brand-img" src="silani-logo-clean.png" alt="SiLani — Sistem Layanan Informasi"><span>Bawaslu Kabupaten Bandung</span></div><p>SiLani adalah halaman akses menuju layanan resmi PPID, bukan sistem PPID baru. Permohonan dan keberatan tetap diproses melalui kanal resmi yang ditautkan.</p></div></footer>
 <audio id="mars" preload="metadata" loop><source src="MARS%20PENGAWAS%20PEMILU%20(1).mp3" type="audio/mpeg"></audio>
-<script src="game.js?v=20261105-coinfix-v16"></script>
-<script src="silani.js?v=20261105-game3"></script>
-</body>
-</html>
+<script src="silani.js?v=20261106-games-menu"></script>
+</body></html>
