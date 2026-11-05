@@ -28,3 +28,34 @@
 
 /* v1.3: keep game title high-contrast and hero foreground above background */
 .game-hero .hero-text h1{color:#fff!important;-webkit-text-fill-color:#fff!important;text-shadow:0 3px 20px rgba(35,7,13,.72)!important}
+
+
+/* v1.4 mobile-first immersive play mode. Fallback is required for iOS Safari,
+   where the Fullscreen API is not generally available to ordinary web pages. */
+body.wwr-lock-scroll{overflow:hidden!important;overscroll-behavior:none}
+.wwr-game-card.wwr-mobile-fullscreen{position:fixed!important;inset:0!important;z-index:99999!important;width:100vw!important;height:100vh!important;height:100dvh!important;max-width:none!important;margin:0!important;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)!important;border:0!important;border-radius:0!important;box-sizing:border-box!important;background:#fffaf5!important;display:flex!important;flex-direction:column!important;gap:7px!important;overflow:hidden!important}
+.wwr-game-card.wwr-mobile-fullscreen .wwr-hud{grid-template-columns:repeat(4,minmax(0,1fr));gap:5px;padding:4px 4px 5px;flex:0 0 auto}
+.wwr-game-card.wwr-mobile-fullscreen .wwr-hud>div{padding:5px 7px;min-width:0}
+.wwr-game-card.wwr-mobile-fullscreen .wwr-hud .wwr-label{font-size:clamp(9px,1.7vw,12px)}
+.wwr-game-card.wwr-mobile-fullscreen .wwr-hud strong{font-size:clamp(14px,2.7vw,21px)}
+.wwr-game-card.wwr-mobile-fullscreen .wwr-stage{flex:1 1 auto;min-height:0;width:100%;border-radius:8px;display:flex;align-items:center;justify-content:center}
+.wwr-game-card.wwr-mobile-fullscreen .wwr-stage canvas{width:100%;height:100%;max-height:100%;object-fit:contain;aspect-ratio:auto;touch-action:none}
+.wwr-game-card.wwr-mobile-fullscreen .wwr-controls{flex:0 0 auto;display:grid;grid-template-columns:1fr auto;gap:7px;padding:2px 2px max(5px,env(safe-area-inset-bottom))}
+.wwr-game-card.wwr-mobile-fullscreen .wwr-hint{display:none}
+.wwr-game-card.wwr-mobile-fullscreen .wwr-touch{display:flex;gap:7px;min-width:0}
+.wwr-game-card.wwr-mobile-fullscreen .wwr-touch button{min-height:48px;padding:9px 14px;font-size:clamp(14px,2.4vw,18px);touch-action:manipulation}
+.wwr-game-card.wwr-mobile-fullscreen .wwr-action-buttons{display:flex;gap:6px;margin:0}
+.wwr-game-card.wwr-mobile-fullscreen .wwr-fullscreen,.wwr-game-card.wwr-mobile-fullscreen .wwr-pause{min-height:48px;padding:8px 11px;font-size:13px}
+.wwr-game-card.wwr-mobile-fullscreen .wwr-fullscreen span{display:inline}
+.wwr-game-card.wwr-mobile-fullscreen .wwr-overlay{z-index:2}
+.wwr-game-card:fullscreen,.wwr-game-card:-webkit-full-screen{height:100vh;height:100dvh;overflow:hidden}
+@media(max-width:760px){
+  .wwr-game-card:fullscreen,.wwr-game-card:-webkit-full-screen{padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);gap:7px}
+  .wwr-game-card:fullscreen .wwr-stage,.wwr-game-card:-webkit-full-screen .wwr-stage{flex:1 1 auto;min-height:0}
+  .wwr-game-card:fullscreen .wwr-controls,.wwr-game-card:-webkit-full-screen .wwr-controls{display:grid;grid-template-columns:1fr auto;gap:7px;padding:2px 2px max(5px,env(safe-area-inset-bottom))}
+  .wwr-game-card:fullscreen .wwr-hint,.wwr-game-card:-webkit-full-screen .wwr-hint{display:none}
+  .wwr-game-card:fullscreen .wwr-touch button,.wwr-game-card:-webkit-full-screen .wwr-touch button{min-height:48px;touch-action:manipulation}
+}
+@media(max-width:760px) and (orientation:portrait){
+  .wwr-game-card.wwr-mobile-fullscreen .wwr-stage canvas{object-fit:contain}
+}

@@ -22,15 +22,26 @@
     function slide(){if(mode!=='running')return;if(player.jumping){player.vy=Math.max(player.vy,80);return;}player.sliding=true;player.slideUntil=elapsed+.62;}
     function key(e){if(['Space','ArrowUp','ArrowDown','KeyW','KeyS','KeyP'].includes(e.code))e.preventDefault();if(e.code==='Space'||e.code==='ArrowUp'||e.code==='KeyW')jump();if(e.code==='ArrowDown'||e.code==='KeyS')slide();if(e.code==='KeyP')pause();}
     window.addEventListener('keydown',key);ui.start.addEventListener('click',()=>{if(mode==='paused'){pause();return;}start();});ui.pause.addEventListener('click',pause);ui.jump.addEventListener('pointerdown',e=>{e.preventDefault();jump();});ui.slide.addEventListener('pointerdown',e=>{e.preventDefault();slide();});
-    function syncFullscreenButton(){const active=!!(document.fullscreenElement||document.webkitFullscreenElement);if(ui.fullscreen){ui.fullscreenLabel.textContent=active?'Keluar layar penuh':'Layar penuh';ui.fullscreen.setAttribute('aria-label',active?'Keluar dari layar penuh':'Aktifkan layar penuh');ui.fullscreen.title=active?'Keluar layar penuh':'Layar penuh';}}
-    async function toggleFullscreen(){const target=ui.card;if(!target)return;try{if(document.fullscreenElement||document.webkitFullscreenElement){if(document.exitFullscreen)await document.exitFullscreen();else if(document.webkitExitFullscreen)document.webkitExitFullscreen();}
-      else if(target.requestFullscreen){await target.requestFullscreen();}
-      else if(target.webkitRequestFullscreen){target.webkitRequestFullscreen();}
-      else {ui.copy.textContent='Browser ini belum mendukung mode layar penuh. Permainan tetap dapat dimainkan pada tampilan normal.';ui.overlay.hidden=false;return;}
-      if(window.matchMedia('(max-width: 760px)').matches&&screen.orientation&&screen.orientation.lock){try{await screen.orientation.lock('landscape');}catch(_){/* Lock orientation is optional and browser-dependent. */}}
-    }catch(err){ui.copy.textContent='Mode layar penuh tidak dapat diaktifkan. Coba gunakan tombol fullscreen pada browser atau lanjutkan dalam tampilan normal.';ui.overlay.hidden=false;}syncFullscreenButton();}
+    function isNativeFullscreen(){return !!(document.fullscreenElement||document.webkitFullscreenElement);}
+    function isMobileFullscreen(){return !!(ui.card&&ui.card.classList.contains('wwr-mobile-fullscreen'));}
+    function syncFullscreenButton(){const active=isNativeFullscreen()||isMobileFullscreen();if(ui.fullscreen){ui.fullscreenLabel.textContent=active?'Keluar layar penuh':'Layar penuh';ui.fullscreen.setAttribute('aria-label',active?'Keluar dari layar penuh':'Aktifkan layar penuh');ui.fullscreen.title=active?'Keluar layar penuh':'Layar penuh';}}
+    function enterFallbackFullscreen(){ui.card.classList.add('wwr-mobile-fullscreen');document.body.classList.add('wwr-lock-scroll');setTimeout(()=>{if(ui.card.requestFullscreen||ui.card.webkitRequestFullscreen)return;},80);syncFullscreenButton();}
+    async function toggleFullscreen(){const target=ui.card;if(!target)return;
+      if(isMobileFullscreen()){target.classList.remove('wwr-mobile-fullscreen');document.body.classList.remove('wwr-lock-scroll');try{if(screen.orientation&&screen.orientation.unlock)screen.orientation.unlock();}catch(_){}syncFullscreenButton();return;}
+      if(isNativeFullscreen()){try{if(document.exitFullscreen)await document.exitFullscreen();else if(document.webkitExitFullscreen)document.webkitExitFullscreen();}catch(_){}syncFullscreenButton();return;}
+      // Prefer the native Fullscreen API (Android/desktop). iOS Safari and some
+      // embedded browsers do not expose it, so use a fixed-position immersive fallback.
+      try{
+        if(target.requestFullscreen){await target.requestFullscreen();}
+        else if(target.webkitRequestFullscreen){target.webkitRequestFullscreen();}
+        else {enterFallbackFullscreen();}
+      }catch(_){enterFallbackFullscreen();}
+      if(window.matchMedia('(max-width: 760px)').matches&&screen.orientation&&screen.orientation.lock){try{await screen.orientation.lock('landscape');}catch(_){/* Orientation lock is not supported on every mobile browser. */}}
+      syncFullscreenButton();
+    }
     if(ui.fullscreen)ui.fullscreen.addEventListener('click',toggleFullscreen);
     document.addEventListener('fullscreenchange',syncFullscreenButton);document.addEventListener('webkitfullscreenchange',syncFullscreenButton);
+    window.addEventListener('keydown',e=>{if(e.key==='Escape'&&isMobileFullscreen()){ui.card.classList.remove('wwr-mobile-fullscreen');document.body.classList.remove('wwr-lock-scroll');syncFullscreenButton();}});
     function rounded(x,y,w,h,r,color){ctx.fillStyle=color;ctx.beginPath();ctx.roundRect(x,y,w,h,r);ctx.fill();}
     function drawBackground(dt){const sky=ctx.createLinearGradient(0,0,0,H);sky.addColorStop(0,'#9de0ef');sky.addColorStop(1,'#e6f7dc');ctx.fillStyle=sky;ctx.fillRect(0,0,W,H);
       ctx.fillStyle='#fff7c8';ctx.beginPath();ctx.arc(800,76,38,0,Math.PI*2);ctx.fill();
