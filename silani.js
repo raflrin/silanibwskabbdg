@@ -173,6 +173,15 @@ function configureSurveyLink() {
     bindMusic();
     bindFaq();
     configureSurveyLink();
+    if (document.getElementById('wwr-canvas')) {
+      if (typeof window.initWasraWasriRun === 'function') { window.initWasraWasriRun(); }
+      else if (!document.getElementById('wwr-game-script')) {
+        var gameScript = document.createElement('script');
+        gameScript.id = 'wwr-game-script';
+        gameScript.src = 'game.js?v=1.0.0';
+        document.body.appendChild(gameScript);
+      }
+    }
     paint(audio && !audio.paused);
   }
 
@@ -199,7 +208,10 @@ function configureSurveyLink() {
       // Muat CSS halaman tujuan sebelum mengganti konten.
       syncPageStyles(parsed, url);
 
-      // Pertahankan audio yang sedang berjalan.
+      // Hentikan loop game lama sebelum konten halaman diganti.
+      if (typeof window.destroyWasraWasriRun === 'function') window.destroyWasraWasriRun();
+
+      // Pertahankan node audio yang sama agar musik tidak terputus.
       var savedAudio = audio;
 
       Array.from(document.body.childNodes).forEach(function (node) {
@@ -246,7 +258,8 @@ function configureSurveyLink() {
 
   // Navigasi menu Beranda, Panduan, dan FAQ.
   document.addEventListener('click', function (event) {
-    var link = event.target.closest('a[href]');
+    var target = event.target && event.target.nodeType === 1 ? event.target : event.target && event.target.parentElement;
+    var link = target && target.closest ? target.closest('a[href]') : null;
 
     if (
       !link ||
@@ -267,7 +280,7 @@ function configureSurveyLink() {
     var page = url.pathname.split('/').pop().toLowerCase();
 
     // Ketiga halaman menggunakan navigasi internal.
-    if (!['index.html', 'panduan.html', 'faq.html'].includes(page)) return;
+    if (!['index.html', 'panduan.html', 'faq.html', 'game.html'].includes(page)) return;
 
     event.preventDefault();
 
