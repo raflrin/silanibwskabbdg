@@ -15,11 +15,24 @@
     const player={x:132,y:ground-91,vy:0,jumping:false,sliding:false,slideUntil:0};
     function reset(){elapsed=0;distance=0;score=0;coins=0;speed=300;spawn=1.05;coinSpawn=1.4;groundOffset=0;obstacles=[];tokens=[];particles=[];player.y=ground-91;player.vy=0;player.jumping=false;player.sliding=false;hud();}
     function hud(){ui.score.textContent=Math.floor(score).toLocaleString('id-ID');ui.distance.textContent=Math.floor(distance)+' m';ui.coins.textContent=coins;ui.speed.textContent=(speed/300).toFixed(1)+'×';}
-    // Keep the overlay state explicit: mobile CSS uses important display rules,
-    // so the is-hidden class must also win when play begins.
+    // Set overlay visibility through both DOM state and inline important styles.
+    // This protects the start screen from mobile CSS rules that force display:grid.
     function setOverlayVisible(visible){
-      ui.overlay.hidden=!visible;
-      ui.overlay.classList.toggle('is-hidden',!visible);
+      if(visible){
+        ui.overlay.hidden=false;
+        ui.overlay.classList.remove('is-hidden');
+        ui.overlay.style.removeProperty('display');
+        ui.overlay.style.removeProperty('visibility');
+        ui.overlay.style.removeProperty('opacity');
+        ui.overlay.style.removeProperty('pointer-events');
+      }else{
+        ui.overlay.hidden=true;
+        ui.overlay.classList.add('is-hidden');
+        ui.overlay.style.setProperty('display','none','important');
+        ui.overlay.style.setProperty('visibility','hidden','important');
+        ui.overlay.style.setProperty('opacity','0','important');
+        ui.overlay.style.setProperty('pointer-events','none','important');
+      }
       ui.overlay.setAttribute('aria-hidden',String(!visible));
     }
     function start(){if(mode==='running')return;reset();mode='running';setOverlayVisible(false);ui.pause.textContent='Jeda';last=performance.now();cancelAnimationFrame(raf);raf=requestAnimationFrame(loop);}

@@ -181,111 +181,18 @@ body.wwr-lock-scroll{overflow:hidden!important;overscroll-behavior:none}
   }
 }
 
-/* v1.6: start overlay layout tuned for narrow Android and iPhone screens. */
-@media (max-width: 480px) {
-  .wwr-game-card:not(.wwr-mobile-fullscreen) .wwr-stage {
-    height: clamp(260px, 68vw, 300px) !important;
-    min-height: 260px !important;
-    display: grid !important;
-    place-items: center !important;
-  }
-
-  .wwr-game-card:not(.wwr-mobile-fullscreen) .wwr-stage canvas {
-    display: block !important;
-    width: 100% !important;
-    height: 100% !important;
-    max-height: 100% !important;
-    aspect-ratio: auto !important;
-    object-fit: contain !important;
-  }
-
-  .wwr-game-card:not(.wwr-mobile-fullscreen) .wwr-overlay {
-    position: absolute !important;
-    inset: 0 !important;
-    z-index: 8 !important;
-    display: grid !important;
-    place-items: center !important;
-    box-sizing: border-box !important;
-    padding: 10px !important;
-    overflow: hidden !important;
-  }
-
-  .wwr-game-card:not(.wwr-mobile-fullscreen) .wwr-overlay-panel {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 5px !important;
-    box-sizing: border-box !important;
-    width: min(340px, calc(100% - 8px)) !important;
-    max-width: 100% !important;
-    max-height: calc(100% - 8px) !important;
-    min-height: 0 !important;
-    padding: 13px 15px !important;
-    overflow-y: auto !important;
-    text-align: center !important;
-  }
-
-  .wwr-game-card:not(.wwr-mobile-fullscreen) .wwr-overlay-panel .wwr-pill {
-    flex: 0 0 auto !important;
-    padding: 5px 10px !important;
-    font-size: .66rem !important;
-    line-height: 1.2 !important;
-  }
-
-  .wwr-game-card:not(.wwr-mobile-fullscreen) .wwr-overlay-panel h2 {
-    margin: 5px 0 3px !important;
-    font-size: clamp(1.08rem, 4.4vw, 1.25rem) !important;
-    line-height: 1.2 !important;
-  }
-
-  .wwr-game-card:not(.wwr-mobile-fullscreen) .wwr-overlay-panel p {
-    max-width: 100% !important;
-    margin: 0 auto 7px !important;
-    font-size: clamp(.78rem, 3.2vw, .88rem) !important;
-    line-height: 1.3 !important;
-  }
-
-  .wwr-game-card:not(.wwr-mobile-fullscreen) .wwr-overlay-panel .wwr-primary {
-    display: block !important;
-    flex: 0 0 auto !important;
-    box-sizing: border-box !important;
-    width: 100% !important;
-    min-height: 48px !important;
-    margin: 0 !important;
-    padding: 12px 14px !important;
-    border-radius: 12px !important;
-    color: #fff !important;
-    font-size: 1rem !important;
-    font-weight: 800 !important;
-    line-height: 1.2 !important;
-    white-space: normal !important;
-  }
+/* Final fail-safe: the overlay must be hidden in normal mobile play too. */
+.wwr-overlay[hidden],
+.wwr-overlay.is-hidden {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
 }
 
-@media (max-width: 360px) {
-  .wwr-game-card:not(.wwr-mobile-fullscreen) { padding: 7px; }
-  .wwr-game-card:not(.wwr-mobile-fullscreen) .wwr-overlay-panel { padding: 10px 11px !important; }
-  .wwr-game-card:not(.wwr-mobile-fullscreen) .wwr-overlay-panel p { font-size: .76rem !important; }
-}
-
-@media (max-width: 480px) and (max-height: 520px) {
-  .wwr-game-card:not(.wwr-mobile-fullscreen) .wwr-stage {
-    height: 230px !important;
-    min-height: 230px !important;
-  }
-  .wwr-game-card:not(.wwr-mobile-fullscreen) .wwr-overlay-panel { padding: 8px 11px !important; gap: 3px !important; }
-  .wwr-game-card:not(.wwr-mobile-fullscreen) .wwr-overlay-panel h2 { margin: 3px 0 !important; font-size: 1rem !important; }
-  .wwr-game-card:not(.wwr-mobile-fullscreen) .wwr-overlay-panel p { margin-bottom: 4px !important; font-size: .72rem !important; }
-  .wwr-game-card:not(.wwr-mobile-fullscreen) .wwr-overlay-panel .wwr-primary { min-height: 42px !important; padding: 9px 12px !important; }
-}
-
-
-/* FINAL FIX: a hidden overlay must stay hidden even when mobile layout rules use !important. */
-.wwr-game-card:not(.wwr-mobile-fullscreen) .wwr-overlay[hidden],
-.wwr-game-card:not(.wwr-mobile-fullscreen) .wwr-overlay.is-hidden,
-.wwr-game-card.wwr-mobile-fullscreen .wwr-overlay[hidden],
-.wwr-game-card.wwr-mobile-fullscreen .wwr-overlay.is-hidden {
+/* FINAL OVERLAY VISIBILITY GUARD: the start panel must disappear during play. */
+.wwr-overlay[hidden],
+.wwr-overlay.is-hidden {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;

@@ -18,38 +18,28 @@ function configureSurveyLink() {
 }
 
 (function () {
-  'use strict';
-
-  // Audio dibuat sekali dan node yang sama dipertahankan selama navigasi internal.
   var audio = document.getElementById('mars');
-  var PAGE_FILES = ['index.html', 'panduan.html', 'faq.html', 'game.html', 'run.html', 'catur.html'];
-  var scriptPromises = Object.create(null);
+  var navigationBusy = false;
 
-  function paintMusicState(on) {
+  function paint(on) {
     var btn = document.getElementById('musicBtn');
     if (!btn) return;
-    btn.setAttribute('aria-pressed', String(!!on));
+    btn.setAttribute('aria-pressed', String(on));
     btn.setAttribute('aria-label', on ? 'Jeda Mars Pengawas Pemilu' : 'Putar Mars Pengawas Pemilu');
-    var label = document.getElementById('musicLabel');
-    if (label) label.textContent = on ? 'Jeda mars' : 'Putar mars';
   }
 
   function bindMusic() {
     var btn = document.getElementById('musicBtn');
     if (!btn || !audio || btn.dataset.bound === '1') return;
     btn.dataset.bound = '1';
-
     btn.addEventListener('click', function () {
       if (audio.paused) {
-        var playPromise = audio.play();
-        if (playPromise && typeof playPromise.catch === 'function') {
-          playPromise.catch(function () { paintMusicState(false); });
-        }
+        audio.play().catch(function () { paint(false); });
       } else {
         audio.pause();
       }
     });
-    paintMusicState(!audio.paused);
+    paint(!audio.paused);
   }
 
   function bindFaq() {
@@ -91,22 +81,21 @@ function configureSurveyLink() {
   }
 
   function syncPageStyles(parsed, pageUrl) {
-    var currentHead = document.head;
-    Array.from(parsed.head.querySelectorAll('link[rel~="stylesheet"]')).forEach(function (targetLink) {
+    var targetLinks = Array.from(parsed.head.querySelectorAll('link[rel~="stylesheet"]'));
+    targetLinks.forEach(function (targetLink) {
       var rawHref = targetLink.getAttribute('href');
       if (!rawHref) return;
       var absoluteHref = new URL(rawHref, pageUrl).href;
-      var exists = Array.from(currentHead.querySelectorAll('link[rel~="stylesheet"]')).some(function (link) {
-        return link.href === absoluteHref;
-      });
-      if (exists) return;
-
-      var newLink = document.createElement('link');
-      Array.from(targetLink.attributes).forEach(function (attr) {
-        if (attr.name !== 'href') newLink.setAttribute(attr.name, attr.value);
-      });
-      newLink.href = absoluteHref;
-      currentHead.appendChild(newLink);
+      var exists = Array.from(document.head.querySelectorAll('link[rel~="stylesheet"]'))
+        .some(function (link) { return link.href === absoluteHref; });
+      if (!exists) {
+        var newLink = document.createElement('link');
+        Array.from(targetLink.attributes).forEach(function (attr) {
+          if (attr.name !== 'href') newLink.setAttribute(attr.name, attr.value);
+        });
+        newLink.href = absoluteHref;
+        document.head.appendChild(newLink);
+      }
     });
 
     Array.from(parsed.head.querySelectorAll('style')).forEach(function (targetStyle) {
@@ -114,105 +103,76 @@ function configureSurveyLink() {
       if (styleId) {
         var existingStyle = document.getElementById(styleId);
         if (existingStyle) existingStyle.textContent = targetStyle.textContent;
-        else currentHead.appendChild(targetStyle.cloneNode(true));
+        else document.head.appendChild(targetStyle.cloneNode(true));
       } else {
         var styleText = targetStyle.textContent;
-        var alreadyPresent = Array.from(currentHead.querySelectorAll('style')).some(function (style) {
-          return !style.id && style.textContent === styleText;
-        });
-        if (!alreadyPresent) currentHead.appendChild(targetStyle.cloneNode(true));
+        var alreadyPresent = Array.from(document.head.querySelectorAll('style'))
+          .some(function (style) { return !style.id && style.textContent === styleText; });
+        if (!alreadyPresent) document.head.appendChild(targetStyle.cloneNode(true));
       }
     });
   }
 
-  function loadScriptOnce(key, src) {
-    if (scriptPromises[key]) return scriptPromises[key];
+  // Load page-specific scripts in document order without reloading this page
+  // or replacing the existing audio element. This is needed for the game pages.
+  async function loadPageScripts(parsed, pageUrl) {
+    var scripts = Array.from(parsed.querySelectorAll('script[src]'));
 
-    var existing = document.getElementById(key);
-    if (existing && existing.dataset.loaded === 'true') return Promise.resolve();
+    for (var i = 0; i < scripts.length; i++) {
+      var rawSrc = scripts[i].getAttribute('src');
+      if (!rawSrc || /(^|\/)silani\.js(?:[?#]|$)/i.test(rawSrc)) continue;
 
-    scriptPromises[key] = new Promise(function (resolve, reject) {
-      var script = existing || document.createElement('script');
-      script.id = key;
-      script.src = src;
-      script.async = true;
-      script.onload = function () {
-        script.dataset.loaded = 'true';
-        resolve();
-      };
-      script.onerror = function () {
-        delete scriptPromises[key];
-        script.remove();
-        reject(new Error('Gagal memuat skrip: ' + src));
-      };
-      if (!existing) document.head.appendChild(script);
-    });
-    return scriptPromises[key];
-  }
+      var absoluteSrc = new URL(rawSrc, pageUrl).href;
+      var parsedSrc = new URL(absoluteSrc);
+      var fileName = parsedSrc.pathname.split('/').pop().toLowerCase();
 
-  async function initRunPage() {
-    if (!document.getElementById('wwr-canvas')) return;
-    if (typeof window.initWasraWasriRun !== 'function') {
-      await loadScriptOnce('silani-run-game-script', 'game.js?v=20261106-mobile-audio-v2');
-    }
-    if (typeof window.initWasraWasriRun === 'function') window.initWasraWasriRun();
-  }
+      // The chess engine is shared; only its page-specific controller needs
+      // to be executed again when the chess page is opened again.
+      if (fileName === 'chess.min.js' && typeof window.Chess === 'function') continue;
 
-  async function initChessPage() {
-    if (!document.getElementById('chess-board')) return;
+      // The runner exposes an initializer. Reuse it when the script was
+      // already loaded during an earlier visit in this SPA session.
+      if (fileName === 'game.js' && typeof window.initWasraWasriRun === 'function') {
+        window.initWasraWasriRun();
+        continue;
+      }
 
-    if (typeof window.Chess !== 'function') {
-      await loadScriptOnce('silani-chess-library', 'https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js');
-    }
-    if (typeof window.initCaturSiLani !== 'function') {
-      await loadScriptOnce('silani-chess-app-script', 'chess.js?v=20261106-spa-audio-v2');
-    }
-    if (typeof window.initCaturSiLani === 'function') {
-      window.initCaturSiLani();
-    } else {
-      var status = document.getElementById('game-status');
-      if (status) status.textContent = 'Komponen catur belum berhasil dimuat. Periksa koneksi internet lalu muat ulang halaman.';
+      await new Promise(function (resolve, reject) {
+        var script = document.createElement('script');
+        script.src = absoluteSrc;
+        script.async = false;
+        script.onload = resolve;
+        script.onerror = function () { reject(new Error('Gagal memuat skrip: ' + absoluteSrc)); };
+        document.head.appendChild(script);
+      });
     }
   }
 
-  async function initPage() {
+  function initPage() {
     bindMusic();
     bindFaq();
     configureSurveyLink();
-
-    try {
-      await initRunPage();
-      await initChessPage();
-    } catch (error) {
-      console.error('Inisialisasi halaman SiLani:', error);
-      var status = document.getElementById('game-status');
-      if (status) status.textContent = 'Komponen permainan gagal dimuat. Periksa koneksi internet lalu muat ulang halaman.';
+    if (document.getElementById('wwr-canvas') && typeof window.initWasraWasriRun === 'function') {
+      window.initWasraWasriRun();
     }
-    paintMusicState(audio && !audio.paused);
+    paint(audio && !audio.paused);
   }
 
   async function navigate(url, push) {
+    if (navigationBusy) return;
+    navigationBusy = true;
     try {
-      var response = await fetch(url, { credentials: 'same-origin' });
-      if (!response.ok) throw new Error('Gagal memuat halaman (' + response.status + ')');
-
+      var response = await fetch(url);
+      if (!response.ok) throw new Error('Gagal memuat halaman: ' + response.status);
       var html = await response.text();
       var parsed = new DOMParser().parseFromString(html, 'text/html');
       if (!parsed.getElementById('mars')) throw new Error('Elemen audio tidak ditemukan');
 
       syncPageStyles(parsed, url);
-
-      // Hentikan permainan yang sedang aktif sebelum konten lama dilepas.
       if (typeof window.destroyWasraWasriRun === 'function') window.destroyWasraWasriRun();
-      if (typeof window.destroyCaturSiLani === 'function') window.destroyCaturSiLani();
 
-      // Audio tidak dilepas dari DOM: status play/pause dan currentTime tetap terjaga.
+      // Keep the same audio DOM node alive while replacing the page content.
       var savedAudio = audio;
-      if (!savedAudio) {
-        savedAudio = document.getElementById('mars');
-        audio = savedAudio;
-      }
-
       Array.from(document.body.childNodes).forEach(function (node) {
         if (node !== savedAudio) document.body.removeChild(node);
       });
@@ -226,26 +186,33 @@ function configureSurveyLink() {
       document.title = parsed.title;
       if (push) history.pushState({ silani: true }, '', url);
       window.scrollTo(0, 0);
-      await initPage();
+
+      await loadPageScripts(parsed, url);
+      initPage();
     } catch (error) {
       console.error('Navigasi SiLani:', error);
-      // Fallback agar tautan tetap bisa dibuka bila navigasi internal gagal.
+      // Fallback preserves normal navigation if a page resource cannot load.
       location.href = url;
+    } finally {
+      navigationBusy = false;
     }
   }
 
+  // Keep the existing audio node alive for every internal page, including
+  // WASRA & WASRI RUN and Catur. This prevents the Mars from stopping on entry.
   document.addEventListener('click', function (event) {
-    var target = event.target && event.target.nodeType === 1 ? event.target : (event.target && event.target.parentElement);
+    var target = event.target && event.target.nodeType === 1
+      ? event.target
+      : event.target && event.target.parentElement;
     var link = target && target.closest ? target.closest('a[href]') : null;
-    if (!link || event.defaultPrevented || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) return;
-    if (link.target && link.target.toLowerCase() === '_blank') return;
-    if (link.hasAttribute('download')) return;
+    if (!link || event.defaultPrevented || event.metaKey || event.ctrlKey ||
+        event.shiftKey || event.altKey || event.button !== 0) return;
 
     var url = new URL(link.href, location.href);
     if (url.origin !== location.origin) return;
     var page = url.pathname.split('/').pop().toLowerCase();
-    if (PAGE_FILES.indexOf(page) === -1) return;
-    if (url.pathname === location.pathname && url.hash) return;
+    var internalPages = ['index.html', 'panduan.html', 'faq.html', 'game.html', 'run.html', 'catur.html'];
+    if (internalPages.indexOf(page) === -1) return;
 
     event.preventDefault();
     navigate(url.href, true);
@@ -256,8 +223,8 @@ function configureSurveyLink() {
   });
 
   if (audio) {
-    audio.addEventListener('play', function () { paintMusicState(true); });
-    audio.addEventListener('pause', function () { paintMusicState(false); });
+    audio.addEventListener('play', function () { paint(true); });
+    audio.addEventListener('pause', function () { paint(false); });
   }
 
   initPage();
