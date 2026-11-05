@@ -25,3 +25,6 @@
 }
 .page-hero.game-hero .hero-text { position: relative; z-index: 2; }
 .page-hero.game-hero .hero-mascots { position: relative; z-index: 1; }
+
+/* v1.3: keep game title high-contrast and hero foreground above background */
+.game-hero .hero-text h1{color:#fff!important;-webkit-text-fill-color:#fff!important;text-shadow:0 3px 20px rgba(35,7,13,.72)!important}

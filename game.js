@@ -10,7 +10,7 @@
     const BEST_KEY='silani_wwr_best_v1', DIST_KEY='silani_wwr_distance_v1';
     let best=Number(localStorage.getItem(BEST_KEY)||0),bestDistance=Number(localStorage.getItem(DIST_KEY)||0);
     ui.best.textContent=best.toLocaleString('id-ID');ui.record.textContent=best.toLocaleString('id-ID');ui.bestDistance.textContent=bestDistance+' m';
-    const wasra=new Image(),wasri=new Image();wasra.src='WASRA.png';wasri.src='WASRI.png';
+    const wasra=new Image(),wasri=new Image();wasra.src='WASRA.png?v=20261105-v13';wasri.src='WASRI.png?v=20261105-v13';
     const W=960,H=420,ground=340; let raf=0,last=0,mode='ready',elapsed=0,distance=0,score=0,coins=0,speed=300,spawn=0,coinSpawn=0,groundOffset=0,obstacles=[],tokens=[],particles=[];
     const player={x:132,y:ground-91,vy:0,jumping:false,sliding:false,slideUntil:0};
     function reset(){elapsed=0;distance=0;score=0;coins=0;speed=300;spawn=1.05;coinSpawn=1.4;groundOffset=0;obstacles=[];tokens=[];particles=[];player.y=ground-91;player.vy=0;player.jumping=false;player.sliding=false;hud();}
@@ -59,13 +59,13 @@
       for(const t of tokens){if(!t.taken&&Math.hypot((pbox.x+pbox.w/2)-t.x,(pbox.y+pbox.h/2)-t.y)<42){t.taken=true;coins++;score+=50;}}
       ctx.clearRect(0,0,W,H);drawBackground(dt);obstacles.forEach(drawObstacle);
       tokens.forEach(t=>{ctx.save();ctx.translate(t.x,t.y);ctx.fillStyle='#ffd54f';ctx.strokeStyle='#b97b1b';ctx.lineWidth=3;ctx.beginPath();ctx.arc(0,0,t.r,0,7);ctx.fill();ctx.stroke();ctx.fillStyle='#fff4bd';ctx.font='bold 13px sans-serif';ctx.textAlign='center';ctx.fillText('★',0,5);ctx.restore();});
-      let phase=elapsed*13;let y=player.y;drawCharacter(wasra,player.x,y,68,94,phase,player.sliding);drawCharacter(wasri,player.x+48,y+5,64,89,phase+1.2,player.sliding);
+      let phase=elapsed*13;let y=player.y;drawCharacter(wasra,player.x,y-12,112,112,phase,player.sliding);drawCharacter(wasri,player.x+72,y-8,108,108,phase+1.2,player.sliding);
       // little trail sparkle
       ctx.fillStyle='#fff';for(let i=0;i<3;i++){let xx=player.x-12-((elapsed*80+i*17)%34);ctx.globalAlpha=.65-i*.16;ctx.beginPath();ctx.arc(xx,ground-18-i*9,3,0,7);ctx.fill();}ctx.globalAlpha=1;
       hud();raf=requestAnimationFrame(loop);
     }
     // Render a still scene while waiting for the first run.
-    function preview(){ctx.clearRect(0,0,W,H);drawBackground(0);drawCharacter(wasra,player.x,ground-91,68,94,0,false);drawCharacter(wasri,player.x+48,ground-86,64,89,1,false);drawObstacle({x:610,y:ground,type:'crate'});drawObstacle({x:790,y:ground,type:'cone'});}
+    function preview(){ctx.clearRect(0,0,W,H);drawBackground(0);drawCharacter(wasra,player.x,ground-112,112,112,0,false);drawCharacter(wasri,player.x+72,ground-108,108,108,1,false);drawObstacle({x:610,y:ground,type:'crate'});drawObstacle({x:790,y:ground,type:'cone'});}
     preview();
     window.destroyWasraWasriRun=function(){cancelAnimationFrame(raf);window.removeEventListener('keydown',key);document.removeEventListener('fullscreenchange',syncFullscreenButton);document.removeEventListener('webkitfullscreenchange',syncFullscreenButton);root.dataset.initialized='0';};
   }
