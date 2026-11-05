@@ -12,6 +12,42 @@
 .wwr-game-card:fullscreen .wwr-overlay,.wwr-game-card:-webkit-full-screen .wwr-overlay{position:absolute}
 @media(max-width:760px){.wwr-action-buttons{margin-left:auto}.wwr-fullscreen{padding:10px 12px}}
 @media(max-width:480px){.wwr-fullscreen span{display:none}.wwr-fullscreen{min-width:44px;padding:10px}.wwr-controls{gap:8px}.wwr-action-buttons{gap:6px}}
+/* Perbaikan tampilan game pada HP Android dan iPhone */
+@media (max-width: 480px) {
+  .wwr-overlay {
+    padding: 8px;
+    overflow-y: auto;
+  }
+
+  .wwr-overlay-panel {
+    width: 100%;
+    max-width: 340px;
+    max-height: calc(100% - 16px);
+    box-sizing: border-box;
+    padding: 12px;
+    overflow-y: auto;
+  }
+
+  .wwr-overlay h2 {
+    font-size: 1.15rem;
+    line-height: 1.2;
+    margin: 7px 0 5px;
+  }
+
+  .wwr-overlay p {
+    font-size: .82rem;
+    line-height: 1.3;
+    margin-bottom: 10px;
+  }
+
+  .wwr-primary {
+    display: block;
+    width: 100%;
+    min-height: 48px;
+    font-size: 1rem;
+    padding: 12px;
+  }
+}
 
 /* v1.2 visual correction: force high-contrast game hero title */
 .page-hero.game-hero .hero-text h1,
