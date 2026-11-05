@@ -12,3 +12,16 @@
 .wwr-game-card:fullscreen .wwr-overlay,.wwr-game-card:-webkit-full-screen .wwr-overlay{position:absolute}
 @media(max-width:760px){.wwr-action-buttons{margin-left:auto}.wwr-fullscreen{padding:10px 12px}}
 @media(max-width:480px){.wwr-fullscreen span{display:none}.wwr-fullscreen{min-width:44px;padding:10px}.wwr-controls{gap:8px}.wwr-action-buttons{gap:6px}}
+
+/* v1.2 visual correction: force high-contrast game hero title */
+.page-hero.game-hero .hero-text h1,
+.game-hero .hero-in .hero-text h1,
+.game-hero h1 {
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+  text-shadow: 0 3px 18px rgba(35, 5, 12, .72), 0 1px 2px rgba(0,0,0,.55) !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+.page-hero.game-hero .hero-text { position: relative; z-index: 2; }
+.page-hero.game-hero .hero-mascots { position: relative; z-index: 1; }
