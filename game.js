@@ -37,9 +37,12 @@
     const wasra = new Image();
     const wasri = new Image();
     const electionBg = new Image();
+    const electionBgPortrait = new Image();
     wasra.src = 'WASRA.png?v=20261106-mascot-original';
     wasri.src = 'WASRI.png?v=20261106-mascot-original';
-    electionBg.src = 'game-bg-election-landscape.jpg?v=20261106-election-scene';
+    electionBg.src = 'game-bg-election-landscape.jpg?v=20261106-election-scene-v2';
+    electionBgPortrait.src = 'game-bg-election-portrait.jpg?v=20261106-election-portrait-v1';
+    electionBgPortrait.onload = () => { if (mode === 'ready') preview(); };
 
     let W = 960, H = 420, ground = 330, portrait = false;
     let pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
@@ -89,7 +92,9 @@
       ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
 
       ground = H * (portrait ? 0.79 : 0.79);
-      characterSize = Math.min(108, H * (portrait ? 0.16 : 0.26));
+      characterSize = portrait
+        ? Math.min(154, W * 0.22, H * 0.17)
+        : Math.min(108, H * 0.26);
       characterSize = Math.max(48, characterSize);
       characterWidth = characterSize * 1.06;
       characterGap = characterWidth * 0.62;
@@ -290,60 +295,28 @@
     }
 
     function drawPortraitEnvironment() {
+      // Dedicated portrait artwork in the same illustration style as desktop.
+      // Crop only the unused lower road area so the building, campaign crowd,
+      // TPS and voters stay visible on tall phone screens without distortion.
       const sky = ctx.createLinearGradient(0, 0, 0, H);
-      sky.addColorStop(0, '#55c8f4'); sky.addColorStop(.57, '#d7f3e9'); sky.addColorStop(1, '#f6d5a1');
-      ctx.fillStyle = sky; ctx.fillRect(0, 0, W, H);
-      ctx.fillStyle = '#fff3b5'; ctx.beginPath(); ctx.arc(W * .82, H * .09, Math.min(W, H) * .055, 0, Math.PI * 2); ctx.fill();
-      drawCloud(W * .10, H * .12, Math.min(1.25, W / 360));
-      drawCloud(W * .59, H * .17, Math.min(1.1, W / 390));
-      // Distant green hills and urban roofline.
-      ctx.fillStyle = '#83c49c'; ctx.beginPath(); ctx.moveTo(0, H * .31); ctx.quadraticCurveTo(W * .30, H * .23, W * .55, H * .31); ctx.quadraticCurveTo(W * .78, H * .25, W, H * .30); ctx.lineTo(W, H * .44); ctx.lineTo(0, H * .44); ctx.fill();
-      // Bawaslu office, simplified but clearly labeled.
-      const bx = W * .035, by = H * .205, bw = W * .49, bh = H * .225;
-      ctx.fillStyle = '#c7b9a5'; ctx.fillRect(bx - 5, by + bh - 12, bw + 12, 15);
-      ctx.fillStyle = '#fff5e7'; ctx.fillRect(bx, by, bw, bh);
-      ctx.fillStyle = '#9c6b44'; ctx.fillRect(bx, by + bh * .68, bw, bh * .32);
-      for (let i = 0; i < 3; i++) { ctx.fillStyle = '#a7d7e8'; ctx.fillRect(bx + bw * (.08 + i * .17), by + bh * .42, bw * .12, bh * .25); }
-      ctx.fillStyle = '#d7b879'; ctx.beginPath(); ctx.moveTo(bx + bw * .07, by + bh * .14); ctx.lineTo(bx + bw * .16, by + bh * .14); ctx.lineTo(bx + bw * .16, by + bh * .34); ctx.lineTo(bx + bw * .07, by + bh * .34); ctx.fill();
-      ctx.fillStyle = '#1a242b'; ctx.font = 'bold ' + Math.max(13, W * .043) + 'px Arial'; ctx.textAlign = 'left'; ctx.fillText('BAWASLU', bx + bw * .22, by + bh * .27);
-      ctx.font = 'bold ' + Math.max(7, W * .018) + 'px Arial'; ctx.fillText('KABUPATEN BANDUNG', bx + bw * .22, by + bh * .39);
-      // Peaceful campaign vehicle to the left.
-      const tx = -W * .02, ty = H * .42, tw = W * .46, th = H * .14;
-      rounded(tx, ty + th * .24, tw, th * .64, 9, '#176c9b');
-      ctx.fillStyle = '#6ed0e2'; ctx.fillRect(tx + tw * .12, ty + th * .05, tw * .46, th * .40);
-      ctx.fillStyle = '#eaf8f7'; ctx.fillRect(tx + tw * .08, ty + th * .43, tw * .52, th * .33);
-      ctx.fillStyle = '#a51f2d'; ctx.font = 'bold ' + Math.max(9, W * .026) + 'px Arial'; ctx.textAlign = 'center';
-      ctx.fillText('KAMPANYE', tx + tw * .34, ty + th * .58); ctx.fillText('DAMAI', tx + tw * .34, ty + th * .77);
-      ctx.fillStyle = '#1d2c3a'; ctx.beginPath(); ctx.arc(tx + tw * .20, ty + th * .89, th * .12, 0, 7); ctx.arc(tx + tw * .78, ty + th * .89, th * .12, 0, 7); ctx.fill();
-      // Loudspeaker and flag.
-      ctx.fillStyle = '#26384a'; ctx.beginPath(); ctx.moveTo(tx + tw * .70, ty + th * .02); ctx.lineTo(tx + tw * .92, ty - th * .04); ctx.lineTo(tx + tw * .92, ty + th * .14); ctx.closePath(); ctx.fill();
-      ctx.strokeStyle = '#697b83'; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(W * .49, H * .15); ctx.lineTo(W * .49, H * .42); ctx.stroke();
-      ctx.fillStyle = '#df343b'; ctx.fillRect(W * .49, H * .15, W * .16, H * .045); ctx.fillStyle = '#fff'; ctx.fillRect(W * .49, H * .195, W * .16, H * .045);
-      // TPS tent at right.
-      const sx = W * .54, sy = H * .34, sw = W * .46, sh = H * .26;
-      ctx.fillStyle = '#fff7ed'; ctx.fillRect(sx + sw * .04, sy + sh * .30, sw * .92, sh * .68);
-      ctx.fillStyle = '#c62d39'; ctx.beginPath(); ctx.moveTo(sx, sy + sh * .34); ctx.lineTo(sx + sw * .50, sy); ctx.lineTo(sx + sw, sy + sh * .34); ctx.closePath(); ctx.fill();
-      ctx.fillStyle = '#fff4e6'; ctx.beginPath(); ctx.moveTo(sx + sw * .10, sy + sh * .33); ctx.lineTo(sx + sw * .50, sy + sh * .07); ctx.lineTo(sx + sw * .90, sy + sh * .33); ctx.closePath(); ctx.fill();
-      ctx.fillStyle = '#a51f2d'; ctx.textAlign = 'center'; ctx.font = 'bold ' + Math.max(15, W * .055) + 'px Arial'; ctx.fillText('TPS', sx + sw * .50, sy + sh * .28);
-      ctx.font = 'bold ' + Math.max(7, W * .019) + 'px Arial'; ctx.fillText('TEMPAT PEMUNGUTAN SUARA', sx + sw * .50, sy + sh * .40);
-      // Voting table / ballot box.
-      ctx.fillStyle = '#f3e4c9'; ctx.fillRect(sx + sw * .36, sy + sh * .66, sw * .30, sh * .23);
-      ctx.fillStyle = '#c7a36a'; ctx.fillRect(sx + sw * .39, sy + sh * .72, sw * .24, sh * .16);
-      ctx.fillStyle = '#2b342e'; ctx.fillRect(sx + sw * .43, sy + sh * .69, sw * .16, 3);
-      // Crowd cheering across the far side of the road, facing the runners.
-      const crowdTop = ground - H * .025;
-      const people = [
-        {f:.07,c:'#d83c43',p:'wave',s:'#eab68e'}, {f:.19,c:'#286fa5',p:'hold',s:'#f0c5a0'},
-        {f:.31,c:'#efb84c',p:'wave',s:'#9c654b'}, {f:.43,c:'#2a8a70',p:'hold',s:'#f1c7a4'},
-        {f:.57,c:'#db7b9b',p:'wave',s:'#b77956'}, {f:.69,c:'#f2f1ec',p:'hold',s:'#e7b893'},
-        {f:.82,c:'#2c679b',p:'wave',s:'#8b5d43'}, {f:.94,c:'#dfb14e',p:'wave',s:'#e9bb99'}
-      ];
-      people.forEach((p, i) => drawPortraitPerson(W * p.f, crowdTop + (i % 2) * H * .008, H * .13, p.c, p.p, p.s));
-      drawSign(W * .12, H * .618, W * .22, H * .07, 'TOLAK POLITIK', 'UANG', '#b83b39');
-      drawSign(W * .67, H * .615, W * .23, H * .07, 'DUKUNG', 'PEMILU DAMAI', '#277b67');
-      // Low barrier / sidewalk between supporters and the road.
-      ctx.fillStyle = '#d7d1bd'; ctx.fillRect(0, ground - H * .035, W, H * .035);
-      ctx.fillStyle = '#75838a'; ctx.fillRect(0, ground - H * .035, W, H * .012);
+      sky.addColorStop(0, '#36a9ed');
+      sky.addColorStop(1, '#d9f0e6');
+      ctx.fillStyle = sky;
+      ctx.fillRect(0, 0, W, H);
+
+      if (electionBgPortrait.complete && electionBgPortrait.naturalWidth) {
+        const imageW = electionBgPortrait.naturalWidth;
+        const imageH = electionBgPortrait.naturalHeight;
+        const sourceH = Math.min(imageH, imageW * H / W);
+        // Anchor the crop to the top to retain the Bawaslu office and TPS;
+        // the dynamic road is painted over the lower part separately.
+        ctx.drawImage(electionBgPortrait, 0, 0, imageW, sourceH, 0, 0, W, H);
+      } else {
+        drawCloud(W * .14, H * .13, Math.min(1.2, W / 380));
+        drawCloud(W * .68, H * .18, Math.min(1.1, W / 400));
+        ctx.fillStyle = '#81c69a';
+        ctx.fillRect(0, H * .56, W, H * .10);
+      }
     }
 
     function drawLandscapeEnvironment() {
@@ -367,8 +340,9 @@
 
     function drawRoad(dt) {
       const s = Math.max(.45, unitY);
-      ctx.fillStyle = '#59616a'; ctx.fillRect(0, ground, W, H - ground);
-      ctx.fillStyle = '#3d4651'; ctx.fillRect(0, ground + 2 * s, W, 4 * s);
+      const roadTop = portrait ? H * 0.61 : ground;
+      ctx.fillStyle = '#59616a'; ctx.fillRect(0, roadTop, W, H - roadTop);
+      ctx.fillStyle = '#3d4651'; ctx.fillRect(0, roadTop + 2 * s, W, 4 * s);
       // Lane markers move to make the run feel fast.
       ctx.fillStyle = '#f8f0d7';
       const dashW = 48 * s, gap = 34 * s, cycle = dashW + gap;
