@@ -178,7 +178,7 @@ function configureSurveyLink() {
       else if (!document.getElementById('wwr-game-script')) {
         var gameScript = document.createElement('script');
         gameScript.id = 'wwr-game-script';
-        gameScript.src = 'game.js?v=20261106-fullscreen-election-v2';
+        gameScript.src = 'game.js?v=20261106-same-landscape-pan-v4';
         gameScript.onload = function () { if (typeof window.initWasraWasriRun === 'function') window.initWasraWasriRun(); };
         document.body.appendChild(gameScript);
       }

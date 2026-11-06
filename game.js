@@ -1,7 +1,6 @@
-/* WASRA & WASRI RUN — SiLani, responsive election-day edition.
-   Uses the original WASRA.png and WASRI.png mascots supplied with SiLani.
-   Landscape: campaign, Bawaslu office and TPS artwork. Portrait: an adapted
-   full-height scene so the game fills a phone screen without letterboxing. */
+/* WASRA & WASRI RUN — SiLani, one shared landscape panorama for all screens.
+   Uses original WASRA.png and WASRI.png mascots. On mobile portrait, the
+   camera pans through the same unmodified election panorama; no text overlays. */
 (function () {
   'use strict';
 
@@ -37,12 +36,9 @@
     const wasra = new Image();
     const wasri = new Image();
     const electionBg = new Image();
-    const electionBgPortrait = new Image();
     wasra.src = 'WASRA.png?v=20261106-mascot-original';
     wasri.src = 'WASRI.png?v=20261106-mascot-original';
     electionBg.src = 'game-bg-election-landscape.jpg?v=20261106-election-scene-v2';
-    electionBgPortrait.src = 'game-bg-election-portrait.jpg?v=20261106-election-portrait-v1';
-    electionBgPortrait.onload = () => { if (mode === 'ready') preview(); };
 
     let W = 960, H = 420, ground = 330, portrait = false;
     let pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
@@ -254,126 +250,50 @@
       ctx.arc(x + 36 * s, y, 13 * s, 0, Math.PI * 2); ctx.fill();
     }
 
-    function drawPortraitPerson(x, foot, h, shirt, pose, skin) {
-      const head = h * 0.20, bodyW = h * 0.29, bodyH = h * 0.36;
-      const shoulderY = foot - h * 0.60;
-      ctx.save(); ctx.lineCap = 'round'; ctx.lineJoin = 'round';
-      // legs
-      ctx.strokeStyle = '#28364a'; ctx.lineWidth = Math.max(3, h * 0.075);
-      ctx.beginPath(); ctx.moveTo(x - bodyW * 0.18, foot - h * 0.25); ctx.lineTo(x - bodyW * 0.22, foot); ctx.moveTo(x + bodyW * 0.18, foot - h * 0.25); ctx.lineTo(x + bodyW * 0.28, foot); ctx.stroke();
-      // shoes
-      ctx.strokeStyle = '#f7f7f4'; ctx.lineWidth = Math.max(3, h * 0.075);
-      ctx.beginPath(); ctx.moveTo(x - bodyW * 0.3, foot); ctx.lineTo(x - bodyW * 0.12, foot); ctx.moveTo(x + bodyW * 0.18, foot); ctx.lineTo(x + bodyW * 0.39, foot); ctx.stroke();
-      // torso
-      rounded(x - bodyW / 2, shoulderY, bodyW, bodyH, Math.max(4, h * 0.06), shirt);
-      // arms: some wave, some hold sign
-      ctx.strokeStyle = skin; ctx.lineWidth = Math.max(4, h * 0.10);
-      ctx.beginPath();
-      if (pose === 'wave') {
-        ctx.moveTo(x - bodyW * .42, shoulderY + h * .08); ctx.lineTo(x - bodyW * .76, shoulderY - h * .22);
-        ctx.moveTo(x + bodyW * .42, shoulderY + h * .08); ctx.lineTo(x + bodyW * .78, shoulderY - h * .20);
-      } else {
-        ctx.moveTo(x - bodyW * .42, shoulderY + h * .10); ctx.lineTo(x - bodyW * .70, shoulderY - h * .02);
-        ctx.moveTo(x + bodyW * .42, shoulderY + h * .10); ctx.lineTo(x + bodyW * .70, shoulderY - h * .02);
-      }
-      ctx.stroke();
-      // head and hair
-      ctx.fillStyle = skin; ctx.beginPath(); ctx.arc(x, foot - h * .73, head, 0, Math.PI * 2); ctx.fill();
-      ctx.fillStyle = '#26303b'; ctx.beginPath(); ctx.arc(x, foot - h * .79, head * .98, Math.PI, Math.PI * 2); ctx.fill();
-      ctx.fillStyle = '#20252d'; ctx.beginPath(); ctx.arc(x - head * .34, foot - h * .72, Math.max(1.5, h * .018), 0, Math.PI * 2); ctx.arc(x + head * .34, foot - h * .72, Math.max(1.5, h * .018), 0, Math.PI * 2); ctx.fill();
-      ctx.restore();
-    }
-
-    function drawSign(x, y, w, h, line1, line2, accent) {
-      ctx.save(); ctx.translate(x, y);
-      ctx.fillStyle = '#fffdf4'; ctx.strokeStyle = accent || '#b33b36'; ctx.lineWidth = 2;
-      ctx.fillRect(0, 0, w, h); ctx.strokeRect(0, 0, w, h);
-      ctx.fillStyle = '#6a2730'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-      ctx.font = 'bold ' + Math.max(8, h * .21) + 'px Arial'; ctx.fillText(line1, w / 2, h * .36, w - 5);
-      ctx.font = 'bold ' + Math.max(8, h * .20) + 'px Arial'; ctx.fillText(line2, w / 2, h * .68, w - 5);
-      ctx.restore();
-    }
-
     function drawPortraitEnvironment() {
-      // Dedicated portrait artwork in the same illustration style as desktop.
-      // Crop only the unused lower road area so the building, campaign crowd,
-      // TPS and voters stay visible on tall phone screens without distortion.
+      // On phones, reuse the EXACT same landscape artwork as desktop.
+      // The image is never stretched and no extra text is painted over it.
+      // Instead, the portrait camera slowly pans across the panorama as the
+      // player runs: campaign/Bawaslu first, then the crowd and TPS.
       const sky = ctx.createLinearGradient(0, 0, 0, H);
-      sky.addColorStop(0, '#36a9ed');
+      sky.addColorStop(0, '#79d3f2');
+      sky.addColorStop(.60, '#d9f0e6');
       sky.addColorStop(1, '#d9f0e6');
       ctx.fillStyle = sky;
       ctx.fillRect(0, 0, W, H);
 
-      if (electionBgPortrait.complete && electionBgPortrait.naturalWidth) {
-        const imageW = electionBgPortrait.naturalWidth;
-        const imageH = electionBgPortrait.naturalHeight;
-        const sourceH = Math.min(imageH, imageW * H / W);
-        // Anchor the crop to the top to retain the Bawaslu office and TPS;
-        // the dynamic road is painted over the lower part separately.
-        ctx.drawImage(electionBgPortrait, 0, 0, imageW, sourceH, 0, 0, W, H);
+      if (electionBg.complete && electionBg.naturalWidth && electionBg.naturalHeight) {
+        const sceneH = H * 0.62;
+        const scale = sceneH / electionBg.naturalHeight;
+        const sourceW = Math.min(electionBg.naturalWidth, W / scale);
+        const maxScroll = Math.max(0, electionBg.naturalWidth - sourceW);
+        // Pan steadily through the original landscape illustration.
+        // At the start we show the Bawaslu building and peaceful campaign;
+        // later the camera reveals the polling station and voters.
+        const startCameraX = Math.min(maxScroll, electionBg.naturalWidth * 0.05);
+        const cameraX = startCameraX + Math.min(maxScroll - startCameraX, elapsed * 15 / scale);
+        ctx.drawImage(
+          electionBg,
+          cameraX, 0, sourceW, electionBg.naturalHeight,
+          0, 0, W, sceneH
+        );
 
-        // Tambahkan tulisan yang sama dengan versi landscape ke papan-papan
-        // kosong pada ilustrasi portrait. Teks dirender oleh canvas agar ejaan
-        // tetap akurat dan tajam pada berbagai ukuran layar.
-        const scaleX = W / imageW;
-        const scaleY = H / sourceH;
-        function portraitBoardText(x, y, w, h, lines, fontPx, color) {
-          const left = x * scaleX;
-          const top = y * scaleY;
-          const width = w * scaleX;
-          const height = h * scaleY;
-          const lineHeight = height / lines.length;
-          const maxTextWidth = width * .88;
-          ctx.save();
-          // Repaint only the blank placard face, keeping its original scale.
-          ctx.fillStyle = '#fffdf4';
-          ctx.fillRect(left, top, width, height);
-          ctx.strokeStyle = '#a83b3b';
-          ctx.lineWidth = Math.max(1, 1.6 * scaleX);
-          ctx.strokeRect(left, top, width, height);
-          ctx.fillStyle = color || '#63232b';
-          ctx.textAlign = 'center';
-          ctx.textBaseline = 'middle';
-          lines.forEach((line, index) => {
-            let fontSize = Math.min(fontPx * scaleX, lineHeight * .68);
-            ctx.font = '800 ' + Math.max(6, fontSize) + 'px Arial, sans-serif';
-            while (ctx.measureText(line).width > maxTextWidth && fontSize > 6 * scaleX) {
-              fontSize *= .92;
-              ctx.font = '800 ' + Math.max(6, fontSize) + 'px Arial, sans-serif';
-            }
-            ctx.fillText(line, left + width / 2, top + lineHeight * (index + .5));
-          });
-          ctx.restore();
-        }
-
-        // Identitas gedung Bawaslu Kabupaten Bandung.
-        ctx.save();
-        ctx.fillStyle = '#17212b';
-        ctx.textAlign = 'left';
-        ctx.textBaseline = 'middle';
-        ctx.font = '900 ' + (31 * scaleX) + 'px Arial, sans-serif';
-        ctx.fillText('BAWASLU', 382 * scaleX, 337 * scaleY, 215 * scaleX);
-        ctx.font = '800 ' + (13 * scaleX) + 'px Arial, sans-serif';
-        ctx.fillText('KABUPATEN BANDUNG', 385 * scaleX, 372 * scaleY, 215 * scaleX);
-        ctx.restore();
-
-        // Tulisan TPS pada bagian depan tenda pemungutan suara.
-        ctx.save();
-        ctx.fillStyle = '#b62836';
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.font = '900 ' + (37 * scaleX) + 'px Arial, sans-serif';
-        ctx.fillText('TPS', 705 * scaleX, 603 * scaleY, 190 * scaleX);
-        ctx.font = '800 ' + (13 * scaleX) + 'px Arial, sans-serif';
-        ctx.fillText('TEMPAT PEMUNGUTAN SUARA', 705 * scaleX, 641 * scaleY, 240 * scaleX);
-        ctx.restore();
-
-        // Pesan kampanye damai dan pengawasan partisipatif pada papan kosong.
-        portraitBoardText(169, 617, 98, 61, ['KAMPANYE', 'PEMILU DAMAI'], 12);
-        portraitBoardText(228, 716, 82, 56, ['TOLAK', 'POLITIK UANG'], 11);
-        portraitBoardText(316, 729, 77, 58, ['LAWAN', 'HOAKS PEMILU'], 10);
-        portraitBoardText(278, 855, 77, 53, ['JAGA', 'NETRALITAS', 'ASN/TNI/POLRI'], 9);
+        // Extend the same scene's roadside into the playable foreground.
+        // This area is intentionally kept text-free; moving obstacles and
+        // the original Wasra/Wasri sprites are drawn above it.
+        const vergeTop = sceneH;
+        const roadTop = H * 0.65;
+        const verge = ctx.createLinearGradient(0, vergeTop, 0, roadTop);
+        verge.addColorStop(0, '#86c891');
+        verge.addColorStop(1, '#70b77f');
+        ctx.fillStyle = verge;
+        ctx.fillRect(0, vergeTop, W, Math.max(0, roadTop - vergeTop));
+        ctx.fillStyle = '#5a9e70';
+        ctx.fillRect(0, roadTop - 12 * unitY, W, 12 * unitY);
+        ctx.fillStyle = '#e8e4d3';
+        ctx.fillRect(0, roadTop - 12 * unitY, W, 3 * unitY);
       } else {
+        // Fallback while the panorama is still loading.
         drawCloud(W * .14, H * .13, Math.min(1.2, W / 380));
         drawCloud(W * .68, H * .18, Math.min(1.1, W / 400));
         ctx.fillStyle = '#81c69a';
@@ -556,8 +476,7 @@
     }
 
     // Recalculate the game world when the user enters/exits fullscreen or
-    // rotates a phone. This gives portrait phones a full-height vertical scene
-    // instead of shrinking a wide canvas into a narrow strip.
+    // rotates a phone. The same panorama is reframed through a portrait camera.
     resizeCanvas();
     if (window.ResizeObserver && ui.stage) {
       resizeObserver = new ResizeObserver(() => { resizeCanvas(); });
