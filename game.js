@@ -18,7 +18,7 @@
       record: $('wwr-record'), overlay: $('wwr-overlay'), title: $('wwr-overlay-title'),
       copy: $('wwr-overlay-copy'), start: $('wwr-start'), pause: $('wwr-pause'),
       jump: $('wwr-jump'), slide: $('wwr-slide'), fullscreen: $('wwr-fullscreen'),
-      fullscreenLabel: $('wwr-fullscreen-label'), card: document.querySelector('.wwr-game-card'),
+      fullscreenLabel: $('wwr-fullscreen-label'), lives: $('wwr-lives'), card: document.querySelector('.wwr-game-card'),
       stage: document.querySelector('.wwr-stage')
     };
 
@@ -45,9 +45,11 @@
     let characterSize = 112, characterWidth = 118, characterGap = 64;
     let unitY = 1, unitX = 1;
     let raf = 0, last = 0, mode = 'ready';
-    let elapsed = 0, distance = 0, score = 0, coins = 0, speed = 300;
+    let elapsed = 0, distance = 0, score = 0, coins = 0, speed = 180;
     let spawn = 0, coinSpawn = 0, groundOffset = 0;
     let obstacles = [], tokens = [], particles = [];
+    const MAX_LIVES = 8;
+    let lives = MAX_LIVES, hitCooldown = 0, jumpBuffer = 0;
     const player = { x: 132, y: 0, vy: 0, jumping: false, sliding: false, slideUntil: 0 };
     let resizeObserver = null;
 
@@ -88,12 +90,13 @@
       ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
 
       ground = H * (portrait ? 0.79 : 0.79);
+      // Casual mode: slightly smaller mascots leave more room to react.
       characterSize = portrait
-        ? Math.min(154, W * 0.22, H * 0.17)
+        ? Math.min(112, W * 0.16, H * 0.12)
         : Math.min(108, H * 0.26);
       characterSize = Math.max(48, characterSize);
       characterWidth = characterSize * 1.06;
-      characterGap = characterWidth * 0.62;
+      characterGap = characterWidth * 0.56;
       unitY = characterSize / 112;
       unitX = W / 960;
       player.x = W * (portrait ? 0.105 : 0.1375);
@@ -101,20 +104,30 @@
       if (changed && mode === 'ready') preview();
     }
 
+    function updateLives() {
+      if (!ui.lives) return;
+      ui.lives.textContent = 'NYAWA ' + lives + '/' + MAX_LIVES;
+      ui.lives.setAttribute('aria-label', 'Sisa nyawa ' + lives + ' dari ' + MAX_LIVES);
+      ui.lives.classList.toggle('is-low', lives <= 3);
+    }
+
     function reset() {
       elapsed = 0; distance = 0; score = 0; coins = 0;
-      speed = 300 * unitX; spawn = 1.05; coinSpawn = 1.4; groundOffset = 0;
+      // Very relaxed pace: slow start, long first wait, and wide obstacle gaps.
+      speed = 170 * unitX; spawn = 8.0; coinSpawn = 1.3; groundOffset = 0;
       obstacles = []; tokens = []; particles = [];
+      lives = MAX_LIVES; hitCooldown = 0; jumpBuffer = 0;
       player.y = ground - characterSize; player.vy = 0;
       player.jumping = false; player.sliding = false;
-      hud();
+      updateLives(); hud();
     }
 
     function hud() {
       ui.score.textContent = Math.floor(score).toLocaleString('id-ID');
       ui.distance.textContent = Math.floor(distance) + ' m';
       ui.coins.textContent = coins;
-      ui.speed.textContent = (speed / Math.max(1, 300 * unitX)).toFixed(1) + '×';
+      ui.speed.textContent = (speed / Math.max(1, 170 * unitX)).toFixed(1) + '×';
+      updateLives();
     }
 
     function start() {
@@ -142,7 +155,7 @@
         ui.bestDistance.textContent = bestDistance + ' m';
       }
       ui.title.textContent = 'Perjalanan selesai!';
-      ui.copy.textContent = 'Skor ' + final.toLocaleString('id-ID') + ' · Jarak ' + Math.floor(distance) + ' m · Koin ' + coins + '. Coba lagi dan pecahkan rekor!';
+      ui.copy.textContent = 'Skor ' + final.toLocaleString('id-ID') + ' · Jarak ' + Math.floor(distance) + ' m · Koin ' + coins + '. Kamu sudah memakai 8 nyawa. Coba lagi dan pecahkan rekor!';
       ui.start.textContent = 'Main lagi';
       setOverlayVisible(true);
     }
@@ -160,17 +173,26 @@
       }
     }
 
-    function jump() {
-      if (mode !== 'running' || player.jumping || player.sliding) return;
-      player.vy = -720 * unitY;
+    function performJump() {
+      if (player.jumping) return;
+      player.sliding = false;
+      player.vy = -880 * unitY;
       player.jumping = true;
+      jumpBuffer = 0;
+    }
+
+    function jump() {
+      if (mode !== 'running') return;
+      // Short input buffer: a slightly early tap still triggers on landing.
+      jumpBuffer = 0.34;
+      if (!player.jumping) performJump();
     }
 
     function slide() {
       if (mode !== 'running') return;
-      if (player.jumping) { player.vy = Math.max(player.vy, 80 * unitY); return; }
+      if (player.jumping) return;
       player.sliding = true;
-      player.slideUntil = elapsed + 0.62;
+      player.slideUntil = elapsed + 0.82;
     }
 
     function key(e) {
@@ -375,7 +397,9 @@
     }
 
     function spawnObstacle() {
-      const type = Math.random() < .42 ? 'crate' : (Math.random() < .72 ? 'cone' : 'bar');
+      // Beginner-friendly set: mostly small cones, occasional crates, rare bars.
+      const roll = Math.random();
+      const type = roll < .88 ? 'cone' : (roll < .98 ? 'crate' : 'bar');
       obstacles.push({ x: W + 30 * unitX, y: ground, type });
     }
 
@@ -395,17 +419,42 @@
       if (mode !== 'running') return;
       const dt = Math.min((now - last) / 1000, .035);
       last = now; elapsed += dt;
-      speed = Math.min(650 * unitX, 300 * unitX + elapsed * 7.4 * unitX + distance * .07);
+      // Ultra-casual difficulty curve: speed rises very slowly and stays capped.
+      speed = Math.min(280 * unitX, 170 * unitX + elapsed * 0.52 * unitX + distance * .004);
       distance += speed * dt / 13;
-      score += dt * (10 + speed / Math.max(90, 90 * unitX));
+      score += dt * (10 + speed / Math.max(100, 100 * unitX));
       groundOffset += speed * dt;
       spawn -= dt; coinSpawn -= dt;
-      if (spawn <= 0) { spawnObstacle(); spawn = Math.max(.72, 1.55 - Math.min(.7, elapsed * .006)) + Math.random() * .55; }
-      if (coinSpawn <= 0) { spawnCoins(); coinSpawn = 2.5 + Math.random() * 2.1; }
+      jumpBuffer = Math.max(0, jumpBuffer - dt);
+      hitCooldown = Math.max(0, hitCooldown - dt);
+      if (spawn <= 0) {
+        spawnObstacle();
+        // One obstacle every 4.8–6.3 seconds after the generous first wait.
+        spawn = 5.2 + Math.random() * 1.8;
+      }
+      if (coinSpawn <= 0) { spawnCoins(); coinSpawn = 1.9 + Math.random() * 1.2; }
+
+      // Buffered touch input: if the player tapped just before landing, jump now.
+      if (jumpBuffer > 0 && !player.jumping) performJump();
+
+      // Built-in assist: if an obstacle is approaching and no action has been
+      // taken, Wasra & Wasri make a gentle automatic jump for the player.
+      const hitboxLeft = player.x + groupWidth * .24;
+      // Trigger before the obstacle's right edge can enter the left side
+      // of the body hitbox, leaving roughly one second for the assisted jump.
+      const obstacleReach = 45 * unitY;
+      const collisionStartX = hitboxLeft - obstacleReach;
+      const assistRange = speed * 1.05 + 12 * unitX;
+      const approachingObstacle = obstacles.find((o) =>
+        o.x >= collisionStartX && o.x - collisionStartX <= assistRange
+      );
+      if (approachingObstacle && !player.jumping && hitCooldown <= 0) {
+        performJump();
+      }
 
       if (player.jumping) {
         player.y += player.vy * dt;
-        player.vy += 1900 * unitY * dt;
+        player.vy += 1450 * unitY * dt;
         if (player.y >= ground - characterSize) { player.y = ground - characterSize; player.vy = 0; player.jumping = false; }
       }
       if (player.sliding && elapsed > player.slideUntil) player.sliding = false;
@@ -414,17 +463,38 @@
       obstacles = obstacles.filter((o) => o.x > -100 * unitY);
       tokens = tokens.filter((t) => t.x > -40 * unitY && !t.taken);
 
-      const pairWidth = characterWidth * 1.70;
+      // Compact body hitbox: transparent edges of the paired owl artwork do
+      // not count as a collision. Jumping clears obstacles; sliding clears bars.
+      const groupWidth = characterGap + characterWidth;
       const pbox = {
-        x: player.x + characterWidth * .12,
-        y: player.sliding ? ground - 48 * unitY : player.y + characterSize * .16,
-        w: player.sliding ? pairWidth * .80 : pairWidth * .83,
-        h: player.sliding ? 38 * unitY : characterSize * .64
+        x: player.x + groupWidth * .24,
+        y: player.sliding ? ground - characterSize * .36 : player.y + characterSize * .40,
+        w: groupWidth * .66,
+        h: player.sliding ? characterSize * .16 : characterSize * .34
       };
-      for (const o of obstacles) {
-        const box = { x: o.x + 4 * unitY, y: o.type === 'bar' ? ground - 31 * unitY : ground - 45 * unitY,
-          w: (o.type === 'bar' ? 60 : 34) * unitY, h: (o.type === 'bar' ? 20 : 42) * unitY };
-        if (collide(pbox, box)) { end(); break; }
+      if (hitCooldown <= 0 && !player.jumping) {
+        for (const o of obstacles) {
+          let box;
+          if (o.type === 'bar') {
+            box = { x: o.x + 12 * unitY, y: ground - 31 * unitY,
+              w: 42 * unitY, h: 10 * unitY };
+          } else if (o.type === 'crate') {
+            box = { x: o.x + 12 * unitY, y: ground - 34 * unitY,
+              w: 20 * unitY, h: 34 * unitY };
+          } else {
+            box = { x: o.x + 12 * unitY, y: ground - 35 * unitY,
+              w: 20 * unitY, h: 35 * unitY };
+          }
+          if (collide(pbox, box)) {
+            lives = Math.max(0, lives - 1);
+            hitCooldown = 2.2;
+            // Remove the obstacle that caused the hit and grant a long grace period.
+            o.x = -1000 * unitX;
+            updateLives();
+            if (lives <= 0) { end(); break; }
+            break;
+          }
+        }
       }
       if (mode !== 'running') return;
 
@@ -434,7 +504,7 @@
         const nearestY = Math.max(pbox.y, Math.min(t.y, pbox.y + pbox.h));
         const dx = t.x - nearestX, dy = t.y - nearestY;
         const boxPickup = (dx * dx + dy * dy) <= ((t.r + 13 * unitY) * (t.r + 13 * unitY));
-        const jumpMagnet = player.jumping && Math.abs(t.x - (pbox.x + pbox.w / 2)) < 104 * unitY && Math.abs(t.y - (pbox.y + pbox.h / 2)) < 96 * unitY;
+        const jumpMagnet = player.jumping && Math.abs(t.x - (pbox.x + pbox.w / 2)) < 132 * unitY && Math.abs(t.y - (pbox.y + pbox.h / 2)) < 116 * unitY;
         if (boxPickup || jumpMagnet) {
           t.taken = true; coins++; score += 50;
           for (let i = 0; i < 5; i++) particles.push({ x: t.x, y: t.y, vx: (Math.random() - .5) * 95 * unitY, vy: (Math.random() - .8) * 95 * unitY, life: .32, maxLife: .32 });
@@ -453,8 +523,11 @@
       });
       particles.forEach((p) => { ctx.save(); ctx.globalAlpha = Math.max(0, p.life / p.maxLife); ctx.fillStyle = '#fff3a6'; ctx.beginPath(); ctx.arc(p.x, p.y, 3 * unitY, 0, Math.PI * 2); ctx.fill(); ctx.restore(); });
       const phase = elapsed * 13;
+      // Brief visual blink after a bump; play continues while the grace timer runs.
+      ctx.globalAlpha = (hitCooldown > 0 && Math.floor(elapsed * 9) % 2 === 0) ? .48 : 1;
       drawCharacter(wasra, player.x, player.y, characterSize, phase, player.sliding);
       drawCharacter(wasri, player.x + characterGap, player.y + characterSize * .02, characterSize, phase + 1.2, player.sliding);
+      ctx.globalAlpha = 1;
       // Small dust puffs behind the two owls.
       ctx.fillStyle = '#fff';
       for (let i = 0; i < 3; i++) {
@@ -488,6 +561,7 @@
     wasra.onload = () => { if (mode === 'ready') preview(); };
     wasri.onload = () => { if (mode === 'ready') preview(); };
     electionBg.onload = () => { if (mode === 'ready' && !portrait) preview(); };
+    updateLives();
     setOverlayVisible(true);
     preview();
 

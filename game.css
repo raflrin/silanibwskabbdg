@@ -103,3 +103,12 @@ body.wwr-lock-scroll{overflow:hidden!important;overscroll-behavior:none}
   .wwr-game-card.wwr-mobile-fullscreen .wwr-controls{grid-template-columns:1fr auto}
   .wwr-game-card.wwr-mobile-fullscreen .wwr-fullscreen{min-width:42px;padding:8px}
 }
+
+
+/* Visible lives counter for the relaxed beginner mode. */
+.wwr-stage{position:relative}
+.wwr-lives{position:absolute;z-index:4;top:10px;left:10px;padding:7px 11px;border:1px solid #ffffffb8;border-radius:999px;background:rgba(255,255,255,.92);color:#7b1d2a;font-size:.76rem;font-weight:900;letter-spacing:.06em;line-height:1.2;box-shadow:0 3px 12px rgba(20,35,50,.12);pointer-events:none}
+.wwr-lives.is-low{background:rgba(255,239,226,.96);color:#ad3d25}
+.wwr-game-card:fullscreen .wwr-lives,.wwr-game-card:-webkit-full-screen .wwr-lives{top:max(10px,env(safe-area-inset-top));left:max(10px,env(safe-area-inset-left))}
+.wwr-game-card.wwr-mobile-fullscreen .wwr-lives{top:max(10px,env(safe-area-inset-top));left:max(10px,env(safe-area-inset-left))}
+@media(max-width:480px){.wwr-lives{top:7px;left:7px;padding:6px 9px;font-size:.68rem}}
