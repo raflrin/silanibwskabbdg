@@ -1,12 +1,13 @@
 (function(){
 'use strict';
 const boardEl=document.getElementById('chess-board');
-if(!boardEl)return;
+if(!boardEl || boardEl.dataset.chessInitialized==='1')return;
 const $=id=>document.getElementById(id);
 const glyph={wk:'♔',wq:'♕',wr:'♖',wb:'♗',wn:'♘',wp:'♙',bk:'♚',bq:'♛',br:'♜',bb:'♝',bn:'♞',bp:'♟'};
 const value={p:100,n:320,b:335,r:500,q:900,k:20000};
 let game=null,selected=null,legal=[],flipped=false,busy=false,lastMove=null;
 function init(){if(typeof Chess==='undefined'){ $('game-status').textContent='Komponen catur gagal dimuat. Periksa koneksi internet lalu muat ulang halaman.';return;}
+ boardEl.dataset.chessInitialized='1';
  game=new Chess();render();status('Giliran Anda. Silakan melangkah.');}
 function files(){return flipped?['h','g','f','e','d','c','b','a']:['a','b','c','d','e','f','g','h'];}
 function ranks(){return flipped?[1,2,3,4,5,6,7,8]:[8,7,6,5,4,3,2,1];}

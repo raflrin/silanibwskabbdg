@@ -1,200 +1,105 @@
-/* WASRA & WASRI RUN — isolated styles */
-.game-hero .hero-in{align-items:center}.game-hero h1{font-size:clamp(2rem,4vw,3.4rem);line-height:1.05;margin:.25rem 0 .75rem;color:#fff;text-shadow:0 2px 18px #250b12a8}.game-main{padding:30px 0 64px}.wwr-intro{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:20px}.wwr-intro h2{font-size:clamp(1.45rem,3vw,2rem);margin:.2rem 0 .45rem;color:#4c151d}.wwr-intro p{max-width:650px;margin:0;color:#5d626c;line-height:1.65}.wwr-bests{display:flex;gap:10px;flex-shrink:0}.wwr-bests>div{background:#fff;border:1px solid #eadfe0;border-radius:15px;padding:12px 16px;min-width:120px;box-shadow:0 8px 22px #3610180b}.wwr-bests span,.wwr-hud .wwr-label{display:block;font-size:.68rem;font-weight:800;letter-spacing:.09em;color:#777}.wwr-bests strong{display:block;font-size:1.4rem;color:#4c151d;margin-top:3px}.wwr-game-card{background:#fff;border:1px solid #eadfe0;border-radius:22px;padding:16px;box-shadow:0 18px 50px #36101812}.wwr-hud{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:2px 4px 14px}.wwr-hud>div{padding:8px 12px;border-radius:12px;background:#faf6f4}.wwr-hud strong{display:block;font-size:1.25rem;color:#4c151d;font-variant-numeric:tabular-nums}.wwr-stage{position:relative;overflow:hidden;border-radius:16px;background:#c9ecf4;line-height:0}.wwr-stage canvas{display:block;width:100%;height:auto;aspect-ratio:16/7;touch-action:pan-y}.wwr-overlay{position:absolute;inset:0;display:grid;place-items:center;background:linear-gradient(90deg,#172a3c9c,#172a3c45);line-height:1.4;padding:18px}.wwr-overlay[hidden]{display:none}.wwr-overlay-panel{width:min(420px,95%);text-align:center;background:#fff;border:1px solid #ffffffa8;border-radius:20px;padding:26px 24px;box-shadow:0 20px 60px #16283d40}.wwr-pill{display:inline-block;padding:6px 11px;border-radius:99px;background:#fff0e7;color:#a34725;font-size:.68rem;font-weight:900;letter-spacing:.12em}.wwr-overlay h2{margin:12px 0 8px;color:#4c151d;font-size:1.6rem}.wwr-overlay p{margin:0 auto 18px;color:#626a75;font-size:.94rem;max-width:330px}.wwr-primary,.wwr-touch button,.wwr-pause{border:0;border-radius:12px;font:inherit;font-weight:800;cursor:pointer;transition:transform .15s,filter .15s}.wwr-primary{background:#a51e2c;color:#fff;padding:13px 22px;box-shadow:0 8px 18px #a51e2c38}.wwr-primary:hover,.wwr-touch button:hover,.wwr-pause:hover{filter:brightness(1.06);transform:translateY(-1px)}.wwr-controls{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 4px 2px}.wwr-hint{display:flex;flex-wrap:wrap;gap:14px;color:#666;font-size:.82rem}.wwr-hint kbd{display:inline-block;padding:3px 7px;border:1px solid #ddd;border-bottom-width:2px;border-radius:6px;background:#fafafa;color:#333;font:700 .72rem ui-monospace,monospace}.wwr-touch{display:flex;gap:8px}.wwr-touch button{background:#f3e9e8;color:#641c26;padding:10px 15px}.wwr-pause{background:#26394d;color:#fff;padding:10px 16px}.wwr-action-buttons{display:flex;gap:8px;align-items:center}.wwr-fullscreen{border:1px solid #e4c9a0;background:#fff9ed;color:#651c27;border-radius:12px;padding:10px 14px;font:inherit;font-weight:800;cursor:pointer;white-space:nowrap}.wwr-fullscreen:hover{background:#f8ebd7}.wwr-fullscreen:focus-visible,.wwr-pause:focus-visible,.wwr-touch button:focus-visible{outline:3px solid #d8ad58;outline-offset:3px}.wwr-bottom{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}.wwr-tip,.wwr-leaderboard{border:1px solid #eadfe0;border-radius:16px;background:#fff;padding:17px 19px}.wwr-tip strong,.wwr-leaderboard strong{color:#4c151d}.wwr-tip p{margin:5px 0 0;color:#626a75;line-height:1.55;font-size:.9rem}.wwr-leaderboard{display:flex;justify-content:space-between;align-items:center;gap:12px}.wwr-leaderboard span{display:block;color:#777;font-size:.82rem;margin-top:4px}.wwr-leaderboard>strong{font-size:1.6rem}.nav .nav-game-icon{font-size:1rem}
+/* SiLani WASRA & WASRI RUN — responsive game styles */
+.game-hero .hero-in{align-items:center}
+.game-hero h1{font-size:clamp(2rem,4vw,3.4rem);line-height:1.05;margin:.25rem 0 .75rem;color:#fff;text-shadow:0 2px 18px #250b12a8}
+.game-main{padding:30px 0 64px}
+.wwr-intro{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:20px}
+.wwr-intro h2{font-size:clamp(1.45rem,3vw,2rem);margin:.2rem 0 .45rem;color:#4c151d}
+.wwr-intro p{max-width:650px;margin:0;color:#5d626c;line-height:1.65}
+.wwr-bests{display:flex;gap:10px;flex-shrink:0}
+.wwr-bests>div{background:#fff;border:1px solid #eadfe0;border-radius:15px;padding:12px 16px;min-width:120px;box-shadow:0 8px 22px #3610180b}
+.wwr-bests span,.wwr-hud .wwr-label{display:block;font-size:.68rem;font-weight:800;letter-spacing:.09em;color:#777}
+.wwr-bests strong{display:block;font-size:1.4rem;color:#4c151d;margin-top:3px}
+.wwr-game-card{background:#fff;border:1px solid #eadfe0;border-radius:22px;padding:16px;box-shadow:0 18px 50px #36101812}
+.wwr-hud{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;padding:2px 4px 14px}
+.wwr-hud>div{padding:8px 12px;border-radius:12px;background:#faf6f4;min-width:0}
+.wwr-hud strong{display:block;font-size:1.25rem;color:#4c151d;font-variant-numeric:tabular-nums}
+.wwr-stage{position:relative;overflow:hidden;border-radius:16px;background:#c9ecf4;line-height:0;isolation:isolate}
+.wwr-stage canvas{display:block;width:100%;height:auto;aspect-ratio:16/7;touch-action:pan-y}
+.wwr-overlay{position:absolute;inset:0;z-index:5;display:grid;place-items:center;background:linear-gradient(90deg,#172a3c9c,#172a3c45);line-height:1.4;padding:18px;box-sizing:border-box}
+.wwr-overlay[hidden],.wwr-overlay.is-hidden{display:none!important;visibility:hidden!important;opacity:0!important;pointer-events:none!important}
+.wwr-overlay-panel{width:min(420px,95%);box-sizing:border-box;text-align:center;background:#fff;border:1px solid #ffffffa8;border-radius:20px;padding:26px 24px;box-shadow:0 20px 60px #16283d40}
+.wwr-pill{display:inline-block;padding:6px 11px;border-radius:99px;background:#fff0e7;color:#a34725;font-size:.68rem;font-weight:900;letter-spacing:.12em}
+.wwr-overlay h2{margin:12px 0 8px;color:#4c151d;font-size:1.6rem}
+.wwr-overlay p{margin:0 auto 18px;color:#626a75;font-size:.94rem;max-width:330px}
+.wwr-primary,.wwr-touch button,.wwr-pause{border:0;border-radius:12px;font:inherit;font-weight:800;cursor:pointer;transition:transform .15s,filter .15s}
+.wwr-primary{background:#a51e2c;color:#fff;padding:13px 22px;box-shadow:0 8px 18px #a51e2c38}
+.wwr-primary:hover,.wwr-touch button:hover,.wwr-pause:hover{filter:brightness(1.06);transform:translateY(-1px)}
+.wwr-controls{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 4px 2px}
+.wwr-hint{display:flex;flex-wrap:wrap;gap:14px;color:#666;font-size:.82rem}
+.wwr-hint kbd{display:inline-block;padding:3px 7px;border:1px solid #ddd;border-bottom-width:2px;border-radius:6px;background:#fafafa;color:#333;font:700 .72rem ui-monospace,monospace}
+.wwr-touch{display:flex;gap:8px}
+.wwr-touch button{background:#f3e9e8;color:#641c26;padding:10px 15px;touch-action:manipulation}
+.wwr-pause{background:#26394d;color:#fff;padding:10px 16px;touch-action:manipulation}
+.wwr-action-buttons{display:flex;gap:8px;align-items:center}
+.wwr-fullscreen{border:1px solid #e4c9a0;background:#fff9ed;color:#651c27;border-radius:12px;padding:10px 14px;font:inherit;font-weight:800;cursor:pointer;white-space:nowrap;touch-action:manipulation}
+.wwr-fullscreen:hover{background:#f8ebd7}
+.wwr-fullscreen:focus-visible,.wwr-pause:focus-visible,.wwr-touch button:focus-visible{outline:3px solid #d8ad58;outline-offset:3px}
+.wwr-bottom{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+.wwr-tip,.wwr-leaderboard{border:1px solid #eadfe0;border-radius:16px;background:#fff;padding:17px 19px}
+.wwr-tip strong,.wwr-leaderboard strong{color:#4c151d}
+.wwr-tip p{margin:5px 0 0;color:#626a75;line-height:1.55;font-size:.9rem}
+.wwr-leaderboard{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.wwr-leaderboard span{display:block;color:#777;font-size:.82rem;margin-top:4px}
+.wwr-leaderboard>strong{font-size:1.6rem}
+.nav .nav-game-icon{font-size:1rem}
 
-@media(max-width:760px){.wwr-intro{display:block}.wwr-bests{margin-top:14px}.wwr-hud{grid-template-columns:repeat(4,1fr);gap:5px}.wwr-hud>div{padding:7px}.wwr-hud strong{font-size:1.05rem}.wwr-controls{align-items:stretch;flex-wrap:wrap}.wwr-hint{width:100%;justify-content:center}.wwr-touch{flex:1}.wwr-touch button{flex:1}.wwr-pause{min-width:72px}.wwr-bottom{grid-template-columns:1fr}.wwr-stage canvas{aspect-ratio:16/8.5}}
-@media(max-width:430px){.wwr-game-card{padding:9px;border-radius:16px}.wwr-stage{border-radius:12px}.wwr-hud .wwr-label{font-size:.56rem}.wwr-hud strong{font-size:.94rem}.wwr-overlay-panel{padding:17px 14px}.wwr-overlay h2{font-size:1.3rem}.wwr-overlay p{font-size:.82rem}}
-
-/* Fullscreen play mode: HUD and controls remain visible. */
-.wwr-game-card:fullscreen,.wwr-game-card:-webkit-full-screen{box-sizing:border-box;width:100%;height:100%;max-width:none;margin:0;padding:clamp(10px,2vw,24px);border:0;border-radius:0;background:#fffaf5;display:flex;flex-direction:column;gap:10px;overflow:auto}
-.wwr-game-card:fullscreen .wwr-stage,.wwr-game-card:-webkit-full-screen .wwr-stage{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;background:#c9ecf4}
-.wwr-game-card:fullscreen .wwr-stage canvas,.wwr-game-card:-webkit-full-screen .wwr-stage canvas{width:100%;height:100%;max-height:100%;object-fit:contain;aspect-ratio:auto}
-.wwr-game-card:fullscreen .wwr-hud,.wwr-game-card:-webkit-full-screen .wwr-hud{flex-shrink:0}
-.wwr-game-card:fullscreen .wwr-controls,.wwr-game-card:-webkit-full-screen .wwr-controls{flex-shrink:0;padding-bottom:0}
+/* Native fullscreen and the iOS fixed-position fallback both occupy the phone. */
+.wwr-game-card:fullscreen,.wwr-game-card:-webkit-full-screen{box-sizing:border-box;width:100%;height:100vh;height:100dvh;max-width:none;margin:0;padding:clamp(8px,1.5vw,20px);border:0;border-radius:0;background:#fffaf5;display:flex;flex-direction:column;gap:8px;overflow:hidden}
+.wwr-game-card:fullscreen .wwr-stage,.wwr-game-card:-webkit-full-screen .wwr-stage{flex:1 1 auto;min-height:0;width:100%;display:flex;align-items:stretch;justify-content:stretch}
+.wwr-game-card:fullscreen .wwr-stage canvas,.wwr-game-card:-webkit-full-screen .wwr-stage canvas{width:100%;height:100%;max-height:none;object-fit:fill;aspect-ratio:auto}
+.wwr-game-card:fullscreen .wwr-hud,.wwr-game-card:-webkit-full-screen .wwr-hud{flex:0 0 auto;padding-bottom:4px}
+.wwr-game-card:fullscreen .wwr-controls,.wwr-game-card:-webkit-full-screen .wwr-controls{flex:0 0 auto;padding-bottom:0}
 .wwr-game-card:fullscreen .wwr-overlay,.wwr-game-card:-webkit-full-screen .wwr-overlay{position:absolute}
-@media(max-width:760px){.wwr-action-buttons{margin-left:auto}.wwr-fullscreen{padding:10px 12px}}
-@media(max-width:480px){.wwr-fullscreen span{display:none}.wwr-fullscreen{min-width:44px;padding:10px}.wwr-controls{gap:8px}.wwr-action-buttons{gap:6px}}
-
-/* High-contrast game hero title. */
-.page-hero.game-hero .hero-text h1,
-.game-hero .hero-in .hero-text h1,
-.game-hero h1 {
-  color: #fff !important;
-  -webkit-text-fill-color: #fff !important;
-  text-shadow: 0 3px 18px rgba(35, 5, 12, .72), 0 1px 2px rgba(0,0,0,.55) !important;
-  opacity: 1 !important;
-  visibility: visible !important;
-}
-.page-hero.game-hero .hero-text { position: relative; z-index: 2; }
-.page-hero.game-hero .hero-mascots { position: relative; z-index: 1; }
-.game-hero .hero-text h1{color:#fff!important;-webkit-text-fill-color:#fff!important;text-shadow:0 3px 20px rgba(35,7,13,.72)!important}
-
-/* Mobile-first immersive play mode. Fallback for mobile browsers without Fullscreen API. */
 body.wwr-lock-scroll{overflow:hidden!important;overscroll-behavior:none}
 .wwr-game-card.wwr-mobile-fullscreen{position:fixed!important;inset:0!important;z-index:99999!important;width:100vw!important;height:100vh!important;height:100dvh!important;max-width:none!important;margin:0!important;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)!important;border:0!important;border-radius:0!important;box-sizing:border-box!important;background:#fffaf5!important;display:flex!important;flex-direction:column!important;gap:7px!important;overflow:hidden!important}
 .wwr-game-card.wwr-mobile-fullscreen .wwr-hud{grid-template-columns:repeat(4,minmax(0,1fr));gap:5px;padding:4px 4px 5px;flex:0 0 auto}
 .wwr-game-card.wwr-mobile-fullscreen .wwr-hud>div{padding:5px 7px;min-width:0}
 .wwr-game-card.wwr-mobile-fullscreen .wwr-hud .wwr-label{font-size:clamp(9px,1.7vw,12px)}
 .wwr-game-card.wwr-mobile-fullscreen .wwr-hud strong{font-size:clamp(14px,2.7vw,21px)}
-.wwr-game-card.wwr-mobile-fullscreen .wwr-stage{flex:1 1 auto;min-height:0;width:100%;border-radius:8px;display:flex;align-items:center;justify-content:center}
-.wwr-game-card.wwr-mobile-fullscreen .wwr-stage canvas{width:100%;height:100%;max-height:100%;object-fit:contain;aspect-ratio:auto;touch-action:none}
+.wwr-game-card.wwr-mobile-fullscreen .wwr-stage{flex:1 1 auto;min-height:0;width:100%;border-radius:8px;display:flex;align-items:stretch;justify-content:stretch}
+.wwr-game-card.wwr-mobile-fullscreen .wwr-stage canvas{width:100%;height:100%;max-height:none;object-fit:fill;aspect-ratio:auto;touch-action:none}
 .wwr-game-card.wwr-mobile-fullscreen .wwr-controls{flex:0 0 auto;display:grid;grid-template-columns:1fr auto;gap:7px;padding:2px 2px max(5px,env(safe-area-inset-bottom))}
 .wwr-game-card.wwr-mobile-fullscreen .wwr-hint{display:none}
 .wwr-game-card.wwr-mobile-fullscreen .wwr-touch{display:flex;gap:7px;min-width:0}
-.wwr-game-card.wwr-mobile-fullscreen .wwr-touch button{min-height:48px;padding:9px 14px;font-size:clamp(14px,2.4vw,18px);touch-action:manipulation}
+.wwr-game-card.wwr-mobile-fullscreen .wwr-touch button{flex:1;min-height:48px;padding:9px 12px;font-size:clamp(14px,2.4vw,18px);touch-action:manipulation}
 .wwr-game-card.wwr-mobile-fullscreen .wwr-action-buttons{display:flex;gap:6px;margin:0}
-.wwr-game-card.wwr-mobile-fullscreen .wwr-fullscreen,.wwr-game-card.wwr-mobile-fullscreen .wwr-pause{min-height:48px;padding:8px 11px;font-size:13px}
+.wwr-game-card.wwr-mobile-fullscreen .wwr-fullscreen,.wwr-game-card.wwr-mobile-fullscreen .wwr-pause{min-height:48px;padding:8px 11px;font-size:clamp(12px,2.1vw,15px)}
 .wwr-game-card.wwr-mobile-fullscreen .wwr-fullscreen span{display:inline}
-.wwr-game-card.wwr-mobile-fullscreen .wwr-overlay{z-index:2}
-.wwr-game-card:fullscreen,.wwr-game-card:-webkit-full-screen{height:100vh;height:100dvh;overflow:hidden}
+.wwr-game-card.wwr-mobile-fullscreen .wwr-overlay{z-index:8}
+.wwr-game-card.wwr-mobile-fullscreen .wwr-overlay[hidden],.wwr-game-card.wwr-mobile-fullscreen .wwr-overlay.is-hidden{display:none!important}
+
 @media(max-width:760px){
-  .wwr-game-card:fullscreen,.wwr-game-card:-webkit-full-screen{padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);gap:7px}
-  .wwr-game-card:fullscreen .wwr-stage,.wwr-game-card:-webkit-full-screen .wwr-stage{flex:1 1 auto;min-height:0}
-  .wwr-game-card:fullscreen .wwr-controls,.wwr-game-card:-webkit-full-screen .wwr-controls{display:grid;grid-template-columns:1fr auto;gap:7px;padding:2px 2px max(5px,env(safe-area-inset-bottom))}
-  .wwr-game-card:fullscreen .wwr-hint,.wwr-game-card:-webkit-full-screen .wwr-hint{display:none}
-  .wwr-game-card:fullscreen .wwr-touch button,.wwr-game-card:-webkit-full-screen .wwr-touch button{min-height:48px;touch-action:manipulation}
+  .wwr-intro{display:block}
+  .wwr-bests{margin-top:14px}
+  .wwr-hud{grid-template-columns:repeat(4,minmax(0,1fr));gap:5px}
+  .wwr-hud>div{padding:7px}
+  .wwr-hud strong{font-size:1.05rem}
+  .wwr-controls{align-items:stretch;flex-wrap:wrap}
+  .wwr-hint{width:100%;justify-content:center}
+  .wwr-touch{flex:1}
+  .wwr-touch button{flex:1}
+  .wwr-pause{min-width:72px}
+  .wwr-bottom{grid-template-columns:1fr}
+  .wwr-stage canvas{aspect-ratio:16/8.5}
+  .wwr-action-buttons{margin-left:auto}
 }
-@media(max-width:760px) and (orientation:portrait){
-  .wwr-game-card.wwr-mobile-fullscreen .wwr-stage canvas{object-fit:contain}
+@media(max-width:480px){
+  .wwr-game-card{padding:9px;border-radius:16px}
+  .wwr-stage{border-radius:12px}
+  .wwr-hud .wwr-label{font-size:.56rem}
+  .wwr-hud strong{font-size:.94rem}
+  .wwr-overlay{padding:8px}
+  .wwr-overlay-panel{width:min(340px,100%);max-height:100%;overflow-y:auto;padding:14px 12px}
+  .wwr-overlay h2{font-size:1.15rem;line-height:1.2;margin:7px 0 5px}
+  .wwr-overlay p{font-size:.82rem;line-height:1.3;margin-bottom:10px}
+  .wwr-primary{display:block;width:100%;min-height:48px;padding:12px;font-size:1rem}
+  .wwr-fullscreen span{display:none}
+  .wwr-fullscreen{min-width:44px;padding:10px}
+  .wwr-controls{gap:8px}
+  .wwr-action-buttons{gap:6px}
 }
-
-.game-back{margin:0 0 16px}.game-back a{color:#8e1e2a;font-weight:800;text-decoration:none}
-
-/* Final mobile start-panel correction: keep the complete message and CTA visible. */
-@media (max-width: 480px) {
-  .wwr-overlay {
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 6px;
-    overflow-y: auto;
-  }
-
-  .wwr-overlay-panel {
-    box-sizing: border-box;
-    flex: 0 1 auto;
-    width: min(300px, 100%);
-    max-width: 100%;
-    max-height: 100%;
-    min-height: 0;
-    padding: 10px 12px;
-    overflow-y: auto;
-  }
-
-  .wwr-pill {
-    padding: 4px 8px;
-    font-size: .60rem;
-    letter-spacing: .10em;
-  }
-
-  .wwr-overlay h2 {
-    margin: 5px 0 4px;
-    font-size: 1.02rem;
-    line-height: 1.2;
-  }
-
-  .wwr-overlay p {
-    max-width: 100%;
-    margin: 0 auto 7px;
-    font-size: .74rem;
-    line-height: 1.25;
-  }
-
-  .wwr-primary {
-    display: block;
-    box-sizing: border-box;
-    width: 100%;
-    min-height: 44px;
-    padding: 10px 12px;
-    font-size: .92rem;
-    line-height: 1.2;
-  }
-}
-
-@media (max-width: 480px) and (max-height: 520px) {
-  .wwr-overlay { padding: 4px; }
-  .wwr-overlay-panel { padding: 7px 9px; }
-  .wwr-overlay h2 { margin: 3px 0; font-size: .96rem; }
-  .wwr-overlay p { margin-bottom: 5px; font-size: .70rem; }
-  .wwr-primary { min-height: 40px; padding: 8px 10px; }
-}
-
-
-/* v1.5: mobile start screen has a taller play area; keep the canvas undistorted. */
-@media (max-width: 480px) {
-  .wwr-game-card:not(.wwr-mobile-fullscreen) .wwr-stage {
-    height: 210px;
-    min-height: 210px;
-    display: grid;
-    place-items: center;
-  }
-
-  .wwr-game-card:not(.wwr-mobile-fullscreen) .wwr-stage canvas {
-    display: block;
-    width: 100%;
-    height: 100%;
-    max-height: 100%;
-    aspect-ratio: auto;
-    object-fit: contain;
-  }
-
-  .wwr-game-card:not(.wwr-mobile-fullscreen) .wwr-overlay {
-    padding: 6px;
-    overflow: hidden;
-  }
-
-  .wwr-game-card:not(.wwr-mobile-fullscreen) .wwr-overlay-panel {
-    box-sizing: border-box;
-    width: min(320px, 100%);
-    max-width: 100%;
-    max-height: calc(100% - 8px);
-    padding: 10px 12px;
-    overflow-y: auto;
-  }
-
-  .wwr-game-card:not(.wwr-mobile-fullscreen) .wwr-pill {
-    padding: 4px 8px;
-    font-size: .62rem;
-  }
-
-  .wwr-game-card:not(.wwr-mobile-fullscreen) .wwr-overlay h2 {
-    margin: 5px 0 4px;
-    font-size: 1.05rem;
-    line-height: 1.2;
-  }
-
-  .wwr-game-card:not(.wwr-mobile-fullscreen) .wwr-overlay p {
-    max-width: 100%;
-    margin: 0 auto 8px;
-    font-size: .76rem;
-    line-height: 1.25;
-  }
-
-  .wwr-game-card:not(.wwr-mobile-fullscreen) .wwr-primary {
-    display: block;
-    box-sizing: border-box;
-    width: 100%;
-    min-height: 44px;
-    padding: 10px 12px;
-    font-size: .95rem;
-    line-height: 1.2;
-  }
-}
-
-/* Final fail-safe: the overlay must be hidden in normal mobile play too. */
-.wwr-overlay[hidden],
-.wwr-overlay.is-hidden {
-  display: none !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
-}
-
-/* FINAL OVERLAY VISIBILITY GUARD: the start panel must disappear during play. */
-.wwr-overlay[hidden],
-.wwr-overlay.is-hidden {
-  display: none !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
+@media(max-width:360px){
+  .wwr-game-card{padding:7px}
+  .wwr-game-card.wwr-mobile-fullscreen .wwr-controls{grid-template-columns:1fr auto}
+  .wwr-game-card.wwr-mobile-fullscreen .wwr-fullscreen{min-width:42px;padding:8px}
 }
