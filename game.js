@@ -311,6 +311,68 @@
         // Anchor the crop to the top to retain the Bawaslu office and TPS;
         // the dynamic road is painted over the lower part separately.
         ctx.drawImage(electionBgPortrait, 0, 0, imageW, sourceH, 0, 0, W, H);
+
+        // Tambahkan tulisan yang sama dengan versi landscape ke papan-papan
+        // kosong pada ilustrasi portrait. Teks dirender oleh canvas agar ejaan
+        // tetap akurat dan tajam pada berbagai ukuran layar.
+        const scaleX = W / imageW;
+        const scaleY = H / sourceH;
+        function portraitBoardText(x, y, w, h, lines, fontPx, color) {
+          const left = x * scaleX;
+          const top = y * scaleY;
+          const width = w * scaleX;
+          const height = h * scaleY;
+          const lineHeight = height / lines.length;
+          const maxTextWidth = width * .88;
+          ctx.save();
+          // Repaint only the blank placard face, keeping its original scale.
+          ctx.fillStyle = '#fffdf4';
+          ctx.fillRect(left, top, width, height);
+          ctx.strokeStyle = '#a83b3b';
+          ctx.lineWidth = Math.max(1, 1.6 * scaleX);
+          ctx.strokeRect(left, top, width, height);
+          ctx.fillStyle = color || '#63232b';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          lines.forEach((line, index) => {
+            let fontSize = Math.min(fontPx * scaleX, lineHeight * .68);
+            ctx.font = '800 ' + Math.max(6, fontSize) + 'px Arial, sans-serif';
+            while (ctx.measureText(line).width > maxTextWidth && fontSize > 6 * scaleX) {
+              fontSize *= .92;
+              ctx.font = '800 ' + Math.max(6, fontSize) + 'px Arial, sans-serif';
+            }
+            ctx.fillText(line, left + width / 2, top + lineHeight * (index + .5));
+          });
+          ctx.restore();
+        }
+
+        // Identitas gedung Bawaslu Kabupaten Bandung.
+        ctx.save();
+        ctx.fillStyle = '#17212b';
+        ctx.textAlign = 'left';
+        ctx.textBaseline = 'middle';
+        ctx.font = '900 ' + (31 * scaleX) + 'px Arial, sans-serif';
+        ctx.fillText('BAWASLU', 382 * scaleX, 337 * scaleY, 215 * scaleX);
+        ctx.font = '800 ' + (13 * scaleX) + 'px Arial, sans-serif';
+        ctx.fillText('KABUPATEN BANDUNG', 385 * scaleX, 372 * scaleY, 215 * scaleX);
+        ctx.restore();
+
+        // Tulisan TPS pada bagian depan tenda pemungutan suara.
+        ctx.save();
+        ctx.fillStyle = '#b62836';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.font = '900 ' + (37 * scaleX) + 'px Arial, sans-serif';
+        ctx.fillText('TPS', 705 * scaleX, 603 * scaleY, 190 * scaleX);
+        ctx.font = '800 ' + (13 * scaleX) + 'px Arial, sans-serif';
+        ctx.fillText('TEMPAT PEMUNGUTAN SUARA', 705 * scaleX, 641 * scaleY, 240 * scaleX);
+        ctx.restore();
+
+        // Pesan kampanye damai dan pengawasan partisipatif pada papan kosong.
+        portraitBoardText(169, 617, 98, 61, ['KAMPANYE', 'PEMILU DAMAI'], 12);
+        portraitBoardText(228, 716, 82, 56, ['TOLAK', 'POLITIK UANG'], 11);
+        portraitBoardText(316, 729, 77, 58, ['LAWAN', 'HOAKS PEMILU'], 10);
+        portraitBoardText(278, 855, 77, 53, ['JAGA', 'NETRALITAS', 'ASN/TNI/POLRI'], 9);
       } else {
         drawCloud(W * .14, H * .13, Math.min(1.2, W / 380));
         drawCloud(W * .68, H * .18, Math.min(1.1, W / 400));
@@ -340,7 +402,7 @@
 
     function drawRoad(dt) {
       const s = Math.max(.45, unitY);
-      const roadTop = portrait ? H * 0.61 : ground;
+      const roadTop = portrait ? H * 0.65 : ground;
       ctx.fillStyle = '#59616a'; ctx.fillRect(0, roadTop, W, H - roadTop);
       ctx.fillStyle = '#3d4651'; ctx.fillRect(0, roadTop + 2 * s, W, 4 * s);
       // Lane markers move to make the run feel fast.
