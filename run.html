@@ -64,14 +64,14 @@
     </button>
   </div>
 </header>
-<section class="page-hero game-hero"><div class="hero-in"><div class="hero-text"><p class="eyebrow">SiLani · Ruang bermain edukatif</p><h1>WASRA &amp; WASRI RUN</h1><p class="hero-copy">Mode sangat mudah: pilih Wasra atau Wasri, hindari rintangan jalan dengan melompat dan burung terbang dengan bergeser. Bantuan otomatis tersedia.</p></div><div class="hero-mascots page-mascots"><img class="hero-pair" src="wasra-wasri-game-hero.png?v=20261105-v15" alt="Maskot SiLani Wasra dan Wasri"></div></div></section>
+<section class="page-hero game-hero"><div class="hero-in"><div class="hero-text"><p class="eyebrow">SiLani · Ruang bermain edukatif</p><h1>WASRA &amp; WASRI RUN</h1><p class="hero-copy">Pilih Wasra atau Wasri. Lompat melewati rintangan jalan dan geser menghindari burung yang datang dari arah berlawanan. Kecepatan burung meningkat bertahap.</p></div><div class="hero-mascots page-mascots"><img class="hero-pair" src="wasra-wasri-game-hero.png?v=20261105-v15" alt="Maskot SiLani Wasra dan Wasri"></div></div></section>
 
 <main id="isi" class="game-main"><div class="wrap">
 <p class="game-back"><a href="game.html">← Kembali ke pilihan permainan</a></p>
-<section class="wwr-intro"><div><p class="kicker">Mode sangat mudah · Pilih karakter</p><h2>Siap berpetualang?</h2><p>Pilih satu karakter favorit. Lompat untuk melewati rintangan jalan, geser untuk menghindari burung terbang, dan kumpulkan koin.</p></div><div class="wwr-bests"><div><span>Rekor terbaik</span><strong id="wwr-best">0</strong></div><div><span>Jarak terbaik</span><strong id="wwr-best-distance">0 m</strong></div></div></section>
+<section class="wwr-intro"><div><p class="kicker">Mode seimbang · Pilih karakter</p><h2>Siap berpetualang?</h2><p>Pilih satu karakter favorit. Lompat untuk melewati rintangan jalan, geser untuk menghindari burung terbang, dan kumpulkan koin.</p></div><div class="wwr-bests"><div><span>Rekor terbaik</span><strong id="wwr-best">0</strong></div><div><span>Jarak terbaik</span><strong id="wwr-best-distance">0 m</strong></div></div></section>
 <section class="wwr-game-card" aria-label="Permainan Wasra dan Wasri Run">
  <div class="wwr-hud"><div><span class="wwr-label">SKOR</span><strong id="wwr-score">0</strong></div><div><span class="wwr-label">JARAK</span><strong id="wwr-distance">0 m</strong></div><div><span class="wwr-label">KOIN</span><strong id="wwr-coins">0</strong></div><div class="wwr-speed"><span class="wwr-label">KECEPATAN</span><strong id="wwr-speed">1.0×</strong></div></div>
- <div class="wwr-stage"><div class="wwr-lives" id="wwr-lives" aria-live="polite">NYAWA 8/8</div><canvas id="wwr-canvas" width="960" height="420" aria-label="Permainan lari Wasra dan Wasri dengan latar kampanye damai, TPS, dan masyarakat pendukung"></canvas>
+ <div class="wwr-stage"><div class="wwr-lives" id="wwr-lives" aria-live="polite">NYAWA 3/3</div><canvas id="wwr-canvas" width="960" height="420" aria-label="Permainan lari Wasra dan Wasri dengan latar kampanye damai, TPS, dan masyarakat pendukung"></canvas>
   <div class="wwr-overlay" id="wwr-overlay"><div class="wwr-overlay-panel">
    <span class="wwr-pill">PILIH PEMAIN</span>
    <div class="wwr-player-picker" id="wwr-player-picker" role="group" aria-label="Pilih karakter permainan">
@@ -79,13 +79,13 @@
     <button class="wwr-player-option" type="button" data-player-choice="wasri" aria-pressed="false"><img src="WASRI.png?v=20261107-player-select" alt=""><span>Wasri</span></button>
    </div>
    <h2 id="wwr-overlay-title">Siap berlari?</h2>
-   <p id="wwr-overlay-copy">Pilih Wasra atau Wasri. Rintangan di jalan: LOMPAT. Burung terbang: GESER. Bantuan otomatis aktif!</p>
+   <p id="wwr-overlay-copy">Pilih Wasra atau Wasri. Rintangan jalan: LOMPAT. Burung datang dari kanan ke kiri: GESER. Bantuan otomatis aktif!</p>
    <button class="wwr-primary" id="wwr-start" type="button">Mulai bermain</button>
   </div></div>
  </div>
  <div class="wwr-controls"><div class="wwr-hint"><span><kbd>SPACE</kbd> / <kbd>↑</kbd> Lompat</span><span><kbd>↓</kbd> Geser</span><span><kbd>P</kbd> Jeda</span></div><div class="wwr-touch"><button type="button" id="wwr-jump" aria-label="Lompat">↑ Lompat</button><button type="button" id="wwr-slide" aria-label="Geser">↓ Geser</button></div><div class="wwr-action-buttons"><button type="button" class="wwr-fullscreen" id="wwr-fullscreen" aria-label="Aktifkan layar penuh" title="Layar penuh">⛶ <span id="wwr-fullscreen-label">Layar penuh</span></button><button type="button" class="wwr-pause" id="wwr-pause">Jeda</button></div></div>
 </section>
-<section class="wwr-bottom"><div class="wwr-tip"><strong>Tips bermain</strong><p>Nikmati permainan dengan 15 nyawa dan bantuan otomatis. Rintangan jalan dapat dilompati; burung terbang dapat dihindari dengan geser. Pilih Wasra atau Wasri sebelum mulai.</p></div><div class="wwr-leaderboard"><div><strong>Rekor perangkat ini</strong><span>Skor tersimpan otomatis di browser yang sama.</span></div><strong id="wwr-record">0</strong></div></section>
+<section class="wwr-bottom"><div class="wwr-tip"><strong>Tips bermain</strong><p>Nikmati permainan dengan 3 nyawa dan bantuan otomatis. Rintangan jalan dapat dilompati; burung terbang dapat dihindari dengan geser. Pilih Wasra atau Wasri sebelum mulai.</p></div><div class="wwr-leaderboard"><div><strong>Rekor perangkat ini</strong><span>Skor tersimpan otomatis di browser yang sama.</span></div><strong id="wwr-record">0</strong></div></section>
 </div></main>
 <footer class="site-footer silani-footer">
   <div class="footer-main">
@@ -111,7 +111,7 @@
   <div class="footer-bottom"><p>© 2026 Bawaslu Kabupaten Bandung · SiLani</p><p>SiLani merupakan halaman akses menuju layanan resmi PPID, bukan sistem PPID baru. Permohonan dan keberatan tetap diproses melalui kanal resmi yang ditautkan.</p></div>
 </footer>
 <audio id="mars" preload="metadata" loop><source src="MARS%20PENGAWAS%20PEMILU%20(1).mp3" type="audio/mpeg"></audio>
-<script src="game.js?v=20261107-pilih-pemain-v7"></script>
+<script src="game.js?v=20261107-mode-seimbang-v8"></script>
 <script src="silani.js?v=20261106-same-landscape-pan-v4"></script>
 </body>
 </html>

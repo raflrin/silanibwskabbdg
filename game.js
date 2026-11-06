@@ -1,6 +1,6 @@
-/* WASRA & WASRI RUN — SiLani extra-easy mode.
-   Players choose one original mascot (Wasra or Wasri). Road barriers require
-   jumping; birds from above require sliding. Slow pace and auto-assist enabled. */
+/* WASRA & WASRI RUN — SiLani balanced-easy mode v8.
+   Players choose Wasra or Wasri. Road barriers require jumping; birds fly
+   right-to-left in the opposite direction and require sliding. */
 (function () {
   'use strict';
 
@@ -49,10 +49,10 @@
     let characterSize = 96, characterWidth = 102;
     let unitY = 1, unitX = 1;
     let raf = 0, last = 0, mode = 'ready';
-    let elapsed = 0, distance = 0, score = 0, coins = 0, speed = 140;
+    let elapsed = 0, distance = 0, score = 0, coins = 0, speed = 190;
     let spawn = 0, coinSpawn = 0, groundOffset = 0;
     let obstacles = [], tokens = [], particles = [];
-    const MAX_LIVES = 15;
+    const MAX_LIVES = 3;
     let lives = MAX_LIVES, hitCooldown = 0, jumpBuffer = 0;
     const player = { x: 132, y: 0, vy: 0, jumping: false, sliding: false, slideUntil: 0 };
     let resizeObserver = null;
@@ -136,13 +136,13 @@
       if (!ui.lives) return;
       ui.lives.textContent = 'NYAWA ' + lives + '/' + MAX_LIVES;
       ui.lives.setAttribute('aria-label', 'Sisa nyawa ' + lives + ' dari ' + MAX_LIVES);
-      ui.lives.classList.toggle('is-low', lives <= 3);
+      ui.lives.classList.toggle('is-low', lives <= 1);
     }
 
     function reset() {
       elapsed = 0; distance = 0; score = 0; coins = 0;
-      // Extra-easy mode: slow speed, long first wait and generous obstacle spacing.
-      speed = 105 * unitX; spawn = 13.0; coinSpawn = 1.8; groundOffset = 0;
+      // Beginner-friendly mode: 3 lives, moderate speed, fair spacing, and auto-assist.
+      speed = 190 * unitX; spawn = 5.6; coinSpawn = 2.0; groundOffset = 0;
       obstacles = []; tokens = []; particles = [];
       lives = MAX_LIVES; hitCooldown = 0; jumpBuffer = 0;
       player.y = ground - characterSize; player.vy = 0;
@@ -154,7 +154,7 @@
       ui.score.textContent = Math.floor(score).toLocaleString('id-ID');
       ui.distance.textContent = Math.floor(distance) + ' m';
       ui.coins.textContent = coins;
-      ui.speed.textContent = (speed / Math.max(1, 105 * unitX)).toFixed(1) + '×';
+      ui.speed.textContent = (speed / Math.max(1, 190 * unitX)).toFixed(1) + '×';
       updateLives();
     }
 
@@ -183,7 +183,7 @@
         ui.bestDistance.textContent = bestDistance + ' m';
       }
       ui.title.textContent = 'Perjalanan selesai!';
-      ui.copy.textContent = 'Skor ' + final.toLocaleString('id-ID') + ' · Jarak ' + Math.floor(distance) + ' m · Koin ' + coins + '. Lima belas kesempatan sudah digunakan. Coba lagi!';
+      ui.copy.textContent = 'Skor ' + final.toLocaleString('id-ID') + ' · Jarak ' + Math.floor(distance) + ' m · Koin ' + coins + '. Tiga nyawa sudah habis. Coba lagi dan pecahkan rekor!';
       ui.start.textContent = 'Main lagi';
       setOverlayVisible(true);
     }
@@ -204,7 +204,7 @@
     function performJump() {
       if (player.jumping) return;
       player.sliding = false;
-      player.vy = -720 * unitY;
+      player.vy = -790 * unitY;
       player.jumping = true;
       jumpBuffer = 0;
     }
@@ -220,7 +220,7 @@
       if (mode !== 'running') return;
       if (player.jumping) return;
       player.sliding = true;
-      player.slideUntil = elapsed + 1.35;
+      player.slideUntil = elapsed + 2.0;
     }
 
     function key(e) {
@@ -414,6 +414,8 @@
       const flap = Math.sin(elapsed * 9 + (o.phase || 0)) * 7 * s;
       ctx.save();
       ctx.translate(o.x, o.y + Math.sin(elapsed * 3 + (o.phase || 0)) * 3 * s);
+      // Face left: the bird flies toward the runner from the opposite direction.
+      ctx.scale(-1, 1);
       // A friendly cartoon bird flying across the upper part of the track.
       ctx.fillStyle = '#34485c';
       ctx.beginPath(); ctx.ellipse(0, 0, 22 * s, 12 * s, 0, 0, Math.PI * 2); ctx.fill();
@@ -450,11 +452,12 @@
     }
 
     function spawnObstacle() {
-      // Road barriers require a jump; flying birds can be passed by sliding.
+      // Ground barriers need a jump; birds approach from the right, flying left.
+      // About one in three obstacles is a bird, so both controls get used.
       const roll = Math.random();
-      if (roll < 0.28) {
+      if (roll < 0.34) {
         obstacles.push({
-          x: W + 42 * unitX,
+          x: W + 56 * unitX,
           y: ground - characterSize * 0.80,
           type: 'bird',
           phase: Math.random() * Math.PI * 2,
@@ -482,8 +485,10 @@
       if (mode !== 'running') return;
       const dt = Math.min((now - last) / 1000, .035);
       last = now; elapsed += dt;
-      // Very gentle difficulty curve: the game remains slow even after several minutes.
-      speed = Math.min(180 * unitX, 105 * unitX + elapsed * 0.08 * unitX + distance * .00045);
+      // Moderate opening pace; speed builds progressively without becoming frantic.
+      speed = Math.min(340 * unitX, 190 * unitX + elapsed * 0.36 * unitX + distance * .0010);
+      // Birds fly faster than the runners, and their approach speed rises over time.
+      const birdSpeedFactor = Math.min(1.95, 1.30 + elapsed * 0.0032);
       distance += speed * dt / 13;
       score += dt * (10 + speed / Math.max(100, 100 * unitX));
       groundOffset += speed * dt;
@@ -492,25 +497,34 @@
       hitCooldown = Math.max(0, hitCooldown - dt);
       if (spawn <= 0) {
         spawnObstacle();
-        // Long gaps between obstacles let new players understand the controls.
-        spawn = 9.0 + Math.random() * 3.5;
+        // Moderate spacing: enough reaction time, but the run does not feel empty.
+        const intervalTightening = Math.min(1.1, elapsed * 0.0028);
+        spawn = Math.max(4.8, 5.8 + Math.random() * 2.0 - intervalTightening);
       }
       if (coinSpawn <= 0) { spawnCoins(); coinSpawn = 2.2 + Math.random() * 1.5; }
 
       // Buffered touch input: if the player tapped just before landing, jump now.
       if (jumpBuffer > 0 && !player.jumping) performJump();
 
-      // Built-in beginner assistance: ground barriers trigger a jump,
-      // overhead birds trigger a slide. Each obstacle is assisted only once.
+      // Built-in assist: ground barriers trigger a jump; incoming birds trigger a slide.
+      // Each obstacle is assisted once, at a timing matched to its approach speed.
       const hitboxLeft = player.x + characterSize * 0.20;
       const collisionStartX = hitboxLeft - 62 * unitY;
-      const assistRange = speed * 2.15 + 28 * unitX;
-      const approachingObstacle = obstacles.find((o) =>
-        !o.assisted && o.x >= collisionStartX && o.x - collisionStartX <= assistRange
-      );
+      const approachingObstacle = obstacles.find((o) => {
+        if (o.assisted || o.x < collisionStartX) return false;
+        // Trigger each assist at a useful time: birds need a longer slide window;
+        // road obstacles trigger a jump shortly before reaching the player.
+        const range = o.type === 'bird'
+          ? speed * birdSpeedFactor * 1.55 + 38 * unitX
+          : speed * 0.92 + 30 * unitX;
+        return o.x - collisionStartX <= range;
+      });
       if (approachingObstacle && hitCooldown <= 0) {
         if (approachingObstacle.type === 'bird') {
-          if (!player.sliding && !player.jumping) slide();
+          if (!player.jumping) {
+            player.sliding = true;
+            player.slideUntil = Math.max(player.slideUntil, elapsed + 2.05);
+          }
         } else if (!player.jumping) {
           performJump();
         }
@@ -519,11 +533,11 @@
 
       if (player.jumping) {
         player.y += player.vy * dt;
-        player.vy += 1150 * unitY * dt;
+        player.vy += 1280 * unitY * dt;
         if (player.y >= ground - characterSize) { player.y = ground - characterSize; player.vy = 0; player.jumping = false; }
       }
       if (player.sliding && elapsed > player.slideUntil) player.sliding = false;
-      obstacles.forEach((o) => { o.x -= speed * dt; });
+      obstacles.forEach((o) => { o.x -= speed * (o.type === 'bird' ? birdSpeedFactor : 1) * dt; });
       tokens.forEach((t) => { t.x -= speed * dt; });
       obstacles = obstacles.filter((o) => o.x > -100 * unitY);
       tokens = tokens.filter((t) => t.x > -40 * unitY && !t.taken);
