@@ -1,6 +1,6 @@
-/* WASRA & WASRI RUN — SiLani, one shared landscape panorama for all screens.
-   Uses original WASRA.png and WASRI.png mascots. On mobile portrait, the
-   camera pans through the same unmodified election panorama; no text overlays. */
+/* WASRA & WASRI RUN — SiLani extra-easy mode.
+   Players choose one original mascot (Wasra or Wasri). Road barriers require
+   jumping; birds from above require sliding. Slow pace and auto-assist enabled. */
 (function () {
   'use strict';
 
@@ -24,10 +24,14 @@
 
     const BEST_KEY = 'silani_wwr_best_v1';
     const DIST_KEY = 'silani_wwr_distance_v1';
+    const PLAYER_KEY = 'silani_wwr_selected_player_v1';
     const safeRead = (key) => { try { return Number(localStorage.getItem(key) || 0); } catch (_) { return 0; } };
+    const safeReadText = (key, fallback) => { try { return localStorage.getItem(key) || fallback; } catch (_) { return fallback; } };
     const safeWrite = (key, value) => { try { localStorage.setItem(key, String(value)); } catch (_) { /* storage optional */ } };
     let best = safeRead(BEST_KEY);
     let bestDistance = safeRead(DIST_KEY);
+    let selectedPlayer = safeReadText(PLAYER_KEY, 'wasra') === 'wasri' ? 'wasri' : 'wasra';
+    const playerPickerButtons = Array.from(document.querySelectorAll('[data-player-choice]'));
 
     ui.best.textContent = best.toLocaleString('id-ID');
     ui.record.textContent = best.toLocaleString('id-ID');
@@ -42,13 +46,13 @@
 
     let W = 960, H = 420, ground = 330, portrait = false;
     let pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
-    let characterSize = 112, characterWidth = 118, characterGap = 64;
+    let characterSize = 96, characterWidth = 102;
     let unitY = 1, unitX = 1;
     let raf = 0, last = 0, mode = 'ready';
-    let elapsed = 0, distance = 0, score = 0, coins = 0, speed = 180;
+    let elapsed = 0, distance = 0, score = 0, coins = 0, speed = 140;
     let spawn = 0, coinSpawn = 0, groundOffset = 0;
     let obstacles = [], tokens = [], particles = [];
-    const MAX_LIVES = 8;
+    const MAX_LIVES = 15;
     let lives = MAX_LIVES, hitCooldown = 0, jumpBuffer = 0;
     const player = { x: 132, y: 0, vy: 0, jumping: false, sliding: false, slideUntil: 0 };
     let resizeObserver = null;
@@ -71,6 +75,31 @@
       }
     }
 
+    function updatePlayerPicker() {
+      playerPickerButtons.forEach((button) => {
+        const active = button.dataset.playerChoice === selectedPlayer;
+        button.classList.toggle('is-selected', active);
+        button.setAttribute('aria-pressed', String(active));
+      });
+    }
+
+    function getSelectedSprite() {
+      return selectedPlayer === 'wasri' ? wasri : wasra;
+    }
+
+    playerPickerButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        if (mode === 'running') return;
+        const choice = button.dataset.playerChoice;
+        if (choice !== 'wasra' && choice !== 'wasri') return;
+        selectedPlayer = choice;
+        safeWrite(PLAYER_KEY, selectedPlayer);
+        updatePlayerPicker();
+        preview();
+      });
+    });
+    updatePlayerPicker();
+
     function resizeCanvas() {
       const rect = root.getBoundingClientRect();
       if (!rect.width || !rect.height) return;
@@ -90,16 +119,15 @@
       ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
 
       ground = H * (portrait ? 0.79 : 0.79);
-      // Casual mode: slightly smaller mascots leave more room to react.
+      // One selected owl, with a deliberately compact footprint for easier play.
       characterSize = portrait
-        ? Math.min(112, W * 0.16, H * 0.12)
-        : Math.min(108, H * 0.26);
-      characterSize = Math.max(48, characterSize);
-      characterWidth = characterSize * 1.06;
-      characterGap = characterWidth * 0.56;
-      unitY = characterSize / 112;
+        ? Math.min(94, W * 0.135, H * 0.105)
+        : Math.min(100, H * 0.24);
+      characterSize = Math.max(46, characterSize);
+      characterWidth = characterSize * 1.02;
+      unitY = characterSize / 100;
       unitX = W / 960;
-      player.x = W * (portrait ? 0.105 : 0.1375);
+      player.x = W * (portrait ? 0.12 : 0.1375);
       if (!player.jumping) player.y = ground - characterSize;
       if (changed && mode === 'ready') preview();
     }
@@ -113,8 +141,8 @@
 
     function reset() {
       elapsed = 0; distance = 0; score = 0; coins = 0;
-      // Very relaxed pace: slow start, long first wait, and wide obstacle gaps.
-      speed = 170 * unitX; spawn = 8.0; coinSpawn = 1.3; groundOffset = 0;
+      // Extra-easy mode: slow speed, long first wait and generous obstacle spacing.
+      speed = 105 * unitX; spawn = 13.0; coinSpawn = 1.8; groundOffset = 0;
       obstacles = []; tokens = []; particles = [];
       lives = MAX_LIVES; hitCooldown = 0; jumpBuffer = 0;
       player.y = ground - characterSize; player.vy = 0;
@@ -126,7 +154,7 @@
       ui.score.textContent = Math.floor(score).toLocaleString('id-ID');
       ui.distance.textContent = Math.floor(distance) + ' m';
       ui.coins.textContent = coins;
-      ui.speed.textContent = (speed / Math.max(1, 170 * unitX)).toFixed(1) + '×';
+      ui.speed.textContent = (speed / Math.max(1, 105 * unitX)).toFixed(1) + '×';
       updateLives();
     }
 
@@ -155,7 +183,7 @@
         ui.bestDistance.textContent = bestDistance + ' m';
       }
       ui.title.textContent = 'Perjalanan selesai!';
-      ui.copy.textContent = 'Skor ' + final.toLocaleString('id-ID') + ' · Jarak ' + Math.floor(distance) + ' m · Koin ' + coins + '. Kamu sudah memakai 8 nyawa. Coba lagi dan pecahkan rekor!';
+      ui.copy.textContent = 'Skor ' + final.toLocaleString('id-ID') + ' · Jarak ' + Math.floor(distance) + ' m · Koin ' + coins + '. Lima belas kesempatan sudah digunakan. Coba lagi!';
       ui.start.textContent = 'Main lagi';
       setOverlayVisible(true);
     }
@@ -176,7 +204,7 @@
     function performJump() {
       if (player.jumping) return;
       player.sliding = false;
-      player.vy = -880 * unitY;
+      player.vy = -720 * unitY;
       player.jumping = true;
       jumpBuffer = 0;
     }
@@ -184,7 +212,7 @@
     function jump() {
       if (mode !== 'running') return;
       // Short input buffer: a slightly early tap still triggers on landing.
-      jumpBuffer = 0.34;
+      jumpBuffer = 0.62;
       if (!player.jumping) performJump();
     }
 
@@ -192,7 +220,7 @@
       if (mode !== 'running') return;
       if (player.jumping) return;
       player.sliding = true;
-      player.slideUntil = elapsed + 0.82;
+      player.slideUntil = elapsed + 1.35;
     }
 
     function key(e) {
@@ -381,32 +409,67 @@
       ctx.restore();
     }
 
+    function drawBird(o) {
+      const s = unitY;
+      const flap = Math.sin(elapsed * 9 + (o.phase || 0)) * 7 * s;
+      ctx.save();
+      ctx.translate(o.x, o.y + Math.sin(elapsed * 3 + (o.phase || 0)) * 3 * s);
+      // A friendly cartoon bird flying across the upper part of the track.
+      ctx.fillStyle = '#34485c';
+      ctx.beginPath(); ctx.ellipse(0, 0, 22 * s, 12 * s, 0, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = '#425f78';
+      ctx.beginPath();
+      ctx.moveTo(-4 * s, -2 * s);
+      ctx.quadraticCurveTo(-18 * s, -19 * s - flap, -34 * s, -10 * s - flap);
+      ctx.quadraticCurveTo(-22 * s, 2 * s, -4 * s, 5 * s);
+      ctx.closePath(); ctx.fill();
+      ctx.beginPath();
+      ctx.moveTo(5 * s, -1 * s);
+      ctx.quadraticCurveTo(18 * s, -18 * s + flap, 34 * s, -9 * s + flap);
+      ctx.quadraticCurveTo(22 * s, 4 * s, 5 * s, 5 * s);
+      ctx.closePath(); ctx.fill();
+      ctx.fillStyle = '#e5b34b';
+      ctx.beginPath(); ctx.moveTo(20 * s, -1 * s); ctx.lineTo(34 * s, 4 * s); ctx.lineTo(20 * s, 7 * s); ctx.closePath(); ctx.fill();
+      ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(12 * s, -5 * s, 4 * s, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = '#182a38'; ctx.beginPath(); ctx.arc(13 * s, -5 * s, 1.8 * s, 0, Math.PI * 2); ctx.fill();
+      ctx.restore();
+    }
+
     function drawObstacle(o) {
       const s = unitY;
-      if (o.type === 'crate') {
-        rounded(o.x, o.y - 42 * s, 42 * s, 42 * s, 7 * s, '#9b542d');
-        ctx.strokeStyle = '#f4c17a'; ctx.lineWidth = 4 * s; ctx.strokeRect(o.x + 7 * s, o.y - 35 * s, 28 * s, 28 * s);
-        ctx.beginPath(); ctx.moveTo(o.x + 7 * s, o.y - 35 * s); ctx.lineTo(o.x + 35 * s, o.y - 7 * s); ctx.moveTo(o.x + 35 * s, o.y - 35 * s); ctx.lineTo(o.x + 7 * s, o.y - 7 * s); ctx.stroke();
-      } else if (o.type === 'cone') {
-        ctx.fillStyle = '#f27632'; ctx.beginPath(); ctx.moveTo(o.x + 20 * s, o.y - 48 * s); ctx.lineTo(o.x + 42 * s, o.y); ctx.lineTo(o.x - 2 * s, o.y); ctx.closePath(); ctx.fill();
-        ctx.fillStyle = '#fff'; ctx.fillRect(o.x + 7 * s, o.y - 18 * s, 26 * s, 7 * s); ctx.fillRect(o.x - 5 * s, o.y - 2 * s, 50 * s, 7 * s);
+      if (o.type === 'bird') {
+        drawBird(o);
+      } else if (o.type === 'crate') {
+        rounded(o.x, o.y - 38 * s, 38 * s, 38 * s, 7 * s, '#9b542d');
+        ctx.strokeStyle = '#f4c17a'; ctx.lineWidth = 3 * s; ctx.strokeRect(o.x + 6 * s, o.y - 32 * s, 26 * s, 26 * s);
+        ctx.beginPath(); ctx.moveTo(o.x + 6 * s, o.y - 32 * s); ctx.lineTo(o.x + 32 * s, o.y - 6 * s); ctx.moveTo(o.x + 32 * s, o.y - 32 * s); ctx.lineTo(o.x + 6 * s, o.y - 6 * s); ctx.stroke();
       } else {
-        rounded(o.x, o.y - 30 * s, 68 * s, 18 * s, 9 * s, '#263b50');
-        ctx.fillStyle = '#f8d46b'; ctx.fillRect(o.x + 8 * s, o.y - 27 * s, 10 * s, 12 * s); ctx.fillRect(o.x + 48 * s, o.y - 27 * s, 10 * s, 12 * s);
+        ctx.fillStyle = '#f27632'; ctx.beginPath(); ctx.moveTo(o.x + 17 * s, o.y - 40 * s); ctx.lineTo(o.x + 35 * s, o.y); ctx.lineTo(o.x - 2 * s, o.y); ctx.closePath(); ctx.fill();
+        ctx.fillStyle = '#fff'; ctx.fillRect(o.x + 6 * s, o.y - 15 * s, 23 * s, 6 * s); ctx.fillRect(o.x - 4 * s, o.y - 2 * s, 43 * s, 6 * s);
       }
     }
 
     function spawnObstacle() {
-      // Beginner-friendly set: mostly small cones, occasional crates, rare bars.
+      // Road barriers require a jump; flying birds can be passed by sliding.
       const roll = Math.random();
-      const type = roll < .88 ? 'cone' : (roll < .98 ? 'crate' : 'bar');
-      obstacles.push({ x: W + 30 * unitX, y: ground, type });
+      if (roll < 0.28) {
+        obstacles.push({
+          x: W + 42 * unitX,
+          y: ground - characterSize * 0.80,
+          type: 'bird',
+          phase: Math.random() * Math.PI * 2,
+          assisted: false
+        });
+      } else {
+        const type = roll < 0.88 ? 'cone' : 'crate';
+        obstacles.push({ x: W + 42 * unitX, y: ground, type, assisted: false });
+      }
     }
 
     function spawnCoins() {
       const n = 4 + Math.floor(Math.random() * 2);
       const s = unitY;
-      const y = ground - 145 * s - Math.random() * 24 * s;
+      const y = ground - 118 * s - Math.random() * 16 * s;
       for (let i = 0; i < n; i++) {
         const arc = Math.sin(i / (n - 1 || 1) * Math.PI) * 12 * s;
         tokens.push({ x: W + 20 * unitX + i * 34 * s, y: y - arc, r: 11 * s, taken: false });
@@ -419,8 +482,8 @@
       if (mode !== 'running') return;
       const dt = Math.min((now - last) / 1000, .035);
       last = now; elapsed += dt;
-      // Ultra-casual difficulty curve: speed rises very slowly and stays capped.
-      speed = Math.min(280 * unitX, 170 * unitX + elapsed * 0.52 * unitX + distance * .004);
+      // Very gentle difficulty curve: the game remains slow even after several minutes.
+      speed = Math.min(180 * unitX, 105 * unitX + elapsed * 0.08 * unitX + distance * .00045);
       distance += speed * dt / 13;
       score += dt * (10 + speed / Math.max(100, 100 * unitX));
       groundOffset += speed * dt;
@@ -429,32 +492,34 @@
       hitCooldown = Math.max(0, hitCooldown - dt);
       if (spawn <= 0) {
         spawnObstacle();
-        // One obstacle every 4.8–6.3 seconds after the generous first wait.
-        spawn = 5.2 + Math.random() * 1.8;
+        // Long gaps between obstacles let new players understand the controls.
+        spawn = 9.0 + Math.random() * 3.5;
       }
-      if (coinSpawn <= 0) { spawnCoins(); coinSpawn = 1.9 + Math.random() * 1.2; }
+      if (coinSpawn <= 0) { spawnCoins(); coinSpawn = 2.2 + Math.random() * 1.5; }
 
       // Buffered touch input: if the player tapped just before landing, jump now.
       if (jumpBuffer > 0 && !player.jumping) performJump();
 
-      // Built-in assist: if an obstacle is approaching and no action has been
-      // taken, Wasra & Wasri make a gentle automatic jump for the player.
-      const hitboxLeft = player.x + groupWidth * .24;
-      // Trigger before the obstacle's right edge can enter the left side
-      // of the body hitbox, leaving roughly one second for the assisted jump.
-      const obstacleReach = 45 * unitY;
-      const collisionStartX = hitboxLeft - obstacleReach;
-      const assistRange = speed * 1.05 + 12 * unitX;
+      // Built-in beginner assistance: ground barriers trigger a jump,
+      // overhead birds trigger a slide. Each obstacle is assisted only once.
+      const hitboxLeft = player.x + characterSize * 0.20;
+      const collisionStartX = hitboxLeft - 62 * unitY;
+      const assistRange = speed * 2.15 + 28 * unitX;
       const approachingObstacle = obstacles.find((o) =>
-        o.x >= collisionStartX && o.x - collisionStartX <= assistRange
+        !o.assisted && o.x >= collisionStartX && o.x - collisionStartX <= assistRange
       );
-      if (approachingObstacle && !player.jumping && hitCooldown <= 0) {
-        performJump();
+      if (approachingObstacle && hitCooldown <= 0) {
+        if (approachingObstacle.type === 'bird') {
+          if (!player.sliding && !player.jumping) slide();
+        } else if (!player.jumping) {
+          performJump();
+        }
+        approachingObstacle.assisted = true;
       }
 
       if (player.jumping) {
         player.y += player.vy * dt;
-        player.vy += 1450 * unitY * dt;
+        player.vy += 1150 * unitY * dt;
         if (player.y >= ground - characterSize) { player.y = ground - characterSize; player.vy = 0; player.jumping = false; }
       }
       if (player.sliding && elapsed > player.slideUntil) player.sliding = false;
@@ -463,32 +528,30 @@
       obstacles = obstacles.filter((o) => o.x > -100 * unitY);
       tokens = tokens.filter((t) => t.x > -40 * unitY && !t.taken);
 
-      // Compact body hitbox: transparent edges of the paired owl artwork do
-      // not count as a collision. Jumping clears obstacles; sliding clears bars.
-      const groupWidth = characterGap + characterWidth;
-      const pbox = {
-        x: player.x + groupWidth * .24,
-        y: player.sliding ? ground - characterSize * .36 : player.y + characterSize * .40,
-        w: groupWidth * .66,
-        h: player.sliding ? characterSize * .16 : characterSize * .34
-      };
-      if (hitCooldown <= 0 && !player.jumping) {
+      // One-character compact hitbox: transparent edges are ignored.
+      // Sliding lowers the head/body box so overhead birds pass safely above.
+      const pbox = player.sliding
+        ? { x: player.x + characterSize * 0.27, y: ground - characterSize * 0.31,
+            w: characterSize * 0.48, h: characterSize * 0.16 }
+        : { x: player.x + characterSize * 0.25, y: player.y + characterSize * 0.25,
+            w: characterSize * 0.50, h: characterSize * 0.57 };
+      if (hitCooldown <= 0) {
         for (const o of obstacles) {
           let box;
-          if (o.type === 'bar') {
-            box = { x: o.x + 12 * unitY, y: ground - 31 * unitY,
-              w: 42 * unitY, h: 10 * unitY };
+          if (o.type === 'bird') {
+            box = { x: o.x - 19 * unitY, y: o.y - 14 * unitY,
+              w: 43 * unitY, h: 27 * unitY };
           } else if (o.type === 'crate') {
-            box = { x: o.x + 12 * unitY, y: ground - 34 * unitY,
-              w: 20 * unitY, h: 34 * unitY };
+            box = { x: o.x + 8 * unitY, y: ground - 34 * unitY,
+              w: 24 * unitY, h: 34 * unitY };
           } else {
-            box = { x: o.x + 12 * unitY, y: ground - 35 * unitY,
-              w: 20 * unitY, h: 35 * unitY };
+            box = { x: o.x + 8 * unitY, y: ground - 34 * unitY,
+              w: 24 * unitY, h: 34 * unitY };
           }
           if (collide(pbox, box)) {
             lives = Math.max(0, lives - 1);
-            hitCooldown = 2.2;
-            // Remove the obstacle that caused the hit and grant a long grace period.
+            hitCooldown = 3.0;
+            // Remove the obstacle and grant a generous grace period.
             o.x = -1000 * unitX;
             updateLives();
             if (lives <= 0) { end(); break; }
@@ -504,8 +567,9 @@
         const nearestY = Math.max(pbox.y, Math.min(t.y, pbox.y + pbox.h));
         const dx = t.x - nearestX, dy = t.y - nearestY;
         const boxPickup = (dx * dx + dy * dy) <= ((t.r + 13 * unitY) * (t.r + 13 * unitY));
-        const jumpMagnet = player.jumping && Math.abs(t.x - (pbox.x + pbox.w / 2)) < 132 * unitY && Math.abs(t.y - (pbox.y + pbox.h / 2)) < 116 * unitY;
-        if (boxPickup || jumpMagnet) {
+        const jumpMagnet = player.jumping && Math.abs(t.x - (pbox.x + pbox.w / 2)) < 175 * unitY && Math.abs(t.y - (pbox.y + pbox.h / 2)) < 150 * unitY;
+        const easyMagnet = Math.abs(t.x - (pbox.x + pbox.w / 2)) < 105 * unitY && Math.abs(t.y - (ground - characterSize * 0.78)) < 95 * unitY;
+        if (boxPickup || jumpMagnet || easyMagnet) {
           t.taken = true; coins++; score += 50;
           for (let i = 0; i < 5; i++) particles.push({ x: t.x, y: t.y, vx: (Math.random() - .5) * 95 * unitY, vy: (Math.random() - .8) * 95 * unitY, life: .32, maxLife: .32 });
         }
@@ -525,8 +589,7 @@
       const phase = elapsed * 13;
       // Brief visual blink after a bump; play continues while the grace timer runs.
       ctx.globalAlpha = (hitCooldown > 0 && Math.floor(elapsed * 9) % 2 === 0) ? .48 : 1;
-      drawCharacter(wasra, player.x, player.y, characterSize, phase, player.sliding);
-      drawCharacter(wasri, player.x + characterGap, player.y + characterSize * .02, characterSize, phase + 1.2, player.sliding);
+      drawCharacter(getSelectedSprite(), player.x, player.y, characterSize, phase, player.sliding);
       ctx.globalAlpha = 1;
       // Small dust puffs behind the two owls.
       ctx.fillStyle = '#fff';
@@ -542,10 +605,9 @@
       ctx.clearRect(0, 0, W, H);
       drawBackground(0);
       const y = ground - characterSize;
-      drawCharacter(wasra, player.x, y, characterSize, 0, false);
-      drawCharacter(wasri, player.x + characterGap, y, characterSize, 1, false);
+      drawCharacter(getSelectedSprite(), player.x, y, characterSize, 0, false);
       drawObstacle({ x: W * .72, y: ground, type: 'crate' });
-      drawObstacle({ x: W * .86, y: ground, type: 'cone' });
+      drawObstacle({ x: W * .86, y: ground - characterSize * .80, type: 'bird', phase: 0.6 });
     }
 
     // Recalculate the game world when the user enters/exits fullscreen or

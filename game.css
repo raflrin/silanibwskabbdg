@@ -112,3 +112,13 @@ body.wwr-lock-scroll{overflow:hidden!important;overscroll-behavior:none}
 .wwr-game-card:fullscreen .wwr-lives,.wwr-game-card:-webkit-full-screen .wwr-lives{top:max(10px,env(safe-area-inset-top));left:max(10px,env(safe-area-inset-left))}
 .wwr-game-card.wwr-mobile-fullscreen .wwr-lives{top:max(10px,env(safe-area-inset-top));left:max(10px,env(safe-area-inset-left))}
 @media(max-width:480px){.wwr-lives{top:7px;left:7px;padding:6px 9px;font-size:.68rem}}
+
+
+/* Character picker: one playable owl is selected before each run. */
+.wwr-player-picker{display:flex;justify-content:center;gap:12px;margin:10px auto 12px;max-width:340px}
+.wwr-player-option{display:flex;flex:1 1 0;align-items:center;justify-content:center;gap:9px;min-height:76px;padding:7px 12px;border:2px solid #eadfe0;border-radius:15px;background:#fffaf7;color:#4c151d;font:inherit;font-weight:900;cursor:pointer;transition:border-color .15s,background .15s,transform .15s;touch-action:manipulation}
+.wwr-player-option img{width:58px;height:58px;object-fit:contain;display:block}
+.wwr-player-option.is-selected{border-color:#a51e2c;background:#fff0ec;box-shadow:0 0 0 3px #a51e2c18}
+.wwr-player-option:focus-visible{outline:3px solid #d8ad58;outline-offset:3px}
+.wwr-player-option:active{transform:scale(.98)}
+@media(max-width:480px){.wwr-player-picker{gap:8px;margin:7px auto 9px}.wwr-player-option{min-height:62px;padding:5px 8px;border-radius:12px;font-size:.92rem}.wwr-player-option img{width:48px;height:48px}.wwr-overlay-panel{padding:14px 12px}}
